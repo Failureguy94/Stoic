@@ -1,0 +1,6 @@
+{
+  "platforms": ["android"],
+  "android": {
+    "modules": ["app.stoic.device.StoicDeviceModule"]
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Same palette as the app and website (light). -->
+  <color name="stoic_bg">#FFFAF3</color>
+  <color name="stoic_surface">#FFFFFF</color>
+  <color name="stoic_ink">#2B2340</color>
+  <color name="stoic_muted">#5B5470</color>
+  <color name="stoic_field">#7A7290</color>
+  <color name="stoic_brand">#5B3FD0</color>
+  <color name="stoic_brand_ink">#FFFFFF</color>
+  <color name="stoic_lavender">#ECE6FF</color>
+  <color name="stoic_rose">#FFDFE6</color>
+  <color name="stoic_line">#E7DFD3</color>
+</resources>

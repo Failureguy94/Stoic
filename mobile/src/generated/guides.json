@@ -1,0 +1,1005 @@
+{
+ "android-digital-wellbeing": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Before you start"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Phone model and Android version I tested on: "
+       },
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY PHONE MODEL AND ANDROID VERSION]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Menu names differ between phone makers. Google's own help page says some steps \"may vary based on your device\"."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 1: Set an app timer"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Digital Wellbeing screen listing apps with a timer set on one app",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 2: Turn on Focus mode"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Focus mode settings with distracting apps selected and a schedule set",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 3: Turn on Bedtime mode"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Bedtime mode settings showing a schedule and the grayscale option",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "todo",
+          "c": [
+           {
+            "t": "text",
+            "v": "[ADD MY TIPS FROM TESTING]"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "From Google's help page: app timers "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "reset at midnight"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ", and some "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "work or school accounts"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " may not work with app timers."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "Can't find Digital Wellbeing? "
+         },
+         {
+          "t": "todo",
+          "c": [
+           {
+            "t": "text",
+            "v": "[ADD WHERE IT IS ON MY PHONE, e.g. Settings path]"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "Official help: "
+         },
+         {
+          "t": "link",
+          "href": "https://support.google.com/android/answer/9346420",
+          "c": [
+           {
+            "t": "text",
+            "v": "Google's Digital Wellbeing help page"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "notification-cleanup": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Before you start"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Phone I tested on: "
+       },
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY PHONE MODEL AND OS VERSION]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tip: check which apps send you the most notifications first, then decide which ones to keep. "
+       },
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD WHERE I FOUND THIS ON MY PHONE]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 1: Find your noisiest apps"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Settings screen listing apps by how many notifications they sent",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 2: Turn off or quieten notifications for those apps"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Notification settings for one app with most categories switched off",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Part 3: Set a study-time Do Not Disturb or Focus"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "Do Not Disturb or Focus schedule set for study hours, with a few people allowed",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "todo",
+          "c": [
+           {
+            "t": "text",
+            "v": "[ADD MY TIPS FROM TESTING]"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "Android: Digital Wellbeing's Focus mode pauses chosen apps "
+         },
+         {
+          "t": "em",
+          "c": [
+           {
+            "t": "text",
+            "v": "and"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " their notifications. See "
+         },
+         {
+          "t": "link",
+          "href": "https://support.google.com/android/answer/9346420",
+          "c": [
+           {
+            "t": "text",
+            "v": "Google's help page"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "iPhone: a Focus can allow only the people and apps you choose. See "
+         },
+         {
+          "t": "link",
+          "href": "https://support.apple.com/guide/iphone/set-up-a-focus-iphd6288a67f/ios",
+          "c": [
+           {
+            "t": "text",
+            "v": "Apple's Focus setup guide"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "Windows laptop: "
+         },
+         {
+          "t": "link",
+          "href": "https://support.microsoft.com/en-us/windows/how-to-use-focus-in-windows-11-cbcc9ddb-8164-43fa-8919-b9a2af072382",
+          "c": [
+           {
+            "t": "text",
+            "v": "Focus sessions"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " turn on Do not disturb for the length of the timer."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "reduce-youtube-distraction": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Before you start"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Device and browser I tested on: "
+       },
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY DEVICE AND BROWSER]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pick "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "one"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " option below. Doing one thing well beats installing three tools."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Option A: On a laptop, hide YouTube's feed with Unhook"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "YouTube home page with the recommendation feed hidden by Unhook",
+   "caption": "[ADD CAPTION]",
+   "width": 1280,
+   "height": 800
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Option B: On a phone, set a daily limit on YouTube or Instagram"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "todo",
+        "c": [
+         {
+          "t": "text",
+          "v": "[ADD MY STEPS]"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "screenshot",
+   "alt": "App timer for YouTube set to a daily limit",
+   "caption": "[ADD CAPTION]"
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "todo",
+          "c": [
+           {
+            "t": "text",
+            "v": "[ADD MY TIPS FROM TESTING]"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "Unhook works in desktop browsers only. It does not change the YouTube phone app."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "On Android, app timers reset at midnight ("
+         },
+         {
+          "t": "link",
+          "href": "https://support.google.com/android/answer/9346420",
+          "c": [
+           {
+            "t": "text",
+            "v": "Google help"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ")."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "text",
+          "v": "See every option in the "
+         },
+         {
+          "t": "link",
+          "href": "/tools",
+          "c": [
+           {
+            "t": "text",
+            "v": "tool comparison"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}

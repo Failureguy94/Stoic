@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pebble, STOIC's mascot: the same drawing as the app and website. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="98dp"
+    android:viewportWidth="120" android:viewportHeight="98">
+  <path android:fillColor="@color/stoic_line"
+      android:pathData="M22,92a38,5 0,1 0,76 0a38,5 0,1 0,-76 0z" />
+  <path android:fillColor="@color/stoic_lavender" android:strokeColor="@color/stoic_ink" android:strokeWidth="3"
+      android:pathData="M14,58c0,-27 20,-48 49,-48 27,0 45,18 45,43 0,22 -16,34 -46,34C31,87 14,78 14,58z" />
+  <path android:strokeColor="@color/stoic_surface" android:strokeWidth="4" android:strokeLineCap="round"
+      android:pathData="M36,28c6,-6 14,-9 22,-9" />
+  <path android:fillColor="@color/stoic_rose"
+      android:pathData="M31,60a7,4 0,1 0,14 0a7,4 0,1 0,-14 0z" />
+  <path android:fillColor="@color/stoic_rose"
+      android:pathData="M77,60a7,4 0,1 0,14 0a7,4 0,1 0,-14 0z" />
+  <path android:fillColor="@color/stoic_ink"
+      android:pathData="M43.4,49a3.6,3.6 0,1 0,7.2 0a3.6,3.6 0,1 0,-7.2 0z" />
+  <path android:fillColor="@color/stoic_ink"
+      android:pathData="M71.4,49a3.6,3.6 0,1 0,7.2 0a3.6,3.6 0,1 0,-7.2 0z" />
+  <path android:strokeColor="@color/stoic_ink" android:strokeWidth="3" android:strokeLineCap="round"
+      android:pathData="M54,61q7,6 14,0" />
+</vector>

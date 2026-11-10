@@ -58,7 +58,7 @@ Or from the terminal: `npx vercel` (preview) and `npx vercel --prod`.
 | Tool data (typed) | `data/tools.ts` |
 | Picker recommendations | `data/picker.ts` |
 | Survey numbers | `data/survey.ts` |
-| Guides | `content/guides/*.mdx`, and their details (time needed, author, date tested) in `lib/guides.ts` |
+| Guides | `content/guides/*.mdx`, and their details (time needed, author, date tested) in `data/guides.ts` |
 | Guide screenshots | `public/guides/<guide-slug>/` |
 
 ### Adding a screenshot to a guide

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="stoic_a11y_label">STOIC limits and pauses</string>
+  <string name="stoic_a11y_summary">Shows your pause or time\'s-up screen when you open an app you chose.</string>
+  <string name="stoic_a11y_description">STOIC uses this only to see which app is in front, so it can show the pause, daily-limit or focus screen for the apps you picked. It cannot read what is on your screen or what you type, and nothing leaves your phone.</string>
+
+  <string name="stoic_this_app">this app</string>
+  <string name="stoic_pause_title">Pause for a moment</string>
+  <string name="stoic_pause_body">You asked for a short pause before opening %1$s. Is this important right now?</string>
+  <string name="stoic_limit_title">That\'s your time for today</string>
+  <string name="stoic_limit_body">You set a daily limit of %1$d minutes for %2$s, and you\'ve reached it. It starts fresh at midnight.</string>
+  <string name="stoic_focus_title">You\'re in a focus session</string>
+  <string name="stoic_focus_body">%1$s is paused until your session ends at %2$s. Pebble is growing.</string>
+
+  <string name="stoic_go_back">Go back</string>
+  <string name="stoic_open_anyway">Open anyway</string>
+  <string name="stoic_open_anyway_in">Open anyway (%1$d)</string>
+  <string name="stoic_open_anyway_wait">Open anyway, available in a few seconds</string>
+  <string name="stoic_open_anyway_ready">Open anyway is now available</string>
+  <string name="stoic_five_more">5 more minutes</string>
+  <string name="stoic_footer">You set this up in STOIC. You can change it there any time.</string>
+</resources>
