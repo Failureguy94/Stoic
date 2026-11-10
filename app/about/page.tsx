@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { tools } from "@/data/tools";
-import { formatDate } from "@/components/Badges";
+import { formatDate } from "@/components/Tags";
 import { SITE_NAME } from "@/lib/site";
 import { TOTAL_RESPONDENTS } from "@/data/survey";
 
@@ -26,7 +26,7 @@ const A11Y_CHECKLIST = [
 
 export default function AboutPage() {
   return (
-    <div className="prose max-w-3xl">
+    <div className="reading">
       <h1>About, method and accessibility</h1>
       <p>
         {SITE_NAME} is a first-year course project (&ldquo;Digital Wellness Resource Hub&rdquo;) at IIIT Nagpur.
@@ -103,9 +103,9 @@ export default function AboutPage() {
 
       <h2 id="attribution">Attribution and AI assistance</h2>
       <p>
-        Built with Next.js, React, TypeScript, Tailwind CSS and MDX. Body font: Atkinson Hyperlegible (Braille
-        Institute, SIL Open Font License), served by Google Fonts through <code>next/font</code>. No other images,
-        icons or assets are third-party.
+        Built with Next.js, React, TypeScript, Tailwind CSS and MDX. Fonts: Fredoka (headings) and Nunito (body),
+        both under the SIL Open Font License, served through <code>next/font</code>. The Pebble mascot and all
+        illustrations are original inline SVG drawn for this site. Small symbols are standard emoji.
       </p>
       <p>
         <strong>AI-assistance acknowledgement:</strong> This site was built with assistance from Claude; the

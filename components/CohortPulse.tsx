@@ -1,34 +1,30 @@
 import { TOTAL_RESPONDENTS, TRIED_TO_CUT_DOWN, getQuestion } from "@/data/survey";
 
-/**
- * Anonymous, aggregate-only encouragement from our survey.
- * Never shows individuals, rankings or comparisons between people.
- */
+/** Anonymous, aggregate-only encouragement. Never individuals, rankings or comparisons. */
 export function CohortPulse() {
-  const used = getQuestion("tools-used");
-  const usedSomething = TOTAL_RESPONDENTS - (used.answers.find((a) => a.label === "None")?.count ?? 0);
-  const wellbeing = used.answers.find((a) => a.label === "Android Digital Wellbeing")?.count ?? 0;
+  const used = getQuestion("tools-used").answers;
   const failed = getQuestion("why-failed").answers;
+  const count = (list: { label: string; count: number }[], label: string) =>
+    list.find((a) => a.label === label)?.count ?? 0;
 
   const stats = [
+    { n: TRIED_TO_CUT_DOWN, text: "have already tried to cut down their phone time.", tint: "bg-peach" },
     {
-      big: `${TRIED_TO_CUT_DOWN} of ${TOTAL_RESPONDENTS}`,
-      text: "first-years we surveyed have already tried to cut down their phone time.",
+      n: TOTAL_RESPONDENTS - count(used, "None"),
+      text: "have already tried at least one tool, like Digital Wellbeing, Focus mode or a blocker.",
+      tint: "bg-sky",
     },
     {
-      big: `${usedSomething} of ${TOTAL_RESPONDENTS}`,
-      text: "have already tried at least one tool, such as Digital Wellbeing, Focus mode or a blocker.",
-    },
-    {
-      big: `${wellbeing} of ${TOTAL_RESPONDENTS}`,
-      text: "already use Android Digital Wellbeing, so a free tool on your phone is a normal place to start.",
+      n: count(used, "Android Digital Wellbeing"),
+      text: "use Android Digital Wellbeing, so a free tool already on your phone is a normal place to start.",
+      tint: "bg-butter",
     },
   ];
 
   return (
     <section aria-labelledby="pulse-h" className="space-y-5">
       <div>
-        <h2 id="pulse-h" className="text-2xl font-bold">
+        <h2 id="pulse-h" className="text-3xl font-bold">
           Cohort pulse
         </h2>
         <p className="mt-1 text-muted">
@@ -37,36 +33,46 @@ export function CohortPulse() {
       </div>
       <ul className="grid gap-4 sm:grid-cols-3">
         {stats.map((s) => (
-          <li key={s.big + s.text} className="rounded-lg bg-accent-soft p-5">
-            <p className="text-3xl font-bold">{s.big}</p>
-            <p className="mt-1">{s.text}</p>
+          <li key={s.text} className={`pop rounded-[var(--radius-blob)] ${s.tint} p-6`}>
+            <p className="font-display text-4xl font-bold">
+              {s.n} <span className="text-2xl">of {TOTAL_RESPONDENTS}</span>
+            </p>
+            <p className="mt-2">{s.text}</p>
           </li>
         ))}
       </ul>
-      <div className="rounded-lg border border-border bg-surface p-5">
-        <h3 className="text-lg font-bold">What makes a change stick, according to your batch</h3>
-        <p className="mt-1">
-          When we asked why tools stopped working, the answers pointed to what helps:
-        </p>
-        <ul className="mt-3 list-disc space-y-1 pl-5">
-          <li>
-            <strong>Pick something automatic.</strong> {countOf(failed, "Forgot to use it")} people said they simply
-            forgot. Schedules and daily limits keep working on busy days.
+      <div className="rounded-[var(--radius-blob)] border-2 border-line bg-surface p-6">
+        <h3 className="text-xl font-bold">What makes a change stick, according to your batch</h3>
+        <p className="mt-1">We asked why tools stopped working. The answers point to what helps:</p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+          <li className="rounded-[1.25rem] bg-sky p-4">
+            <p className="font-extrabold">
+              <span aria-hidden="true">↻ </span>Pick something automatic
+            </p>
+            <p className="mt-1 text-sm">
+              {count(failed, "Forgot to use it")} people simply forgot. Schedules and daily limits keep going on busy
+              days.
+            </p>
           </li>
-          <li>
-            <strong>Start free and built in.</strong> {countOf(failed, "Cost")} mentioned cost and{" "}
-            {countOf(failed, "Too many permissions")} mentioned permissions. Your phone&apos;s own settings avoid both.
+          <li className="rounded-[1.25rem] bg-mint p-4">
+            <p className="font-extrabold">
+              <span aria-hidden="true">⌂ </span>Start free and built in
+            </p>
+            <p className="mt-1 text-sm">
+              {count(failed, "Cost")} mentioned cost and {count(failed, "Too many permissions")} mentioned permissions.
+              Your phone&apos;s own settings avoid both.
+            </p>
           </li>
-          <li>
-            <strong>Keep it simple.</strong> {countOf(failed, "Too complicated")} found tools too complicated. One small
-            goal beats five settings.
+          <li className="rounded-[1.25rem] bg-butter p-4">
+            <p className="font-extrabold">
+              <span aria-hidden="true">✦ </span>Keep it simple
+            </p>
+            <p className="mt-1 text-sm">
+              {count(failed, "Too complicated")} found tools too complicated. One small goal beats five settings.
+            </p>
           </li>
         </ul>
       </div>
     </section>
   );
-}
-
-function countOf(list: { label: string; count: number }[], label: string) {
-  return list.find((a) => a.label === label)?.count ?? 0;
 }

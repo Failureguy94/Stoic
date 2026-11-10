@@ -36,8 +36,8 @@ for (const scheme of ["light", "dark"]) {
       await page.goto(BASE + path, { waitUntil: "networkidle" });
       // Exercise interactive states so they are checked too.
       if (path === "/") {
-        await page.getByLabel("YouTube / reels").check();
-        await page.getByLabel("Android phone").check();
+        await page.getByLabel("YouTube / reels").check({ force: true });
+        await page.getByLabel("Android phone").check({ force: true });
       }
       await page.addScriptTag({ content: axeSource });
       const res = await page.evaluate(async () =>

@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function DesignNotePage() {
   return (
-    <div className="prose max-w-3xl">
+    <div className="reading">
       <h1>Design note: tamper-resistant tracking (future work)</h1>
 
-      <p className="rounded-lg border-l-4 border-note-border bg-note-bg p-4">
+      <p className="rounded-[1.25rem] bg-butter p-5 text-warn-ink">
         <strong>Status: design only, not implemented.</strong> Nothing on this page exists in {SITE_NAME} today.
         Check-ins on this website are self-reported, and no system can be fully cheat-proof.
       </p>

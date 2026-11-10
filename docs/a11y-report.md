@@ -1,6 +1,6 @@
 # Automated accessibility check (axe-core)
 
-Run: 2026-11-10T14:11:21.360Z
+Run: 2026-11-10T14:32:22.971Z
 Tool: axe-core 4.14.0, rules tagged wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice.
 Each page checked in light and dark colour schemes at 1280px and 375px wide. Also checks for horizontal page scrolling.
 

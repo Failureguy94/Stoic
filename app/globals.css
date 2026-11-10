@@ -1,82 +1,83 @@
 @import "tailwindcss";
 
 /*
- * Colour tokens. Every text/background pair below was chosen to meet
- * WCAG AA (4.5:1 for body text, 3:1 for large text and UI boundaries).
- * See docs/accessibility-checklist.md for the measured ratios.
+ * STOIC: playful, friendly theme.
+ * Pastel surfaces with deep-plum text. Every text/background pair meets
+ * WCAG AA (ratios measured in docs/accessibility-checklist.md).
  */
 :root {
-  --bg: #f7f6f2;
+  --bg: #fffaf3;
   --surface: #ffffff;
-  --fg: #14171a;
-  --muted: #474f57;
-  --border: #d6d3ca;
-  --field: #767676; /* input/checkbox borders: 4.3:1 on white, >3:1 required */
-  --accent: #0b5d57;
-  --accent-fg: #ffffff;
-  --accent-soft: #e2efed;
-  --focus: #1a56db;
+  --ink: #2b2340;
+  --muted: #5b5470;
+  --line: #e7dfd3;
+  --field: #7a7290;
+  --brand: #5b3fd0;
+  --brand-ink: #ffffff;
+  --focus: #d1366b;
 
-  --free-bg: #e6f4ea;
-  --free-fg: #14532d;
-  --freemium-bg: #fdf3d7;
-  --freemium-fg: #5c3b00;
-  --paid-bg: #fde8e8;
-  --paid-fg: #7f1d1d;
-  --info-bg: #e8eefc;
-  --info-fg: #1e3a8a;
-  --note-bg: #fff7e0;
-  --note-border: #b7791f;
+  --peach: #ffe3d3;
+  --mint: #d9f5e5;
+  --lavender: #ece6ff;
+  --sky: #dcefff;
+  --butter: #fff1bf;
+  --rose: #ffdfe6;
+
+  --good-ink: #1b5e3a;
+  --warn-ink: #6b4400;
+  --alert-ink: #8a1c3c;
+  --info-ink: #1f4a80;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121417;
-    --surface: #1b1e22;
-    --fg: #ecebe6;
-    --muted: #b7bcc2;
-    --border: #3a3f45;
-    --field: #8b939b;
-    --accent: #6fd1c4;
-    --accent-fg: #0b1f1d;
-    --accent-soft: #173431;
-    --focus: #8ab4ff;
+    --bg: #1c1726;
+    --surface: #262035;
+    --ink: #f4effa;
+    --muted: #cbc2de;
+    --line: #3d3452;
+    --field: #9a90b4;
+    --brand: #b9a6ff;
+    --brand-ink: #1c1240;
+    --focus: #ff8fb3;
 
-    --free-bg: #163222;
-    --free-fg: #a7f0c0;
-    --freemium-bg: #3a2c0c;
-    --freemium-fg: #fcd98a;
-    --paid-bg: #3d1717;
-    --paid-fg: #fbb4b4;
-    --info-bg: #1a2440;
-    --info-fg: #c3d4ff;
-    --note-bg: #2b2412;
-    --note-border: #d69e2e;
+    --peach: #4a2f2a;
+    --mint: #1f3b2e;
+    --lavender: #322a55;
+    --sky: #1d3247;
+    --butter: #3d3519;
+    --rose: #4a2333;
+
+    --good-ink: #a8efc5;
+    --warn-ink: #ffd98a;
+    --alert-ink: #ffb8cb;
+    --info-ink: #b8d6ff;
   }
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-fg: var(--fg);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-border: var(--border);
+  --color-line: var(--line);
   --color-field: var(--field);
-  --color-accent: var(--accent);
-  --color-accent-fg: var(--accent-fg);
-  --color-accent-soft: var(--accent-soft);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
   --color-focus: var(--focus);
-  --color-free-bg: var(--free-bg);
-  --color-free-fg: var(--free-fg);
-  --color-freemium-bg: var(--freemium-bg);
-  --color-freemium-fg: var(--freemium-fg);
-  --color-paid-bg: var(--paid-bg);
-  --color-paid-fg: var(--paid-fg);
-  --color-info-bg: var(--info-bg);
-  --color-info-fg: var(--info-fg);
-  --color-note-bg: var(--note-bg);
-  --color-note-border: var(--note-border);
-  --font-sans: var(--font-body), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-peach: var(--peach);
+  --color-mint: var(--mint);
+  --color-lavender: var(--lavender);
+  --color-sky: var(--sky);
+  --color-butter: var(--butter);
+  --color-rose: var(--rose);
+  --color-good-ink: var(--good-ink);
+  --color-warn-ink: var(--warn-ink);
+  --color-alert-ink: var(--alert-ink);
+  --color-info-ink: var(--info-ink);
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display-face), var(--font-body), system-ui, sans-serif;
+  --radius-blob: 1.75rem;
 }
 
 html {
@@ -85,117 +86,132 @@ html {
 
 body {
   background: var(--bg);
-  color: var(--fg);
+  color: var(--ink);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-/* Visible focus for every interactive element (keyboard users). */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
-/* Links are always underlined so they are not identified by colour alone. */
 a {
   text-decoration-line: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
 }
 a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
 }
 
-/* Respect users who ask for less motion. */
+/* Gentle "pop" on hover: switched off for reduced-motion users below. */
+.pop {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.pop:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }
 
-/* Skip link: hidden until focused. */
 .skip-link {
   position: absolute;
   left: 1rem;
   top: -100px;
   z-index: 50;
-  background: var(--accent);
-  color: var(--accent-fg);
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  font-weight: 700;
+  background: var(--brand);
+  color: var(--brand-ink);
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 800;
 }
 .skip-link:focus {
   top: 1rem;
 }
 
-/* Long-form text (guides, about, design note). */
-.prose {
-  max-width: 70ch;
+/* Long-form reading (guides, about, design note). */
+.reading {
+  max-width: 68ch;
 }
-.prose h1 {
-  font-size: 2rem;
-  line-height: 1.2;
+.reading h1 {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  line-height: 1.15;
   font-weight: 700;
   margin: 0 0 1rem;
 }
-.prose h2 {
-  font-size: 1.4rem;
-  line-height: 1.3;
+.reading h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
   font-weight: 700;
-  margin: 2.2rem 0 0.75rem;
+  margin: 2.4rem 0 0.75rem;
 }
-.prose h3 {
-  font-size: 1.15rem;
+.reading h3 {
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 1.6rem 0 0.5rem;
 }
-.prose p,
-.prose ul,
-.prose ol {
+.reading p,
+.reading ul,
+.reading ol {
   margin: 0 0 1rem;
 }
-.prose ul {
+.reading ul {
   list-style: disc;
   padding-left: 1.4rem;
 }
-.prose ol {
+.reading ol {
   list-style: decimal;
   padding-left: 1.6rem;
 }
-.prose li {
-  margin: 0.35rem 0;
+.reading li {
+  margin: 0.4rem 0;
 }
-.prose li > ul,
-.prose li > ol {
-  margin: 0.35rem 0 0;
+.reading li::marker {
+  color: var(--brand);
+  font-weight: 800;
 }
-.prose a {
-  color: var(--accent);
-  font-weight: 600;
-}
-.prose code {
-  font-size: 0.9em;
-  background: var(--accent-soft);
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-}
-.prose strong {
+.reading a {
+  color: var(--brand);
   font-weight: 700;
 }
-.prose table {
-  border-collapse: collapse;
-  margin: 1rem 0;
+.reading code {
+  font-size: 0.9em;
+  background: var(--lavender);
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
 }
-.prose th,
-.prose td {
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.6rem;
-  text-align: left;
+.reading strong {
+  font-weight: 800;
 }

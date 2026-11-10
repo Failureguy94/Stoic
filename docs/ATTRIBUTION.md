@@ -57,6 +57,7 @@ Technical reference for the design note (checked 2026-11-10): https://developer.
 
 ## Fonts, images and icons
 
-- **Atkinson Hyperlegible**, by the Braille Institute of America, SIL Open Font License 1.1. Loaded through `next/font/google`.
-- No third-party images or icon sets. Badge symbols are plain Unicode characters.
+- **Fredoka** (headings) and **Nunito** (body), SIL Open Font License 1.1. Loaded through `next/font/google`.
+- **Pebble** mascot, wave divider and app icon: original inline SVG drawn for this site.
+- No third-party images or icon sets. Badge symbols and decorative icons are plain Unicode characters and emoji (hidden from screen readers).
 - Guide screenshots (in `public/guides/`) are the student's own.
