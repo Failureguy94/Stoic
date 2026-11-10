@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to main content
         </a>
         <SiteHeader />
-        <main id="main" tabIndex={-1} className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 focus:outline-none sm:px-6 sm:py-12">
+        <main id="main" tabIndex={-1} className="mx-auto w-full max-w-5xl flex-1 has-[[data-wide]]:max-w-[88rem] px-4 py-8 focus:outline-none sm:px-6 sm:py-12">
           {children}
         </main>
         <SiteFooter />

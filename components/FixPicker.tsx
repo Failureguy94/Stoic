@@ -60,7 +60,7 @@ export function FixPicker() {
         ) : (
           <div>
             <h3 className="text-xl font-bold">
-              For {problemLabel?.toLowerCase()} on {deviceLabel}
+              For {problemLabel} on {deviceLabel}
             </h3>
             {result.picks.length === 1 && (
               <p className="mt-1 text-muted">

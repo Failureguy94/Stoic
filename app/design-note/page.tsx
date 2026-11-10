@@ -35,8 +35,10 @@ export default function DesignNotePage() {
       <ol>
         <li>
           <strong>Read usage events from the system.</strong> Android&apos;s <code>UsageStatsManager</code> API
-          returns app foreground and background events. It needs the user to grant &ldquo;Usage access&rdquo; in
-          Settings, which they can see and switch off at any time.
+          provides device usage history and statistics. It needs the <code>PACKAGE_USAGE_STATS</code> permission, which
+          the user must grant themselves in Settings (&ldquo;Usage access&rdquo;), and can switch off at any time.
+          Android&apos;s documentation also notes that usage events &ldquo;are only kept by the system for a few
+          days&rdquo;, which is another reason to sync them regularly.
         </li>
         <li>
           <strong>Sync to an append-only log.</strong> The app regularly uploads daily per-app totals to a server
@@ -74,6 +76,16 @@ export default function DesignNotePage() {
         with a two-week deadline. We think writing the design down honestly is more useful than claiming our
         website can do something it cannot.
       </p>
+
+      <h2>Reference</h2>
+      <ul>
+        <li>
+          <a href="https://developer.android.com/reference/android/app/usage/UsageStatsManager" rel="noopener noreferrer">
+            Android Developers: UsageStatsManager API reference
+          </a>{" "}
+          (checked 10 Nov 2026)
+        </li>
+      </ul>
     </div>
   );
 }

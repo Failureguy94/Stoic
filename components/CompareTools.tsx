@@ -183,12 +183,12 @@ function OfficialLink({ tool }: { tool: Tool }) {
 function ToolTable({ rows }: { rows: Tool[] }) {
   return (
     <div
-      className="mt-6 hidden overflow-x-auto rounded-lg border border-border bg-surface lg:block"
+      className="relative mt-6 hidden overflow-x-auto rounded-lg border border-border bg-surface lg:block"
       role="region"
       aria-label="Tool comparison table, scrolls sideways"
       tabIndex={0}
     >
-      <table className="w-full min-w-[1200px] border-collapse text-left text-[0.95rem] align-top">
+      <table className="w-full min-w-[1320px] border-collapse text-left text-[0.92rem] align-top">
         <caption className="p-4 text-left text-lg font-bold">
           Comparison of {rows.length} digital wellness tools. Details were checked on official pages
           on the date in the last column.
@@ -207,7 +207,7 @@ function ToolTable({ rows }: { rows: Tool[] }) {
               "Official link",
               "Date checked",
             ].map((h) => (
-              <th key={h} scope="col" className="p-3 align-bottom font-bold">
+              <th key={h} scope="col" className={`p-3 align-bottom font-bold ${h === "Tool" ? "sticky left-0 z-10 bg-accent-soft" : ""}`}>
                 {h}
               </th>
             ))}
@@ -216,7 +216,7 @@ function ToolTable({ rows }: { rows: Tool[] }) {
         <tbody>
           {rows.map((t) => (
             <tr key={t.id} className="border-b border-border align-top">
-              <th scope="row" className="w-40 p-3 font-bold">
+              <th scope="row" className="sticky left-0 z-10 w-40 bg-surface p-3 font-bold shadow-[1px_0_0_var(--border)]">
                 {t.name}
               </th>
               <td className="w-56 p-3">

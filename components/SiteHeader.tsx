@@ -13,7 +13,7 @@ export function SiteHeader() {
   return (
     <header className="border-b border-border bg-surface">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between">
-        <Link href="/" className="no-underline" aria-label={`${SITE_NAME}, ${SITE_TAGLINE}: home`}>
+        <Link href="/" className="no-underline">
           <span className="block text-2xl font-bold tracking-[0.18em]">{SITE_NAME}</span>
           <span className="block text-sm text-muted">{SITE_TAGLINE}</span>
         </Link>

@@ -209,12 +209,12 @@ function PledgeForm({
         </div>
         {choice === "custom" && (
           <div className="mt-3">
-            <label htmlFor={`${uid}-custom`} className="font-bold">
+            <label htmlFor={`${uid}-custom-text`} className="font-bold">
               My goal <span className="font-normal text-muted">(up to 120 characters)</span>
             </label>
             <input
               ref={customRef}
-              id={`${uid}-custom`}
+              id={`${uid}-custom-text`}
               type="text"
               maxLength={120}
               value={custom}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ToolsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-wide>
       <header className="max-w-3xl space-y-3">
         <h1 className="text-3xl font-bold sm:text-4xl">Compare tools</h1>
         <p className="text-lg">
