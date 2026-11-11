@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="stoic_a11y_label">STOIC limits and pauses</string>
-  <string name="stoic_a11y_summary">Shows your pause or time\'s-up screen when you open an app you chose.</string>
-  <string name="stoic_a11y_description">STOIC uses this only to see which app is in front, so it can show the pause, daily-limit or focus screen for the apps you picked. It cannot read what is on your screen or what you type, and nothing leaves your phone.</string>
+  <string name="stoic_a11y_summary">Shows your pause, time\'s-up, focus or bedtime screen when you open an app you chose.</string>
+  <string name="stoic_a11y_description">STOIC uses this only to see which app is in front, so it can show the pause, daily-limit, focus, bedtime or schedule screen for the apps you picked. It cannot read what is on your screen or what you type, and nothing leaves your phone.</string>
 
   <string name="stoic_this_app">this app</string>
   <string name="stoic_pause_title">Pause for a moment</string>
@@ -11,6 +11,11 @@
   <string name="stoic_limit_body">You set a daily limit of %1$d minutes for %2$s, and you\'ve reached it. It starts fresh at midnight.</string>
   <string name="stoic_focus_title">You\'re in a focus session</string>
   <string name="stoic_focus_body">%1$s is paused until your session ends at %2$s. Pebble is growing.</string>
+
+  <string name="stoic_bedtime_title">It\'s bedtime</string>
+  <string name="stoic_schedule_title">%1$s is on</string>
+  <string name="stoic_schedule_fallback">Your schedule</string>
+  <string name="stoic_schedule_body">%1$s is paused until %2$s. Your phone, messages and alarms still work.</string>
 
   <string name="stoic_go_back">Go back</string>
   <string name="stoic_open_anyway">Open anyway</string>

@@ -32,6 +32,26 @@ export interface Rule {
   blockInFocus: boolean;
 }
 
+/** A repeating time window that blocks apps. Mirrors Schedule in Schedules.kt. */
+export interface Schedule {
+  id: string;
+  name: string;
+  kind: "bedtime" | "custom";
+  enabled: boolean;
+  /** ISO days the window starts on: 1 = Monday ... 7 = Sunday. */
+  days: number[];
+  /** Minutes after midnight. If end <= start the window runs past midnight. */
+  startMin: number;
+  endMin: number;
+  /** true: every app except essentials and the always-allowed list. false: only `packages`. */
+  allApps: boolean;
+  packages: string[];
+  /** Turn on Do Not Disturb while active (needs Do Not Disturb access). */
+  dnd: boolean;
+  /** Offer "5 more minutes" on the block screen. */
+  allowSnooze: boolean;
+}
+
 export interface DayRecord {
   /** YYYY-MM-DD */
   day: string;
@@ -53,6 +73,13 @@ interface Native {
   getRulesJson(): string;
   setRulesJson(json: string): void;
   setFocusBlockUntil(untilMs: number): void;
+  getSchedulesJson(): string;
+  setSchedulesJson(json: string): void;
+  getAlwaysAllowedJson(): string;
+  setAlwaysAllowedJson(json: string): void;
+  getEssentialAppsJson(): Promise<string>;
+  hasDndAccess(): boolean;
+  openDndAccessSettings(): void;
   isLogEnabled(): boolean;
   setLogEnabled(enabled: boolean): void;
   recordSnapshotNow(): Promise<boolean>;
@@ -88,6 +115,16 @@ function wrap(n: Native) {
     setRules: (rules: Rule[]) => n.setRulesJson(JSON.stringify(rules)),
     /** Block "blockInFocus" apps until this time (ms since epoch). 0 clears it. */
     setFocusBlockUntil: (untilMs: number) => n.setFocusBlockUntil(untilMs),
+
+    getSchedules: () => parse<Schedule[]>(n.getSchedulesJson(), []),
+    setSchedules: (list: Schedule[]) => n.setSchedulesJson(JSON.stringify(list)),
+    /** Package names that "all apps" schedules skip, chosen by the user. */
+    getAlwaysAllowed: () => parse<string[]>(n.getAlwaysAllowedJson(), []),
+    setAlwaysAllowed: (pkgs: string[]) => n.setAlwaysAllowedJson(JSON.stringify(pkgs)),
+    /** Phone, messages, alarm clock, home screen, Settings: never blocked by schedules. */
+    getEssentialApps: async () => parse<LaunchableApp[]>(await n.getEssentialAppsJson(), []),
+    hasDndAccess: () => n.hasDndAccess(),
+    openDndAccessSettings: () => n.openDndAccessSettings(),
 
     isLogEnabled: () => n.isLogEnabled(),
     setLogEnabled: (enabled: boolean) => n.setLogEnabled(enabled),

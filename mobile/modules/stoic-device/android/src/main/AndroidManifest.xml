@@ -4,11 +4,28 @@
   <!-- "Usage access": the user grants this in Settings; it is never granted silently. -->
   <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
 
-  <!-- See only apps that have a launcher icon (no "all installed apps" permission). -->
+  <!-- Bedtime can turn on Do Not Disturb. The user grants "Do Not Disturb access" in Settings. -->
+  <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+  <!-- See only apps that have a launcher icon (no "all installed apps" permission),
+       plus the apps that handle essential jobs, which schedules must never block (Essentials.kt). -->
   <queries>
     <intent>
       <action android:name="android.intent.action.MAIN" />
       <category android:name="android.intent.category.LAUNCHER" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.MAIN" />
+      <category android:name="android.intent.category.HOME" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SHOW_ALARMS" />
+    </intent>
+    <intent>
+      <action android:name="android.settings.SETTINGS" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.DIAL" />
     </intent>
   </queries>
 

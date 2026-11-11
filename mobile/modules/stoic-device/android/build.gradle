@@ -21,4 +21,6 @@ dependencies {
   // Background job that records usage every few hours.
   implementation "androidx.work:work-runtime-ktx:2.10.0"
   testImplementation "junit:junit:4.13.2"
+  // Android's org.json is a stub in JVM unit tests; use the real one so JSON parsing is tested.
+  testImplementation "org.json:json:20240303"
 }

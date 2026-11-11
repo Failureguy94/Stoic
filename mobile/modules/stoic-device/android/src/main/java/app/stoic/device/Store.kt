@@ -30,6 +30,27 @@ class Store(context: Context) {
   fun graceUntil(pkg: String) = prefs.getLong("grace_$pkg", 0)
   fun setGraceUntil(pkg: String, until: Long) = prefs.edit().putLong("grace_$pkg", until).apply()
 
+  var schedulesJson: String
+    get() = prefs.getString("schedules", "[]") ?: "[]"
+    set(value) = prefs.edit().putString("schedules", value).apply()
+
+  fun schedules(): List<Schedule> = Schedules.parse(schedulesJson)
+
+  /** Apps that "all apps" schedules never block, chosen by the user. */
+  var alwaysAllowedJson: String
+    get() = prefs.getString("alwaysAllowed", "[]") ?: "[]"
+    set(value) = prefs.edit().putString("alwaysAllowed", value).apply()
+
+  fun alwaysAllowed(): Set<String> = Schedules.parsePackages(alwaysAllowedJson)
+
+  /** True while Do Not Disturb is on because STOIC turned it on (so STOIC only turns off what it turned on). */
+  var dndOnByStoic: Boolean
+    get() = prefs.getBoolean("dndOnByStoic", false)
+    set(value) = prefs.edit().putBoolean("dndOnByStoic", value).apply()
+
+  fun snoozeUntil(pkg: String) = prefs.getLong("snooze_$pkg", 0)
+  fun setSnoozeUntil(pkg: String, until: Long) = prefs.edit().putLong("snooze_$pkg", until).apply()
+
   fun extendUntil(pkg: String) = prefs.getLong("extend_$pkg", 0)
   fun setExtendUntil(pkg: String, until: Long) = prefs.edit().putLong("extend_$pkg", until).apply()
 

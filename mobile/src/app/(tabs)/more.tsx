@@ -22,6 +22,7 @@ export default function More() {
           <>
             <NavCard href="/screen-time" icon="⏱️" tint="sky" title="My screen time" body="Your real per-app usage, today and this week, plus a log that survives uninstalls." />
             <NavCard href="/limits" icon="✋" tint="peach" title="Limits and pauses" body="Daily limits, a pause before opening an app, and blocking during focus." />
+            <NavCard href="/schedules" icon="🌙" tint="lavender" title="Schedules and bedtime" body="Hours when apps stay closed, like bedtime or study time, with Do Not Disturb." />
           </>
         ) : (
           <Card tint="butter">

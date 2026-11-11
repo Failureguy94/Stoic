@@ -8,10 +8,12 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.view.accessibility.AccessibilityEvent
+import java.util.Calendar
 
 /**
  * Watches which app comes to the front and shows STOIC's pause / time's-up /
- * focus screen when one of the user's own rules says so.
+ * focus / schedule screen when one of the user's own rules says so. Also turns
+ * Do Not Disturb on and off for schedules that ask for it (Bedtime).
  *
  * Privacy: the service is configured with canRetrieveWindowContent=false, so it
  * cannot read what is on screen or what is typed. It only receives the package
@@ -22,11 +24,15 @@ class StoicAccessibilityService : AccessibilityService() {
   private val handler = Handler(Looper.getMainLooper())
   private var currentPkg: String? = null
 
-  /** Re-check the app in front every so often: a limit can run out while the app stays open. */
+  private var essentials: Set<String> = emptySet()
+  private var essentialsAt = 0L
+  private val launchable = HashMap<String, Boolean>()
+
+  /** Re-check the app in front every so often: a limit can run out, or a schedule start, while the app stays open. */
   private val tick = object : Runnable {
     override fun run() {
       val pkg = currentPkg
-      if (pkg != null && store.rules().containsKey(pkg)) {
+      if (pkg != null && watched(pkg)) {
         // Still using the app: keep "Open anyway" alive so the pause does not reappear mid-use.
         refreshGrace(pkg)
         evaluate(pkg)
@@ -35,8 +41,17 @@ class StoicAccessibilityService : AccessibilityService() {
     }
   }
 
+  /** Once a minute: switch Do Not Disturb on or off to match the schedules. */
+  private val minuteTick = object : Runnable {
+    override fun run() {
+      syncDnd()
+      handler.postDelayed(this, MINUTE_MS)
+    }
+  }
+
   override fun onServiceConnected() {
     store = Store(this)
+    handler.post(minuteTick)
   }
 
   override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -49,7 +64,7 @@ class StoicAccessibilityService : AccessibilityService() {
 
     currentPkg = pkg
     handler.removeCallbacks(tick)
-    if (store.rules().containsKey(pkg)) {
+    if (watched(pkg)) {
       // Back in an app still covered by "Open anyway": refresh it now. Waiting for the first
       // re-check let a nearly expired grace run out and pause the app mid-use.
       refreshGrace(pkg)
@@ -57,6 +72,10 @@ class StoicAccessibilityService : AccessibilityService() {
       handler.postDelayed(tick, TICK_MS)
     }
   }
+
+  /** Does anything apply to this app? Any enabled schedule may (Bedtime can cover "all apps"). */
+  private fun watched(pkg: String): Boolean =
+    store.rules().containsKey(pkg) || store.schedules().any { it.enabled }
 
   private fun refreshGrace(pkg: String) {
     val now = System.currentTimeMillis()
@@ -70,37 +89,76 @@ class StoicAccessibilityService : AccessibilityService() {
     return id.startsWith("$pkg/")
   }
 
-  private fun evaluate(pkg: String) {
-    val rule = store.rules()[pkg] ?: return
+  private fun essentials(): Set<String> {
     val now = System.currentTimeMillis()
-    val used = if (rule.limitMin > 0 && UsageReader.hasAccess(this)) UsageReader.todayMs(this, pkg) else null
-    val decision = Blocker.decide(rule, now, used, store.focusUntil, store.graceUntil(pkg), store.extendUntil(pkg))
+    // Refresh now and then: the user may change their default phone or SMS app.
+    if (now - essentialsAt > ESSENTIALS_TTL_MS) {
+      essentials = Essentials.packages(this)
+      essentialsAt = now
+      launchable.clear()
+    }
+    return essentials
+  }
+
+  private fun isLaunchable(pkg: String): Boolean =
+    launchable.getOrPut(pkg) { packageManager.getLaunchIntentForPackage(pkg) != null }
+
+  private fun evaluate(pkg: String) {
+    val rule = store.rules()[pkg]
+    val now = System.currentTimeMillis()
+    val (isoDay, minute) = localTime(now)
+    val schedule = Schedules.blocking(store.schedules(), pkg, isoDay, minute, essentials(), store.alwaysAllowed(), ::isLaunchable)
+    val used = if (rule != null && rule.limitMin > 0 && UsageReader.hasAccess(this)) UsageReader.todayMs(this, pkg) else null
+    val decision = Blocker.decide(
+      rule, now, used, store.focusUntil, store.graceUntil(pkg), store.extendUntil(pkg),
+      schedule = schedule, snoozeUntil = store.snoozeUntil(pkg),
+    )
     if (decision == Decision.ALLOW) return
 
+    val label = rule?.label ?: UsageReader.launchableLabel(this, pkg) ?: pkg
     startActivity(
       Intent(this, BlockActivity::class.java)
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NO_ANIMATION)
         .putExtra(BlockActivity.EXTRA_KIND, decision.name)
         .putExtra(BlockActivity.EXTRA_PACKAGE, pkg)
-        .putExtra(BlockActivity.EXTRA_LABEL, rule.label)
-        .putExtra(BlockActivity.EXTRA_LIMIT_MIN, rule.limitMin)
-        .putExtra(BlockActivity.EXTRA_ALLOW_EXTEND, rule.allowExtend)
-        .putExtra(BlockActivity.EXTRA_FOCUS_UNTIL, store.focusUntil),
+        .putExtra(BlockActivity.EXTRA_LABEL, label)
+        .putExtra(BlockActivity.EXTRA_LIMIT_MIN, rule?.limitMin ?: 0)
+        .putExtra(BlockActivity.EXTRA_ALLOW_EXTEND, rule?.allowExtend ?: false)
+        .putExtra(BlockActivity.EXTRA_FOCUS_UNTIL, store.focusUntil)
+        .putExtra(BlockActivity.EXTRA_SCHEDULE_NAME, schedule?.name)
+        .putExtra(BlockActivity.EXTRA_SCHEDULE_BEDTIME, schedule?.isBedtime ?: false)
+        .putExtra(BlockActivity.EXTRA_SCHEDULE_END_MIN, schedule?.endMin ?: 0)
+        .putExtra(BlockActivity.EXTRA_SCHEDULE_SNOOZE, schedule?.allowSnooze ?: false),
     )
     // The block screen is now in front. Forget the app so returning to it is checked again.
     currentPkg = null
     handler.removeCallbacks(tick)
   }
 
+  private fun syncDnd() {
+    val (isoDay, minute) = localTime(System.currentTimeMillis())
+    Dnd.sync(this, store, Schedules.dndWanted(store.schedules(), isoDay, minute))
+  }
+
   override fun onInterrupt() {}
 
   override fun onDestroy() {
     handler.removeCallbacks(tick)
+    handler.removeCallbacks(minuteTick)
     super.onDestroy()
   }
 
   companion object {
     private const val TICK_MS = 20_000L
+    private const val MINUTE_MS = 60_000L
+    private const val ESSENTIALS_TTL_MS = 10 * 60_000L
+
+    /** (ISO day 1 = Monday ... 7 = Sunday, minutes after midnight) in local time. */
+    fun localTime(now: Long): Pair<Int, Int> {
+      val c = Calendar.getInstance().apply { timeInMillis = now }
+      val isoDay = (c.get(Calendar.DAY_OF_WEEK) + 5) % 7 + 1
+      return isoDay to (c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE))
+    }
 
     /** True when the user has switched this service on in Accessibility settings. */
     fun isEnabled(context: Context): Boolean {

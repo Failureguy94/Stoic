@@ -79,6 +79,12 @@ class BlockActivity : Activity() {
         titleText = getString(R.string.stoic_limit_title)
         bodyText = getString(R.string.stoic_limit_body, limitMin, label)
       }
+      Decision.SCHEDULE -> {
+        val name = intent.getStringExtra(EXTRA_SCHEDULE_NAME) ?: getString(R.string.stoic_schedule_fallback)
+        titleText = if (intent.getBooleanExtra(EXTRA_SCHEDULE_BEDTIME, false)) getString(R.string.stoic_bedtime_title)
+        else getString(R.string.stoic_schedule_title, name)
+        bodyText = getString(R.string.stoic_schedule_body, label, endTimeText(intent.getIntExtra(EXTRA_SCHEDULE_END_MIN, 0)))
+      }
       else -> {
         titleText = getString(R.string.stoic_pause_title)
         bodyText = getString(R.string.stoic_pause_body, label)
@@ -150,6 +156,12 @@ class BlockActivity : Activity() {
           finish()
         }, margin(top = 12))
       }
+      Decision.SCHEDULE -> if (intent.getBooleanExtra(EXTRA_SCHEDULE_SNOOZE, false)) {
+        column.addView(button(getString(R.string.stoic_five_more), primary = false) {
+          store.setSnoozeUntil(pkg, System.currentTimeMillis() + Blocker.EXTEND_MS)
+          finish()
+        }, margin(top = 12))
+      }
       else -> {}
     }
 
@@ -194,6 +206,15 @@ class BlockActivity : Activity() {
     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
   ).apply { topMargin = dp(top) }
 
+  /** "7:00 AM" (or "07:00") for a schedule that ends this many minutes after midnight. */
+  private fun endTimeText(endMin: Int): String {
+    val c = java.util.Calendar.getInstance().apply {
+      set(java.util.Calendar.HOUR_OF_DAY, endMin / 60)
+      set(java.util.Calendar.MINUTE, endMin % 60)
+    }
+    return DateFormat.getTimeFormat(this).format(c.time)
+  }
+
   private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
   /** Leave the blocked app by going to the home screen. */
@@ -214,6 +235,10 @@ class BlockActivity : Activity() {
     const val EXTRA_LIMIT_MIN = "limitMin"
     const val EXTRA_ALLOW_EXTEND = "allowExtend"
     const val EXTRA_FOCUS_UNTIL = "focusUntil"
+    const val EXTRA_SCHEDULE_NAME = "scheduleName"
+    const val EXTRA_SCHEDULE_BEDTIME = "scheduleBedtime"
+    const val EXTRA_SCHEDULE_END_MIN = "scheduleEndMin"
+    const val EXTRA_SCHEDULE_SNOOZE = "scheduleSnooze"
     private const val PAUSE_MS = 10_000L
   }
 }

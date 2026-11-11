@@ -59,4 +59,22 @@ class BlockerTest {
     assertEquals(now, Blocker.refreshedGrace(now, now))
     assertEquals(0L, Blocker.refreshedGrace(0, now))
   }
+
+  private val bedtime = Schedule("bed", "Bedtime", true, true, (1..7).toSet(), 0, 0, true, emptySet(), false, true)
+
+  @Test fun scheduleBlocksAppsWithoutTheirOwnRule() =
+    assertEquals(Decision.SCHEDULE, Blocker.decide(null, now, 0, 0, 0, 0, schedule = bedtime))
+
+  @Test fun scheduleWinsOverLimitAndPauseButNotFocus() {
+    assertEquals(Decision.SCHEDULE, Blocker.decide(rule(limit = 1, pause = true), now, 10 * min, 0, 0, 0, schedule = bedtime))
+    assertEquals(Decision.FOCUS, Blocker.decide(rule(focus = true), now, 0, now + min, 0, 0, schedule = bedtime))
+  }
+
+  @Test fun snoozeLiftsTheScheduleUntilItExpires() {
+    assertEquals(Decision.ALLOW, Blocker.decide(null, now, 0, 0, 0, 0, schedule = bedtime, snoozeUntil = now + 1))
+    assertEquals(Decision.SCHEDULE, Blocker.decide(null, now, 0, 0, 0, 0, schedule = bedtime, snoozeUntil = now))
+  }
+
+  @Test fun snoozedScheduleFallsBackToTheAppsOwnRule() =
+    assertEquals(Decision.PAUSE, Blocker.decide(rule(pause = true), now, 0, 0, 0, 0, schedule = bedtime, snoozeUntil = now + 1))
 }

@@ -31,7 +31,8 @@
         {
           "enableRemoteNotifications": false
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "scheme": "stoic",
     "experiments": {

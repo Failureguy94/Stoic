@@ -55,6 +55,7 @@ export default function RootLayout() {
         <Stack.Screen name="design-note" options={{ title: "Design note" }} />
         <Stack.Screen name="screen-time" options={{ title: "My screen time" }} />
         <Stack.Screen name="limits" options={{ title: "Limits and pauses" }} />
+        <Stack.Screen name="schedules" options={{ title: "Schedules and bedtime" }} />
       </Stack>
     </>
   );

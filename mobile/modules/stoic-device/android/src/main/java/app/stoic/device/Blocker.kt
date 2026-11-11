@@ -18,7 +18,7 @@ data class Rule(
   val blockInFocus: Boolean,
 )
 
-enum class Decision { ALLOW, FOCUS, LIMIT, PAUSE }
+enum class Decision { ALLOW, FOCUS, SCHEDULE, LIMIT, PAUSE }
 
 object Blocker {
   /** How long "Open anyway" lasts before the pause screen may show again. */
@@ -41,6 +41,8 @@ object Blocker {
    * @param focusUntil  end of the running focus session, 0 if none.
    * @param graceUntil  the user chose "Open anyway" and this has not expired yet.
    * @param extendUntil the user chose "5 more minutes" and this has not expired yet.
+   * @param schedule    the Bedtime or other schedule blocking this app now (see Schedules.blocking), or null.
+   * @param snoozeUntil the user chose "5 more minutes" on a schedule screen and this has not expired yet.
    */
   fun decide(
     rule: Rule?,
@@ -49,10 +51,14 @@ object Blocker {
     focusUntil: Long,
     graceUntil: Long,
     extendUntil: Long,
+    schedule: Schedule? = null,
+    snoozeUntil: Long = 0,
   ): Decision {
-    if (rule == null) return Decision.ALLOW
     // A focus session is the strictest rule: the user started it on purpose.
-    if (rule.blockInFocus && focusUntil > now) return Decision.FOCUS
+    if (rule != null && rule.blockInFocus && focusUntil > now) return Decision.FOCUS
+    // A schedule applies even to apps without their own rule (e.g. Bedtime blocking "all apps").
+    if (schedule != null && snoozeUntil <= now) return Decision.SCHEDULE
+    if (rule == null) return Decision.ALLOW
     if (rule.limitMin > 0 && usedTodayMs != null && usedTodayMs >= rule.limitMin * 60_000L && extendUntil <= now) {
       return Decision.LIMIT
     }

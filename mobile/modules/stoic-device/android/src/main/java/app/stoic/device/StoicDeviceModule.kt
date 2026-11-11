@@ -79,6 +79,39 @@ class StoicDeviceModule : Module() {
 
     Function("setFocusBlockUntil") { untilMs: Double -> Store(context).focusUntil = untilMs.toLong() }
 
+    // ---- schedules and bedtime ----
+    Function("getSchedulesJson") { Store(context).schedulesJson }
+
+    Function("setSchedulesJson") { json: String ->
+      JSONArray(json) // validate before saving so a bad value cannot break the service
+      val store = Store(context)
+      store.schedulesJson = json
+      // Apply Do Not Disturb straight away instead of waiting for the next minute.
+      val (isoDay, minute) = StoicAccessibilityService.localTime(System.currentTimeMillis())
+      Dnd.sync(context, store, Schedules.dndWanted(store.schedules(), isoDay, minute))
+    }
+
+    Function("getAlwaysAllowedJson") { Store(context).alwaysAllowedJson }
+
+    Function("setAlwaysAllowedJson") { json: String ->
+      JSONArray(json)
+      Store(context).alwaysAllowedJson = json
+    }
+
+    /** Apps schedules never block (phone, messages, alarm clock, home screen, Settings), with labels. */
+    AsyncFunction("getEssentialAppsJson") {
+      val arr = JSONArray()
+      Essentials.packages(context)
+        .mapNotNull { pkg -> UsageReader.launchableLabel(context, pkg)?.let { pkg to it } }
+        .sortedBy { it.second.lowercase() }
+        .forEach { arr.put(JSONObject().put("packageName", it.first).put("label", it.second)) }
+      arr.toString()
+    }
+
+    Function("hasDndAccess") { Dnd.hasAccess(context) }
+
+    Function("openDndAccessSettings") { open(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS) }
+
     // ---- STOIC's own usage log ----
     Function("isLogEnabled") { Store(context).logEnabled }
 

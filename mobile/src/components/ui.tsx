@@ -171,21 +171,26 @@ export function Chip({
   selected,
   onPress,
   role = "radio",
+  accessibilityLabel,
 }: {
   label: string;
   hint?: string;
   icon?: string;
   selected: boolean;
   onPress: () => void;
-  role?: "radio" | "checkbox";
+  /** "button" for chips that act (e.g. remove an app) rather than select. */
+  role?: "radio" | "checkbox" | "button";
+  /** Spoken label when the visible one is abbreviated (e.g. "M" for Monday). */
+  accessibilityLabel?: string;
 }) {
   const t = useTheme();
   const fg = selected ? t.brandInk : t.ink;
+  const spoken = accessibilityLabel ?? label;
   return (
     <Pressable
       accessibilityRole={role}
-      accessibilityState={{ checked: selected }}
-      accessibilityLabel={hint ? `${label}, ${hint}` : label}
+      accessibilityState={role === "button" ? undefined : { checked: selected }}
+      accessibilityLabel={hint ? `${spoken}, ${hint}` : spoken}
       onPress={onPress}
       style={({ pressed }) => [
         styles.chip,
