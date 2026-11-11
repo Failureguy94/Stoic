@@ -1,4 +1,508 @@
 {
+ "browser": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "What it does"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC for your browser brings the same ideas to your laptop, in Chrome or Edge:"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pause before opening"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": a 10-second pause before a distracting site, then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open anyway"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Daily limits"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": \"That's your time for today\" once you have spent your minutes on a site. Time counts only while the browser is in front and your screen is unlocked, including while you watch a video."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Schedules"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": hours when chosen sites stay closed, like study hours on weekdays."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Focus with Pebble"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": start a 15, 25 or 45 minute session from the toolbar. Sites marked "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block during focus sessions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " close until it ends."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "A calmer YouTube"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": hide the home feed, Shorts, recommendations, end-screen suggestions and comments. Any Short opens as a normal video."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Strict mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": until the time you pick, rules can get stricter but not looser. You can also lock the browser's extensions page."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Install it"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "The extension isn't in the Chrome Web Store yet. Until it is:"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Download the STOIC project and find the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "extension"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " folder."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "In Chrome, open "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "chrome://extensions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (in Edge, "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "edge://extensions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ")."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Developer mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Click "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Load unpacked"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and choose the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "extension"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " folder."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pin STOIC from the puzzle-piece menu so Pebble sits in your toolbar."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Set it up"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "The settings page opens by itself after you install. Add the one or two sites that pull you in, or tap a suggestion like "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "+ youtube.com"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Choose a pause, a daily limit, or both, and whether each site is blocked during focus."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Optional: add a schedule, and pick which parts of YouTube to hide."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "Everything stays in your browser. STOIC never sends anything anywhere, and it only counts time on the sites you added."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "A site still opens"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check that the address matches. Adding "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "youtube.com"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " covers www.youtube.com and m.youtube.com, but not youtu.be."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Nothing happens in a private window"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": extensions are off in private (Incognito or InPrivate) windows unless you allow them on the extension's "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Details"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " page."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "YouTube still shows something you hid"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": YouTube changes its page often. Reload the page; if it is still there, let us know."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
  "day-score": [
   {
    "type": "heading",
