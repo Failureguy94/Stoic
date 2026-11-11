@@ -16,6 +16,7 @@ const LOADERS: Record<string, Loader> = {
   strict: () => import("@/content/docs/strict.mdx"),
   "day-score": () => import("@/content/docs/day-score.mdx"),
   "screen-time": () => import("@/content/docs/screen-time.mdx"),
+  browser: () => import("@/content/docs/browser.mdx"),
   troubleshooting: () => import("@/content/docs/troubleshooting.mdx"),
 };
 

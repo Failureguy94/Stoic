@@ -19,6 +19,10 @@ The name lives in one place: `SITE_NAME` in [`lib/site.ts`](lib/site.ts) (websit
 
 See [`mobile/AGENTS.md`](mobile/AGENTS.md) for app commands. In short: `cd mobile && npm install && npm run android` (needs Android Studio's SDK and an emulator or phone). `npm test` runs the TypeScript tests; `cd android && ./gradlew :stoic-device:testDebugUnitTest` runs the Kotlin tests.
 
+## STOIC for your browser (in `extension/`)
+
+A Chrome/Edge extension for laptops: pauses, daily limits and schedules for sites, focus sessions, a calmer YouTube (no feed, no Shorts) and strict mode. See [`extension/README.md`](extension/README.md); `cd extension && npm test` runs its tests.
+
 ## Website pages
 
 | Route | What it is |

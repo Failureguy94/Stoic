@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "STOIC: focus, limits and a calmer YouTube",
+  "short_name": "STOIC",
+  "version": "0.1.0",
+  "description": "Pause before distracting sites, set daily limits and schedules, focus with Pebble, and hide YouTube's feed and Shorts. Everything stays in your browser.",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "action": {
+    "default_title": "STOIC",
+    "default_popup": "src/popup.html",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+  },
+  "options_ui": { "page": "src/options.html", "open_in_tab": true },
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "permissions": ["storage", "tabs", "alarms", "idle"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://m.youtube.com/*"],
+      "js": ["src/youtube.js"],
+      "css": ["src/youtube.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": []
+}

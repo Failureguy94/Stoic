@@ -16,6 +16,7 @@ const PAGES = [
   "/docs",
   "/docs/getting-started",
   "/docs/websites",
+  "/docs/browser",
   "/circle",
   "/survey",
   "/about",

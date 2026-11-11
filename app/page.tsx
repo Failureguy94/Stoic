@@ -141,6 +141,10 @@ export default function Home() {
             {SITE_NAME} for Android is being tested on real phones and isn&apos;t on the Play Store yet. The{" "}
             <Link href="/docs">how-to guides</Link> show everything it does.
           </p>
+          <p className="mt-2">
+            On a laptop? <Link href="/docs/browser">{SITE_NAME} for your browser</Link> brings pauses, limits,
+            focus and a calmer YouTube to Chrome and Edge.
+          </p>
         </div>
         <div className="rounded-[var(--radius-blob)] bg-butter p-6">
           <h2 className="text-2xl font-bold">On iPhone?</h2>

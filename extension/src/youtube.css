@@ -1,0 +1,44 @@
+/* Parts of YouTube that STOIC hides, each behind its own switch (a class on <html> set by youtube.js). */
+
+/* Home feed: the endless grid on the home page. */
+html.stoic-feed ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+html.stoic-feed ytm-browse ytm-rich-grid-renderer { display: none !important; }
+html.stoic-feed ytd-browse[page-subtype="home"] #primary::before {
+  content: "STOIC hid your home feed. Search for what you came for.";
+  display: block; margin: 15vh auto 0; max-width: 34rem; padding: 0 16px; text-align: center;
+  font: 500 1.8rem/1.4 Roboto, Arial, sans-serif; color: var(--yt-spec-text-secondary, #606060);
+}
+
+/* Shorts: shelves, the Shorts tab, links in the sidebar and in search results. */
+html.stoic-shorts ytd-reel-shelf-renderer,
+html.stoic-shorts ytd-rich-shelf-renderer[is-shorts],
+html.stoic-shorts ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+html.stoic-shorts ytd-rich-section-renderer:has(ytm-shorts-lockup-view-model),
+html.stoic-shorts grid-shelf-view-model:has(ytm-shorts-lockup-view-model),
+html.stoic-shorts ytd-item-section-renderer:has(> #contents > ytd-reel-shelf-renderer),
+html.stoic-shorts ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+html.stoic-shorts ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.stoic-shorts ytd-rich-item-renderer:has(ytm-shorts-lockup-view-model),
+html.stoic-shorts ytd-rich-item-renderer:has(ytm-shorts-lockup-view-model-v2),
+html.stoic-shorts ytd-video-renderer:has(a[href^="/shorts/"]),
+html.stoic-shorts ytd-grid-video-renderer:has(a[href^="/shorts/"]),
+html.stoic-shorts ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+html.stoic-shorts yt-tab-shape[tab-title="Shorts"],
+html.stoic-shorts ytm-reel-shelf-renderer,
+html.stoic-shorts ytm-pivot-bar-item-renderer:has(.pivot-shorts) { display: none !important; }
+
+/* Recommendations next to (or under) the video you're watching. */
+html.stoic-sidebar ytd-watch-flexy #related,
+html.stoic-sidebar ytd-watch-next-secondary-results-renderer,
+html.stoic-sidebar ytm-item-section-renderer[section-identifier="related-items"] { display: none !important; }
+
+/* Suggestions that cover the end of a video, and the autoplay countdown. */
+html.stoic-endscreen .ytp-endscreen-content,
+html.stoic-endscreen .ytp-ce-element,
+html.stoic-endscreen .ytp-autonav-endscreen-countdown-overlay,
+html.stoic-endscreen .videowall-endscreen { display: none !important; }
+
+/* Comments. */
+html.stoic-comments ytd-watch-flexy ytd-comments#comments,
+html.stoic-comments ytm-comment-section-renderer,
+html.stoic-comments ytd-comments-entry-point-header-renderer { display: none !important; }

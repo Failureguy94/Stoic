@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STOIC settings</title>
+    <link rel="icon" href="../icons/icon32.png" />
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      body { padding: 1.5rem 1rem 4rem; }
+      .wrap { max-width: 46rem; margin: 0 auto; }
+      .wrap > * + *, #app > * + * { margin-top: 1.5rem; }
+      header { display: flex; align-items: center; gap: 1rem; }
+      header img { width: 72px; }
+      fieldset { border: 0; padding: 0; margin: 0; }
+      legend { font-weight: 800; margin-bottom: 0.25rem; }
+      .site + .site, .schedule + .schedule { margin-top: 0.75rem; }
+      .days label { min-height: 40px; }
+      #toast { position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); max-width: 90vw; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <img src="pebble.svg" alt="" class="float" />
+        <div>
+          <h1>STOIC for your browser</h1>
+          <p class="muted">Pause before distracting sites, set limits and schedules, focus, and calm YouTube down. Everything stays in this browser.</p>
+        </div>
+      </header>
+      <main id="app"></main>
+    </div>
+    <p id="toast" class="card tint-butter" role="status" hidden></p>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

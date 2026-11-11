@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>STOIC</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      body { width: 340px; padding: 1rem; }
+      header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+      header img { width: 48px; }
+      .big { font-family: "Fredoka", system-ui, sans-serif; font-size: 2.4rem; line-height: 1; }
+      .card + .card { margin-top: 0.75rem; }
+      footer { margin-top: 0.75rem; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="pebble.svg" alt="" />
+      <div><h1 style="font-size: 1.5rem">STOIC</h1><p class="small muted">Focus, limits and a calmer YouTube</p></div>
+    </header>
+    <main id="app" aria-live="polite"></main>
+    <footer><a href="options.html" target="_blank" id="settings">Sites, schedules and settings</a></footer>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

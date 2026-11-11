@@ -86,6 +86,13 @@ export const DOCS: DocMeta[] = [
     screen: { href: "/screen-time", label: "Open My screen time" },
   },
   {
+    slug: "browser",
+    title: "STOIC for your browser",
+    summary: "Pauses, limits, schedules, focus and a calmer YouTube on your laptop.",
+    icon: "💻",
+    minutes: 3,
+  },
+  {
     slug: "troubleshooting",
     title: "If STOIC stops working",
     summary: "Battery savers, restricted settings, Private DNS and other fixes.",

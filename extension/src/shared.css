@@ -1,0 +1,66 @@
+/* STOIC's look for the extension pages: the same colours, fonts and shapes as the website and app. */
+@font-face { font-family: "Fredoka"; src: url("../fonts/Fredoka-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/Nunito-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+
+:root {
+  --bg: #fffaf3; --surface: #ffffff; --ink: #2b2340; --muted: #5b5470; --line: #e7dfd3; --field: #7a7290;
+  --brand: #5b3fd0; --brand-ink: #ffffff; --focus: #d1366b;
+  --peach: #ffe3d3; --mint: #d9f5e5; --lavender: #ece6ff; --sky: #dcefff; --butter: #fff1bf; --rose: #ffdfe6;
+  --good-ink: #1b5e3a; --warn-ink: #6b4400;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1726; --surface: #262035; --ink: #f4effa; --muted: #cbc2de; --line: #3d3452; --field: #9a90b4;
+    --brand: #b9a6ff; --brand-ink: #1c1240; --focus: #ff8fb3;
+    --peach: #4a2f2a; --mint: #1f3b2e; --lavender: #322a55; --sky: #1d3247; --butter: #3d3519; --rose: #4a2333;
+    --good-ink: #a8efc5; --warn-ink: #ffd98a;
+  }
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bg); color: var(--ink); }
+body { margin: 0; font: 16px/1.55 "Nunito", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+h1, h2, h3, .display { font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; line-height: 1.2; margin: 0; }
+h1 { font-size: 2rem; } h2 { font-size: 1.4rem; } h3 { font-size: 1.1rem; }
+p { margin: 0; }
+a { color: var(--brand); font-weight: 800; }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+.stack > * + * { margin-top: 0.75rem; }
+.row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.card { background: var(--surface); border: 2px solid var(--line); border-radius: 1.5rem; padding: 1.25rem; }
+.tint-lavender { background: var(--lavender); border-color: transparent; }
+.tint-mint { background: var(--mint); border-color: transparent; }
+.tint-peach { background: var(--peach); border-color: transparent; }
+.tint-sky { background: var(--sky); border-color: transparent; }
+.tint-butter { background: var(--butter); border-color: transparent; }
+.tint-rose { background: var(--rose); border-color: transparent; }
+
+button, .button {
+  font: 800 1rem "Nunito", system-ui, sans-serif; min-height: 44px; padding: 0.5rem 1.25rem; border-radius: 999px;
+  border: 2px solid var(--brand); background: var(--brand); color: var(--brand-ink); cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+button.outline, .button.outline { background: transparent; color: var(--ink); border-color: var(--field); }
+button.quiet { background: transparent; border-color: transparent; color: var(--brand); text-decoration: underline; padding-inline: 0.5rem; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button.chip { min-height: 40px; padding: 0.35rem 1rem; background: var(--surface); color: var(--ink); border-color: var(--line); }
+button.chip[aria-pressed="true"], button.chip[aria-checked="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+button.chip[aria-pressed="true"]::before, button.chip[aria-checked="true"]::before { content: "✓ "; }
+
+input[type="text"], input[type="time"], select {
+  font: 1rem "Nunito", system-ui, sans-serif; min-height: 44px; padding: 0.4rem 1rem; border-radius: 999px;
+  border: 2px solid var(--field); background: var(--surface); color: var(--ink);
+}
+label.check { display: flex; gap: 0.6rem; align-items: center; min-height: 44px; cursor: pointer; }
+label.check input { width: 1.25rem; height: 1.25rem; accent-color: var(--brand); }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.pebble { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .float { animation: float 4s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-6px); } }
+}

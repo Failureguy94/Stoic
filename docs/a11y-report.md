@@ -1,6 +1,6 @@
 # Automated accessibility check (axe-core)
 
-Run: 2026-11-11T15:09:26.546Z
+Run: 2026-11-11T15:44:13.568Z
 Tool: axe-core 4.14.0, rules tagged wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa and best-practice.
 Each page checked in light and dark colour schemes at 1280px and 375px wide. Also checks for horizontal page scrolling.
 
@@ -12,6 +12,7 @@ Automated tools find only part of accessibility problems. Manual checks are in a
 | /docs | light | 1280px | PASS | none |
 | /docs/getting-started | light | 1280px | PASS | none |
 | /docs/websites | light | 1280px | PASS | none |
+| /docs/browser | light | 1280px | PASS | none |
 | /circle | light | 1280px | PASS | none |
 | /survey | light | 1280px | PASS | none |
 | /about | light | 1280px | PASS | none |
@@ -20,6 +21,7 @@ Automated tools find only part of accessibility problems. Manual checks are in a
 | /docs | light | 375px | PASS | none |
 | /docs/getting-started | light | 375px | PASS | none |
 | /docs/websites | light | 375px | PASS | none |
+| /docs/browser | light | 375px | PASS | none |
 | /circle | light | 375px | PASS | none |
 | /survey | light | 375px | PASS | none |
 | /about | light | 375px | PASS | none |
@@ -28,6 +30,7 @@ Automated tools find only part of accessibility problems. Manual checks are in a
 | /docs | dark | 1280px | PASS | none |
 | /docs/getting-started | dark | 1280px | PASS | none |
 | /docs/websites | dark | 1280px | PASS | none |
+| /docs/browser | dark | 1280px | PASS | none |
 | /circle | dark | 1280px | PASS | none |
 | /survey | dark | 1280px | PASS | none |
 | /about | dark | 1280px | PASS | none |
@@ -36,6 +39,7 @@ Automated tools find only part of accessibility problems. Manual checks are in a
 | /docs | dark | 375px | PASS | none |
 | /docs/getting-started | dark | 375px | PASS | none |
 | /docs/websites | dark | 375px | PASS | none |
+| /docs/browser | dark | 375px | PASS | none |
 | /circle | dark | 375px | PASS | none |
 | /survey | dark | 375px | PASS | none |
 | /about | dark | 375px | PASS | none |
