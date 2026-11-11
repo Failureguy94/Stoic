@@ -79,6 +79,15 @@ class BlockActivity : Activity() {
         titleText = getString(R.string.stoic_limit_title)
         bodyText = getString(R.string.stoic_limit_body, limitMin, label)
       }
+      Decision.OPENS -> {
+        titleText = getString(R.string.stoic_opens_title)
+        bodyText = getString(R.string.stoic_opens_body, label, intent.getIntExtra(EXTRA_MAX_OPENS, 0))
+      }
+      Decision.CHECKIN -> {
+        titleText = getString(R.string.stoic_checkin_title)
+        val minutes = intent.getIntExtra(EXTRA_CHECKIN_MIN, 0)
+        bodyText = resources.getQuantityString(R.plurals.stoic_checkin_body, minutes, label, minutes)
+      }
       Decision.SCHEDULE -> {
         val name = intent.getStringExtra(EXTRA_SCHEDULE_NAME) ?: getString(R.string.stoic_schedule_fallback)
         titleText = if (intent.getBooleanExtra(EXTRA_SCHEDULE_BEDTIME, false)) getString(R.string.stoic_bedtime_title)
@@ -153,6 +162,19 @@ class BlockActivity : Activity() {
       Decision.LIMIT -> if (allowExtend) {
         column.addView(button(getString(R.string.stoic_five_more), primary = false) {
           store.setExtendUntil(pkg, System.currentTimeMillis() + Blocker.EXTEND_MS)
+          finish()
+        }, margin(top = 12))
+      }
+      Decision.OPENS -> if (allowExtend) {
+        column.addView(button(getString(R.string.stoic_open_once_more), primary = false) {
+          store.addExtraOpen(pkg, UsageReader.dayKey(UsageReader.dayStart(0)))
+          finish()
+        }, margin(top = 12))
+      }
+      Decision.CHECKIN -> {
+        column.addView(button(getString(R.string.stoic_keep_going), primary = false) {
+          // Start the count again: the next check-in comes after another full stretch.
+          store.setSessionStart(pkg, System.currentTimeMillis())
           finish()
         }, margin(top = 12))
       }
@@ -239,6 +261,8 @@ class BlockActivity : Activity() {
     const val EXTRA_SCHEDULE_BEDTIME = "scheduleBedtime"
     const val EXTRA_SCHEDULE_END_MIN = "scheduleEndMin"
     const val EXTRA_SCHEDULE_SNOOZE = "scheduleSnooze"
+    const val EXTRA_MAX_OPENS = "maxOpens"
+    const val EXTRA_CHECKIN_MIN = "checkInMin"
     private const val PAUSE_MS = 10_000L
   }
 }

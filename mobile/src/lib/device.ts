@@ -30,6 +30,10 @@ export interface Rule {
   pause: boolean;
   /** Block while a Pebble focus session runs. */
   blockInFocus: boolean;
+  /** Most opens per day. 0 or missing = no limit. */
+  maxOpens?: number;
+  /** Check in after this many minutes in a row. 0 or missing = never. */
+  checkInMin?: number;
 }
 
 /** A repeating time window that blocks apps. Mirrors Schedule in Schedules.kt. */
@@ -91,6 +95,7 @@ interface Native {
   getRulesJson(): string;
   setRulesJson(json: string): void;
   setFocusBlockUntil(untilMs: number): void;
+  getOpensTodayJson(): string;
   getSchedulesJson(): string;
   setSchedulesJson(json: string): void;
   getAlwaysAllowedJson(): string;
@@ -143,6 +148,8 @@ function wrap(n: Native) {
     openAccessibilitySettings: () => n.openAccessibilitySettings(),
     getRules: () => parse<Rule[]>(n.getRulesJson(), []),
     setRules: (rules: Rule[]) => n.setRulesJson(JSON.stringify(rules)),
+    /** Opens counted today for each app with a rule. */
+    getOpensToday: () => parse<Record<string, number>>(n.getOpensTodayJson(), {}),
     /** Block "blockInFocus" apps until this time (ms since epoch). 0 clears it. */
     setFocusBlockUntil: (untilMs: number) => n.setFocusBlockUntil(untilMs),
 

@@ -83,6 +83,31 @@ class Store(context: Context) {
     get() = prefs.getBoolean("blockWasActive", false)
     set(value) = prefs.edit().putBoolean("blockWasActive", value).apply()
 
+  // ---- opens and check-ins ----
+
+  /** Opens counted today, per app. Resets when the day changes. */
+  fun opensToday(pkg: String, day: String): Int = if (prefs.getString("opensDay", "") == day) prefs.getInt("opens_$pkg", 0) else 0
+
+  fun extraOpensToday(pkg: String, day: String): Int = if (prefs.getString("opensDay", "") == day) prefs.getInt("extraOpens_$pkg", 0) else 0
+
+  fun addOpen(pkg: String, day: String) = bump("opens_$pkg", day)
+
+  fun addExtraOpen(pkg: String, day: String) = bump("extraOpens_$pkg", day)
+
+  private fun bump(key: String, day: String) {
+    if (prefs.getString("opensDay", "") != day) {
+      // New day: forget yesterday's counts.
+      val e = prefs.edit()
+      prefs.all.keys.filter { it.startsWith("opens_") || it.startsWith("extraOpens_") }.forEach { e.remove(it) }
+      e.putString("opensDay", day).commit()
+    }
+    prefs.edit().putInt(key, prefs.getInt(key, 0) + 1).apply()
+  }
+
+  /** When the current visit started, for check-ins. "Keep going" moves it to now. */
+  fun sessionStart(pkg: String) = prefs.getLong("session_$pkg", 0)
+  fun setSessionStart(pkg: String, at: Long) = prefs.edit().putLong("session_$pkg", at).apply()
+
   fun snoozeUntil(pkg: String) = prefs.getLong("snooze_$pkg", 0)
   fun setSnoozeUntil(pkg: String, until: Long) = prefs.edit().putLong("snooze_$pkg", until).apply()
 
@@ -105,6 +130,8 @@ class Store(context: Context) {
             allowExtend = o.optBoolean("allowExtend", true),
             pause = o.optBoolean("pause", false),
             blockInFocus = o.optBoolean("blockInFocus", false),
+            maxOpens = o.optInt("maxOpens", 0).coerceAtLeast(0),
+            checkInMin = o.optInt("checkInMin", 0).coerceAtLeast(0),
           )
         }
       } catch (_: Exception) {

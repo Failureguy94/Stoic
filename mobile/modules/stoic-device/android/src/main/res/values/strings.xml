@@ -17,6 +17,16 @@
   <string name="stoic_schedule_fallback">Your schedule</string>
   <string name="stoic_schedule_body">%1$s is paused until %2$s. Your phone, messages and alarms still work.</string>
 
+  <string name="stoic_opens_title">That\'s your opens for today</string>
+  <string name="stoic_opens_body">You chose to open %1$s at most %2$d times a day. It starts fresh at midnight.</string>
+  <string name="stoic_open_once_more">Open once more</string>
+  <string name="stoic_checkin_title">Still worth it?</string>
+  <plurals name="stoic_checkin_body">
+    <item quantity="one">You\'ve been on %1$s for %2$d minute in a row. Keep going if it\'s helping you.</item>
+    <item quantity="other">You\'ve been on %1$s for %2$d minutes in a row. Keep going if it\'s helping you.</item>
+  </plurals>
+  <string name="stoic_keep_going">Keep going</string>
+
   <string name="stoic_go_back">Go back</string>
   <string name="stoic_open_anyway">Open anyway</string>
   <string name="stoic_open_anyway_in">Open anyway (%1$d)</string>

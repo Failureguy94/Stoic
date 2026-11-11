@@ -77,4 +77,39 @@ class BlockerTest {
 
   @Test fun snoozedScheduleFallsBackToTheAppsOwnRule() =
     assertEquals(Decision.PAUSE, Blocker.decide(rule(pause = true), now, 0, 0, 0, 0, schedule = bedtime, snoozeUntil = now + 1))
+
+  private fun opensRule(max: Int = 5, pause: Boolean = false) = Rule("com.example.app", "Example", 0, true, pause, false, maxOpens = max)
+
+  @Test fun opensAreAllowedUntilTheMaximum() {
+    assertEquals(Decision.ALLOW, Blocker.decide(opensRule(), now, 0, 0, 0, 0, opensToday = 4))
+    assertEquals(Decision.OPENS, Blocker.decide(opensRule(), now, 0, 0, 0, 0, opensToday = 5))
+  }
+
+  @Test fun openOnceMoreAllowsOneMore() {
+    assertEquals(Decision.ALLOW, Blocker.decide(opensRule(), now, 0, 0, 0, 0, opensToday = 5, extraOpens = 1))
+    assertEquals(Decision.OPENS, Blocker.decide(opensRule(), now, 0, 0, 0, 0, opensToday = 6, extraOpens = 1))
+  }
+
+  @Test fun opensAreOnlyCheckedOnANewOpen() =
+    assertEquals(Decision.ALLOW, Blocker.decide(opensRule(), now, 0, 0, 0, 0, opensToday = null))
+
+  @Test fun opensLimitComesBeforeThePause() =
+    assertEquals(Decision.OPENS, Blocker.decide(opensRule(pause = true), now, 0, 0, 0, 0, opensToday = 5))
+
+  @Test fun checkInAfterMinutesInARow() {
+    val r = Rule("com.example.app", "Example", 0, true, false, false, checkInMin = 20)
+    assertEquals(Decision.ALLOW, Blocker.decide(r, now, 0, 0, 0, 0, sessionMs = 19 * min))
+    assertEquals(Decision.CHECKIN, Blocker.decide(r, now, 0, 0, 0, 0, sessionMs = 20 * min))
+  }
+
+  @Test fun dailyLimitWinsOverCheckIn() {
+    val r = Rule("com.example.app", "Example", 30, true, false, false, checkInMin = 20)
+    assertEquals(Decision.LIMIT, Blocker.decide(r, now, 30 * min, 0, 0, 0, sessionMs = 25 * min))
+  }
+
+  @Test fun quickReturnIsTheSameVisit() {
+    assertEquals(false, Blocker.isNewOpen(lastUsedAt = now - 10_000, now = now))
+    assertEquals(true, Blocker.isNewOpen(lastUsedAt = now - 60_000, now = now))
+    assertEquals(true, Blocker.isNewOpen(lastUsedAt = 0, now = now))
+  }
 }

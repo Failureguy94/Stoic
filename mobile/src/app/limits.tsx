@@ -10,18 +10,22 @@ import { space } from "@/theme";
 
 const LIMITS_MIN = [0, 15, 30, 60, 120];
 const limitLabel = (m: number) => (m === 0 ? "No limit" : m < 60 ? `${m} min` : `${m / 60} h`);
+const OPENS = [0, 5, 10, 20, 40];
+const CHECK_IN_MIN = [0, 10, 20, 30];
 
 export default function Limits() {
   const [enabled, setEnabled] = useState<boolean | null>(null);
   const [usageAccess, setUsageAccess] = useState(false);
   const [rules, setRules] = useState<Rule[]>([]);
   const [adding, setAdding] = useState(false);
+  const [opens, setOpens] = useState<Record<string, number>>({});
 
   useForeground(() => {
     if (!device) return;
     setEnabled(device.isBlockerEnabled());
     setUsageAccess(device.hasUsageAccess());
     setRules(device.getRules());
+    setOpens(device.getOpensToday());
   });
 
   const taken = useMemo(() => new Set(rules.map((r) => r.packageName)), [rules]);
@@ -37,7 +41,19 @@ export default function Limits() {
 
   const add = (app: LaunchableApp) => {
     save(
-      [...rules, { packageName: app.packageName, label: app.label, limitMin: 0, allowExtend: true, pause: true, blockInFocus: false }],
+      [
+        ...rules,
+        {
+          packageName: app.packageName,
+          label: app.label,
+          limitMin: 0,
+          allowExtend: true,
+          pause: true,
+          blockInFocus: false,
+          maxOpens: 0,
+          checkInMin: 0,
+        },
+      ],
       `${app.label} added with a pause before opening.`,
     );
     setAdding(false);
@@ -48,8 +64,8 @@ export default function Limits() {
   return (
     <Screen>
       <T v="lead">
-        Pick the apps that pull you in, then choose a gentle pause, a daily limit, or a block during focus sessions. You are
-        always the one in charge of these.
+        Pick the apps that pull you in, then choose a gentle pause, a daily limit, fewer opens, or a check-in when you&apos;ve
+        been on for a while. You are always the one in charge of these.
       </T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Limits and pauses are on" />
@@ -84,13 +100,53 @@ export default function Limits() {
                 <Chip key={m} label={limitLabel(m)} selected={r.limitMin === m} onPress={() => update(r.packageName, { limitMin: m })} />
               ))}
             </ChipGroup>
-            {r.limitMin > 0 ? (
+            <T v="label" style={{ marginTop: space.sm }}>
+              Opens per day
+            </T>
+            <ChipGroup label={`Opens per day for ${r.label}`}>
+              {OPENS.map((n) => (
+                <Chip
+                  key={n}
+                  label={n === 0 ? "Any" : `${n}`}
+                  accessibilityLabel={n === 0 ? "Any number of opens" : `${n} opens`}
+                  selected={(r.maxOpens ?? 0) === n}
+                  onPress={() => update(r.packageName, { maxOpens: n })}
+                />
+              ))}
+            </ChipGroup>
+            {(r.maxOpens ?? 0) > 0 ? (
+              <T v="small" muted>
+                Opened {opens[r.packageName] ?? 0} of {r.maxOpens} times today. Coming back within 30 seconds doesn&apos;t count.
+              </T>
+            ) : null}
+
+            {r.limitMin > 0 || (r.maxOpens ?? 0) > 0 ? (
               <SwitchRow
-                label="Let me add 5 more minutes"
-                hint="Off makes the limit strict until midnight"
+                label="Let me go a little over"
+                hint="Offers “5 more minutes” or “Open once more”. Off makes limits strict until midnight"
                 value={r.allowExtend}
                 onChange={(on) => update(r.packageName, { allowExtend: on })}
               />
+            ) : null}
+
+            <T v="label" style={{ marginTop: space.sm }}>
+              Check in after
+            </T>
+            <ChipGroup label={`Check in after minutes in a row on ${r.label}`}>
+              {CHECK_IN_MIN.map((m) => (
+                <Chip
+                  key={m}
+                  label={m === 0 ? "Never" : `${m} min`}
+                  accessibilityLabel={m === 0 ? "Never check in" : `${m} minutes in a row`}
+                  selected={(r.checkInMin ?? 0) === m}
+                  onPress={() => update(r.packageName, { checkInMin: m })}
+                />
+              ))}
+            </ChipGroup>
+            {(r.checkInMin ?? 0) > 0 ? (
+              <T v="small" muted>
+                After {r.checkInMin} minutes in a row, STOIC asks “Still worth it?”. You can keep going.
+              </T>
             ) : null}
 
             <SwitchRow

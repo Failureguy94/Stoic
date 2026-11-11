@@ -79,6 +79,15 @@ class StoicDeviceModule : Module() {
       Store(context).rulesJson = json
     }
 
+    /** Opens counted today for each app with a rule: {packageName: count}. */
+    Function("getOpensTodayJson") {
+      val store = Store(context)
+      val day = UsageReader.dayKey(UsageReader.dayStart(0))
+      val o = JSONObject()
+      store.rules().keys.forEach { o.put(it, store.opensToday(it, day)) }
+      o.toString()
+    }
+
     Function("setFocusBlockUntil") { untilMs: Double -> Store(context).focusUntil = untilMs.toLong() }
 
     // ---- schedules and bedtime ----
