@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { tools } from "@/data/tools";
-import { formatDate } from "@/components/Tags";
 import { SITE_NAME } from "@/lib/site";
 import { TOTAL_RESPONDENTS } from "@/data/survey";
 
 export const metadata: Metadata = {
-  title: "About, method and accessibility",
-  description: `How ${SITE_NAME} was researched and built, our sources, accessibility checklist and AI-assistance acknowledgement.`,
+  title: "About STOIC",
+  description: `What ${SITE_NAME} is, how the survey shaped it, every permission and what it is for, privacy, accessibility and credits.`,
 };
 
 const A11Y_CHECKLIST = [
@@ -19,7 +17,7 @@ const A11Y_CHECKLIST = [
   "Every image has alt text. Screenshot slots require alt text before they render.",
   "Data tables have a caption, column headers and row headers.",
   "Badges and charts never rely on colour alone. Each shows a word, symbol or number.",
-  "The Find your fix picker uses native radio buttons and announces results to screen readers.",
+  "The Circle's check-in uses native radio buttons and announces results to screen readers.",
   "Animations and transitions are switched off if you ask your device for reduced motion.",
   "Pages work at 320 px wide and zoomed to 200%.",
 ];
@@ -27,59 +25,64 @@ const A11Y_CHECKLIST = [
 export default function AboutPage() {
   return (
     <div className="reading">
-      <h1>About, method and accessibility</h1>
+      <h1>About {SITE_NAME}</h1>
       <p>
-        {SITE_NAME} is a first-year course project (&ldquo;Digital Wellness Resource Hub&rdquo;) at IIIT Nagpur.
-        Its goal is to help students <strong>choose and use</strong> practical digital wellness tools, not just
-        to list links.
+        {SITE_NAME} is a free digital wellbeing app made for students: screen time, limits, bedtime, focus,
+        notification control and website blocking in one place, built to be honest and kind. It started as a
+        first-year course project at IIIT Nagpur.
       </p>
 
-      <h2 id="method">Method</h2>
+      <h2 id="method">How it was shaped</h2>
       <ol>
         <li>
-          <strong>Survey.</strong> We asked {TOTAL_RESPONDENTS} first-year students about their devices, phone time,
-          distractions and past tools (Google Form). See the <Link href="/survey">survey results</Link>.
+          <strong>Survey.</strong> We asked {TOTAL_RESPONDENTS} first-year students about their phones, distractions
+          and why past attempts failed (Google Form). See the <Link href="/survey">survey results</Link>.
         </li>
         <li>
-          <strong>Shortlist.</strong> We started from 12 candidate tools across Android, iPhone, Windows and the
-          browser.
+          <strong>Tools failed because of permissions, cost and forgetting.</strong> So {SITE_NAME} is free, asks for
+          each permission only when you switch on the feature that needs it, and works automatically once set up.
         </li>
         <li>
-          <strong>Verification.</strong> For each tool we read the official website and the official store
-          listing (Google Play, Chrome Web Store or Firefox Add-ons) and recorded cost, paid features,
-          permissions and privacy labels. Anything we could not find is marked &ldquo;Not confirmed&rdquo;. We
-          never guess. One candidate, StayFocusd, was dropped because its official pages could not be loaded.
+          <strong>Kind by design.</strong> No streaks to lose, no red warnings, no shaming. Every limit has a way
+          through unless you choose strict mode.
         </li>
         <li>
-          <strong>Labels.</strong> If an important feature needs payment, the tool is labelled
-          &ldquo;Freemium&rdquo; (never &ldquo;Free&rdquo;) and the paid features are listed.
-        </li>
-        <li>
-          <strong>Guides.</strong> Setup guides are written and tested by a student on a real device.
-        </li>
-        <li>
-          <strong>Link check.</strong> A script checks every external link and saves the result in{" "}
-          <code>docs/link-test-record.md</code>.
+          <strong>Tested on Android.</strong> Every feature is tested on an Android 16 phone emulator, and the
+          blocking rules have automated tests.
         </li>
       </ol>
 
-      <h2 id="sources">Sources and dates checked</h2>
-      <p>Prices and features change. Always confirm on the official page before you pay or grant permissions.</p>
+      <h2 id="permissions">Permissions, and what each one is for</h2>
       <ul>
-        {tools.map((t) => (
-          <li key={t.id}>
-            <strong>{t.name}</strong>, checked <time dateTime={t.dateChecked}>{formatDate(t.dateChecked)}</time>:
-            <ul>
-              {t.sources.map((s) => (
-                <li key={s.url}>
-                  <a href={s.url} rel="noopener noreferrer">
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        <li>
+          <strong>Usage access:</strong> how long each app was open, for screen time, daily limits and your day
+          score.
+        </li>
+        <li>
+          <strong>Accessibility:</strong> which app is in front, to show pause, limit, bedtime and focus screens. It
+          cannot read what is on your screen or what you type.
+        </li>
+        <li>
+          <strong>Notification access:</strong> only for Notifications, to count and hold the ones you choose.
+        </li>
+        <li>
+          <strong>Do Not Disturb access:</strong> only if Bedtime should switch Do Not Disturb on.
+        </li>
+        <li>
+          <strong>VPN:</strong> only for Websites and internet. It stays on your phone and only answers &ldquo;where
+          is this website?&rdquo;.
+        </li>
+      </ul>
+
+      <h2 id="privacy">Privacy</h2>
+      <ul>
+        <li>There is no account and no {SITE_NAME} server. Everything stays on your phone.</li>
+        <li>Held notifications are deleted when you open or clear them, or after three days.</li>
+        <li>Uninstalling {SITE_NAME} or clearing its data deletes everything it stored.</li>
+        <li>
+          This website stores your Circle pledge only in your own browser. Read the{" "}
+          <Link href="/design-note">design note</Link> for what the app records and what it can&apos;t stop.
+        </li>
       </ul>
 
       <h2 id="accessibility">Accessibility checklist</h2>
@@ -93,14 +96,6 @@ export default function AboutPage() {
         ))}
       </ul>
 
-      <h2 id="honesty">What this site cannot do</h2>
-      <p>
-        A website cannot read how much you use your phone. Check-ins in the <Link href="/circle">{SITE_NAME} Circle</Link>{" "}
-        are <strong>self-reported</strong>. Our{" "}
-        <Link href="/design-note">design note on tamper-resistant tracking</Link> explains what a future native app
-        could do, and why no system is fully cheat-proof.
-      </p>
-
       <h2 id="attribution">Attribution and AI assistance</h2>
       <p>
         Built with Next.js, React, TypeScript, Tailwind CSS and MDX. Fonts: Fredoka (headings) and Nunito (body),
@@ -108,8 +103,8 @@ export default function AboutPage() {
         illustrations are original inline SVG drawn for this site. Small symbols are standard emoji.
       </p>
       <p>
-        <strong>AI-assistance acknowledgement:</strong> This site was built with assistance from Claude; the
-        survey, setup guides, screenshots, user testing and final verification are my own work.
+        <strong>AI-assistance acknowledgement:</strong> This site and app were built with assistance from Claude;
+        the survey, user testing and final verification are my own work.
       </p>
       <p>
         The full list of sources and libraries is in <code>docs/ATTRIBUTION.md</code> in the project repository.

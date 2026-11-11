@@ -4,45 +4,27 @@
 
 ## AI-assistance acknowledgement
 
-This site was built with assistance from Claude; the survey, setup guides, screenshots, user testing and final verification are my own work.
+STOIC (the website and the Android app) was built with assistance from Claude; the survey, user testing and final verification are my own work.
 
-Specifically, Claude (an AI assistant by Anthropic, used through Claude Code) helped scaffold the Next.js project, write the components and page copy, research tool details from official pages, and write the check scripts. All tool facts were read from the official sources listed below. Anything that could not be confirmed is marked "Not confirmed" on the site.
+Specifically, Claude (an AI assistant by Anthropic, used through Claude Code) helped scaffold the Next.js website and the Expo/React Native app, write the Kotlin native module, write the components, page copy and how-to guides, and write the automated tests and check scripts.
 
 ## Survey
 
 Google Form survey of 17 first-year students at IIIT Nagpur, designed, run and analysed by the student. Results are in `data/survey.ts` and shown on `/survey`.
 
-## Sources (all checked on 2026-11-10)
+## Technical references
 
-| Tool | Source |
-|---|---|
-| Android Digital Wellbeing | https://support.google.com/android/answer/9346420 |
-| Android Digital Wellbeing | https://play.google.com/store/apps/details?id=com.google.android.apps.wellbeing |
-| iPhone Screen Time | https://support.apple.com/guide/iphone/set-schedules-and-limits-iphb0c7313c9/ios |
-| iPhone Focus | https://support.apple.com/guide/iphone/set-up-a-focus-iphd6288a67f/ios |
-| Windows Focus sessions | https://support.microsoft.com/en-us/windows/how-to-use-focus-in-windows-11-cbcc9ddb-8164-43fa-8919-b9a2af072382 |
-| ScreenZen | https://www.screenzen.co/ |
-| ScreenZen | https://play.google.com/store/apps/details?id=com.screenzen |
-| Forest | https://www.forestapp.cc/ |
-| Forest | https://play.google.com/store/apps/details?id=cc.forestapp |
-| Opal | https://opalapp.com/ |
-| Opal | https://opalapp.com/pricing |
-| Opal | https://play.google.com/store/apps/details?id=com.withopal.opal |
-| LeechBlock NG | https://www.proginosko.com/leechblock/ |
-| LeechBlock NG | https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ |
-| Unhook | https://unhook.app/ |
-| Unhook | https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid |
-| Unhook | https://addons.mozilla.org/en-US/firefox/addon/youtube-recommended-videos/ |
-| Cold Turkey Blocker | https://getcoldturkey.com/ |
-| Cold Turkey Blocker | https://getcoldturkey.com/pricing/ |
-| Freedom | https://freedom.to/pricing |
-| Freedom | https://play.google.com/store/apps/details?id=to.freedom.android2 |
+Android platform APIs the app relies on (Android Developers documentation):
 
-Dropped: **StayFocusd**. Its official site showed no readable content, and its Chrome Web Store page could not be loaded, so nothing could be verified.
-
-Technical reference for the design note (checked 2026-11-10): https://developer.android.com/reference/android/app/usage/UsageStatsManager
+- UsageStatsManager (screen time): https://developer.android.com/reference/android/app/usage/UsageStatsManager
+- AccessibilityService (which app is in front): https://developer.android.com/reference/android/accessibilityservice/AccessibilityService
+- NotificationListenerService (notification control): https://developer.android.com/reference/android/service/notification/NotificationListenerService
+- VpnService (website blocking on the phone): https://developer.android.com/reference/android/net/VpnService
+- NotificationManager interruption filter (Bedtime's Do Not Disturb): https://developer.android.com/reference/android/app/NotificationManager
 
 ## Libraries and tools
+
+### Website
 
 | Name | Use | Licence |
 |---|---|---|
@@ -55,9 +37,21 @@ Technical reference for the design note (checked 2026-11-10): https://developer.
 | playwright-core | Headless browser for checks (dev only) | Apache-2.0 |
 | ESLint, eslint-config-next | Linting (dev only) | MIT |
 
+### Android app (`mobile/`)
+
+| Name | Use | Licence |
+|---|---|---|
+| Expo SDK 58, expo-router and Expo modules | App framework and navigation | MIT |
+| React Native | UI | MIT |
+| react-native-svg, react-native-safe-area-context, react-native-screens | Drawing, layout | MIT |
+| @react-native-community/datetimepicker | Time picker for schedules | MIT |
+| @react-native-async-storage/async-storage | Saving settings on the phone | MIT |
+| AndroidX WorkManager | Background screen-time record | Apache-2.0 |
+| Kotlin, JUnit, org.json (tests) | Native module and its tests | Apache-2.0, EPL-1.0, JSON licence |
+| unified, remark-parse, remark-mdx | Turning the guides into app content (build only) | MIT |
+
 ## Fonts, images and icons
 
-- **Fredoka** (headings) and **Nunito** (body), SIL Open Font License 1.1. Loaded through `next/font/google`.
-- **Pebble** mascot, wave divider and app icon: original inline SVG drawn for this site.
+- **Fredoka** (headings) and **Nunito** (body), SIL Open Font License 1.1. The website loads them through `next/font/google`; the app bundles them (see `mobile/modules/stoic-device/FONTS.md`).
+- **Pebble** mascot, wave divider and app icons: original drawings made for STOIC.
 - No third-party images or icon sets. Badge symbols and decorative icons are plain Unicode characters and emoji (hidden from screen readers).
-- Guide screenshots (in `public/guides/`) are the student's own.

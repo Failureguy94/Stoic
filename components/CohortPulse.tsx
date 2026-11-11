@@ -11,12 +11,12 @@ export function CohortPulse() {
     { n: TRIED_TO_CUT_DOWN, text: "have already tried to cut down their phone time.", tint: "bg-peach" },
     {
       n: TOTAL_RESPONDENTS - count(used, "None"),
-      text: "have already tried at least one tool, like Digital Wellbeing, Focus mode or a blocker.",
+      text: "have already tried at least one tool to cut down. You're in good company.",
       tint: "bg-sky",
     },
     {
-      n: count(used, "Android Digital Wellbeing"),
-      text: "use Android Digital Wellbeing, so a free tool already on your phone is a normal place to start.",
+      n: count(failed, "Forgot to use it"),
+      text: "said a tool stopped working because they forgot to use it, which is why STOIC's schedules and limits run by themselves.",
       tint: "bg-butter",
     },
   ];
@@ -56,11 +56,11 @@ export function CohortPulse() {
           </li>
           <li className="rounded-[1.25rem] bg-mint p-4">
             <p className="font-extrabold">
-              <span aria-hidden="true">⌂ </span>Start free and built in
+              <span aria-hidden="true">⌂ </span>Free, and only what it needs
             </p>
             <p className="mt-1 text-sm">
               {count(failed, "Cost")} mentioned cost and {count(failed, "Too many permissions")} mentioned permissions.
-              Your phone&apos;s own settings avoid both.
+              STOIC is free and asks for each permission only when you switch on the feature that uses it.
             </p>
           </li>
           <li className="rounded-[1.25rem] bg-butter p-4">

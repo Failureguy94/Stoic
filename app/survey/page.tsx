@@ -3,12 +3,11 @@ import Link from "next/link";
 import { BarChart } from "@/components/BarChart";
 import { Pebble } from "@/components/Pebble";
 import { SURVEY, TOTAL_RESPONDENTS, TRIED_TO_CUT_DOWN } from "@/data/survey";
-import { tools } from "@/data/tools";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Survey results",
-  description: `What ${TOTAL_RESPONDENTS} first-year students told us about phone use and digital wellness tools.`,
+  description: `What ${TOTAL_RESPONDENTS} first-year students told us about phone use, and how it shaped STOIC.`,
 };
 
 const TINTS = ["bg-peach", "bg-mint", "bg-sky", "bg-butter", "bg-lavender", "bg-rose", "bg-mint"];
@@ -17,40 +16,45 @@ export default function SurveyPage() {
   const changes: { finding: string; change: React.ReactNode }[] = [
     {
       finding: "12 of 17 wanted a short trusted list",
-      change: <>We kept it to {tools.length} tools, all checked on official pages, and dropped one we couldn&apos;t verify.</>,
+      change: <>Instead of a list of other apps, {SITE_NAME} puts the tools in one place: limits, bedtime, focus, notifications and website blocking.</>,
     },
     {
       finding: "11 of 17 wanted step-by-step guides",
       change: (
         <>
-          We wrote <Link href="/guides">three setup guides</Link> with screenshots and an &ldquo;if it didn&apos;t
-          work&rdquo; box.
+          Every feature has a short <Link href="/docs">how-to guide</Link> with an &ldquo;if it didn&apos;t work&rdquo;
+          box.
         </>
       ),
     },
     {
       finding: "Tools failed because of permissions (6), cost (6) and forgetting (6)",
-      change: <>Every tool shows three labels up front: cost, permission level, and Automatic vs Needs you to remember.</>,
+      change: (
+        <>
+          {SITE_NAME} is free, asks for each permission only when you switch on the feature that needs it, and works
+          automatically once set up.
+        </>
+      ),
     },
     {
       finding: "YouTube/reels (10) and social media (8) were the top distractions",
       change: (
         <>
-          They&apos;re the first two choices in the <Link href="/">Find your fix</Link> picker, and one guide is all
-          about YouTube.
+          <Link href="/docs/limits">Limits, opens per day and check-ins</Link> and{" "}
+          <Link href="/docs/websites">website blocking</Link> all start with those apps.
         </>
       ),
     },
     {
-      finding: "11 study on a Windows laptop, and 9 already use Android Digital Wellbeing",
-      change: <>We cover Android, Windows and browser tools, plus a smaller iPhone section, starting with free built-in tools.</>,
+      finding: "11 study on a Windows laptop",
+      change: <>A {SITE_NAME} browser extension and laptop app are next, so the same rules can follow you to your laptop.</>,
     },
     {
       finding: `${TRIED_TO_CUT_DOWN} of 17 had tried to cut down, but many said it didn't last`,
       change: (
         <>
-          We added the <Link href="/circle">{SITE_NAME} Circle</Link>: one small weekly goal, gentle check-ins, and no
-          shaming.
+          Schedules run by themselves, <Link href="/docs/strict">strict mode</Link> keeps rules firm through a weak
+          moment, and the <Link href="/circle">{SITE_NAME} Circle</Link> offers one small weekly goal with no shaming.
         </>
       ),
     },

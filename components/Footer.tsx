@@ -14,20 +14,19 @@ export function Footer() {
           <nav aria-label="Footer">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 font-bold">
               <li>
-                <Link href="/about">About, method and accessibility</Link>
+                <Link href="/about">About STOIC, permissions and privacy</Link>
               </li>
               <li>
                 <Link href="/design-note">Design note: tamper-resistant tracking</Link>
               </li>
               <li>
-                <Link href="/about#attribution">Sources and AI-assistance acknowledgement</Link>
+                <Link href="/about#attribution">Credits and AI-assistance acknowledgement</Link>
               </li>
             </ul>
           </nav>
           <p className="text-sm">
-            {SITE_NAME} is a first-year course project at IIIT Nagpur. It gives general information, not medical
-            advice. Tool details were checked on the dates shown and can change, so confirm on the official page
-            before you pay or grant permissions.
+            {SITE_NAME} started as a first-year course project at IIIT Nagpur. It helps with phone habits; it
+            isn&apos;t medical advice.
           </p>
         </div>
       </div>

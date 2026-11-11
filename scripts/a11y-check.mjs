@@ -13,11 +13,9 @@ const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 const PAGES = [
   "/",
-  "/tools",
-  "/guides",
-  "/guides/android-digital-wellbeing",
-  "/guides/notification-cleanup",
-  "/guides/reduce-youtube-distraction",
+  "/docs",
+  "/docs/getting-started",
+  "/docs/websites",
   "/circle",
   "/survey",
   "/about",
@@ -34,11 +32,6 @@ for (const scheme of ["light", "dark"]) {
     const page = await ctx.newPage();
     for (const path of PAGES) {
       await page.goto(BASE + path, { waitUntil: "networkidle" });
-      // Exercise interactive states so they are checked too.
-      if (path === "/") {
-        await page.getByLabel("YouTube / reels").check({ force: true });
-        await page.getByLabel("Android phone").check({ force: true });
-      }
       await page.addScriptTag({ content: axeSource });
       const res = await page.evaluate(async () =>
         axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] } }),

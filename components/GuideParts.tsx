@@ -14,7 +14,7 @@ export function Todo({ children }: { children: React.ReactNode }) {
 /**
  * Screenshot slot. `alt` is required. Without `src` it shows a labelled
  * placeholder with the planned alt text.
- * Put images in public/guides/<guide-slug>/ and pass src="/guides/<slug>/<file>.png".
+ * Put images in public/doc-images/<doc-slug>/ and pass src="/doc-images/<slug>/<file>.png".
  */
 export function Screenshot({
   src,

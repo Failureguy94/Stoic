@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Design note: tamper-resistant tracking (future work)",
+  title: "Design note: tamper-resistant tracking",
   description:
     "Why screen-time totals can be erased, and a privacy-first design for a native Android app that makes gaps visible. Not implemented.",
 };
@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 export default function DesignNotePage() {
   return (
     <div className="reading">
-      <h1>Design note: tamper-resistant tracking (future work)</h1>
+      <h1>Design note: tamper-resistant tracking</h1>
 
       <p className="rounded-[1.25rem] bg-butter p-5 text-warn-ink">
-        <strong>Status: design only, not implemented.</strong> Nothing on this page exists in {SITE_NAME} today.
-        Check-ins on this website are self-reported, and no system can be fully cheat-proof.
+        <strong>Status: built into the {SITE_NAME} Android app</strong> as <Link href="/docs/screen-time">Keep my own
+        record</Link>, on the phone only (the server copy described below is not built). Check-ins on this website are
+        still self-reported, and no system can be fully cheat-proof.
       </p>
 
       <h2>The problem</h2>
@@ -31,7 +32,7 @@ export default function DesignNotePage() {
         clearly.
       </p>
 
-      <h2>A possible fix: a small native Android companion app</h2>
+      <h2>How the {SITE_NAME} app fixes it</h2>
       <ol>
         <li>
           <strong>Read usage events from the system.</strong> Android&apos;s <code>UsageStatsManager</code> API
@@ -70,11 +71,12 @@ export default function DesignNotePage() {
         so a person can trust their own numbers.
       </p>
 
-      <h2>Why we did not build it now</h2>
+      <h2>What is built, and what is not</h2>
       <p>
-        It needs a native Android app, a server, and careful privacy review. That is beyond a first-year web project
-        with a two-week deadline. We think writing the design down honestly is more useful than claiming our
-        website can do something it cannot.
+        The {SITE_NAME} Android app reads usage from the system, keeps its own add-only daily record on the phone,
+        and marks days it couldn&apos;t check in as &ldquo;unverified&rdquo;. The server copy is not built: it would
+        need accounts and a careful privacy review, and {SITE_NAME} promises that your data stays on your phone. So
+        uninstalling {SITE_NAME} itself, or clearing its data, still deletes the record.
       </p>
 
       <h2>Reference</h2>

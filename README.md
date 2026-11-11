@@ -1,22 +1,38 @@
-# STOIC: Digital Wellness Resource Hub
+# STOIC: digital wellbeing, made for students
 
-A first-year course project (IIIT Nagpur, Project 3). STOIC helps students **choose and use** practical digital wellness tools: a short, checked list, a "Find your fix" picker, side-by-side comparisons of cost, permissions and effort, student-written setup guides, and the STOIC Circle, which gives gentle, shame-free encouragement.
+STOIC started as a first-year course project at IIIT Nagpur (Project 3). It is a free Android app that helps students take back their study time, plus a website with how-to guides and the STOIC Circle. Everything stays on the user's phone: no account, no server.
 
-The site name lives in one place: `SITE_NAME` in [`lib/site.ts`](lib/site.ts).
+The name lives in one place: `SITE_NAME` in [`lib/site.ts`](lib/site.ts) (website) and [`mobile/src/lib/site.ts`](mobile/src/lib/site.ts) (app).
 
-## Pages
+## What STOIC does (Android app, in `mobile/`)
+
+| Feature | What it is |
+|---|---|
+| Limits and pauses | A pause before opening an app, daily limits, opens per day, "Still worth it?" check-ins |
+| Bedtime and schedules | Hours when apps stay closed, with Do Not Disturb; calls, messages and alarms always work |
+| Focus with Pebble | A focus timer that can block apps or switch the internet off |
+| Notifications | Per-app counts, hold noisy apps, summaries at chosen times |
+| Websites and internet | Site blocking in every browser through an on-phone VPN; internet off during focus |
+| Strict mode | Settings can only get stricter until a chosen time; "Unlock early" takes 15 minutes |
+| Day score | 0–100 from four explained parts, no streaks |
+| Screen time | Real per-app usage, plus an add-only record that survives uninstalls |
+
+See [`mobile/AGENTS.md`](mobile/AGENTS.md) for app commands. In short: `cd mobile && npm install && npm run android` (needs Android Studio's SDK and an emulator or phone). `npm test` runs the TypeScript tests; `cd android && ./gradlew :stoic-device:testDebugUnitTest` runs the Kotlin tests.
+
+## Website pages
 
 | Route | What it is |
 |---|---|
-| `/` | Find your fix picker (problem + device → 1–3 tools) |
-| `/tools` | Compare tools: table on desktop, cards on mobile, with filters |
-| `/guides`, `/guides/[slug]` | Three MDX setup guides (placeholders to fill in) |
+| `/` | What STOIC is and does, privacy, how to get it |
+| `/docs`, `/docs/[slug]` | How-to guides for every feature (the same guides are inside the app) |
 | `/circle` | STOIC Circle: cohort pulse + weekly pledge (saved in this browser only) |
-| `/survey` | Survey results as accessible bar charts + what changed |
-| `/about` | Method, sources, accessibility checklist, AI acknowledgement |
-| `/design-note` | Tamper-resistant tracking design (future work, not built) |
+| `/survey` | Survey results as accessible bar charts, and how they shaped STOIC |
+| `/about` | What STOIC is, every permission and what it's for, privacy, accessibility, credits |
+| `/design-note` | Tamper-resistant tracking: what the app records and what it can't stop |
 
-## Run it locally
+Old hub URLs (`/tools`, `/guides/...`) redirect to the new pages.
+
+## Run the website locally
 
 Needs Node.js 20.9 or newer.
 
@@ -43,35 +59,22 @@ npm run check:a11y                  # axe-core on every page → docs/a11y-repor
 
 `check:a11y` uses Google Chrome at `/usr/bin/google-chrome`. Set `CHROME_PATH` if yours is elsewhere, and `BASE_URL` if the server isn't on port 3000.
 
-## Deploy to Vercel
+## Deploy the website to Vercel
 
 1. Push this repo to GitHub.
 2. On vercel.com, choose **Add New → Project**, import the repo, and keep the defaults (Vercel detects Next.js).
 3. Click **Deploy**. No environment variables are needed.
 
-Or from the terminal: `npx vercel` (preview) and `npx vercel --prod`.
-
 ## Where to edit content
 
 | What | File |
 |---|---|
-| Tool data (typed) | `data/tools.ts` |
-| Picker recommendations | `data/picker.ts` |
+| How-to guides (website and app) | `content/docs/*.mdx`, with title, summary and icon in `data/docs.ts` |
 | Survey numbers | `data/survey.ts` |
-| Guides | `content/guides/*.mdx`, and their details (time needed, author, date tested) in `data/guides.ts` |
-| Guide screenshots | `public/guides/<guide-slug>/` |
 
-### Adding a screenshot to a guide
+After editing a guide, the app picks it up on the next `npm start` or `npm run android` in `mobile/` (or run `npm run docs` there).
 
-```mdx
-<Screenshot
-  src="/guides/android-digital-wellbeing/app-timer.png"
-  alt="Digital Wellbeing showing a 30-minute timer on YouTube"
-  caption="Set the timer, then tap OK."
-/>
-```
-
-Without `src` it shows a visible `[ADD SCREENSHOT]` placeholder. `alt` is always required.
+Guides can use `<Note>`, `<IfItDidntWork>` and `<Screenshot src="/doc-images/<slug>/<file>.png" alt="..." caption="..." />` (images go in `public/doc-images/`; alt text is required).
 
 ## Docs
 
@@ -82,6 +85,6 @@ Without `src` it shows a visible `[ADD SCREENSHOT]` placeholder. `alt` is always
 
 ## Honesty notes
 
-- Tool facts come from official pages, checked on the date shown. Anything not found says "Not confirmed".
 - The website cannot see device usage. Circle check-ins are **self-reported** and stored only in `localStorage`.
-- This site was built with assistance from Claude; the survey, setup guides, screenshots, user testing and final verification are my own work.
+- The app can't stop safe mode, a computer with developer tools, or a factory reset; the guides say so.
+- STOIC was built with assistance from Claude; the survey, user testing and final verification are my own work.
