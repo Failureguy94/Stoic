@@ -52,6 +52,24 @@ export interface Schedule {
   allowSnooze: boolean;
 }
 
+export interface NotificationCount {
+  packageName: string;
+  label: string;
+  count: number;
+}
+
+/** A notification STOIC is holding for later. */
+export interface HeldNotification {
+  key: string;
+  packageName: string;
+  label: string;
+  title: string;
+  text: string;
+  postedAt: number;
+  /** "app": you hold this app. "blocked": the app was blocked (focus, bedtime, schedule) at the time. */
+  reason: "app" | "blocked";
+}
+
 export interface DayRecord {
   /** YYYY-MM-DD */
   day: string;
@@ -80,6 +98,18 @@ interface Native {
   getEssentialAppsJson(): Promise<string>;
   hasDndAccess(): boolean;
   openDndAccessSettings(): void;
+  hasNotificationAccess(): boolean;
+  openNotificationAccessSettings(): void;
+  getNotificationCountsJson(): Promise<string>;
+  getHeldJson(): Promise<string>;
+  openHeld(key: string): boolean;
+  clearHeld(): void;
+  getHoldAppsJson(): string;
+  setHoldAppsJson(json: string): void;
+  getHoldWhileBlocked(): boolean;
+  setHoldWhileBlocked(on: boolean): void;
+  getSummaryTimesJson(): string;
+  setSummaryTimesJson(json: string): void;
   isLogEnabled(): boolean;
   setLogEnabled(enabled: boolean): void;
   recordSnapshotNow(): Promise<boolean>;
@@ -125,6 +155,23 @@ function wrap(n: Native) {
     getEssentialApps: async () => parse<LaunchableApp[]>(await n.getEssentialAppsJson(), []),
     hasDndAccess: () => n.hasDndAccess(),
     openDndAccessSettings: () => n.openDndAccessSettings(),
+
+    hasNotificationAccess: () => n.hasNotificationAccess(),
+    openNotificationAccessSettings: () => n.openNotificationAccessSettings(),
+    /** Today's notifications per app, most first. */
+    getNotificationCounts: async () => parse<NotificationCount[]>(await n.getNotificationCountsJson(), []),
+    /** Newest first. */
+    getHeld: async () => parse<HeldNotification[]>(await n.getHeldJson(), []),
+    /** Opens it like a tap on the original notification, and removes it from the list. */
+    openHeld: (key: string) => n.openHeld(key),
+    clearHeld: () => n.clearHeld(),
+    getHoldApps: () => parse<string[]>(n.getHoldAppsJson(), []),
+    setHoldApps: (pkgs: string[]) => n.setHoldAppsJson(JSON.stringify(pkgs)),
+    getHoldWhileBlocked: () => n.getHoldWhileBlocked(),
+    setHoldWhileBlocked: (on: boolean) => n.setHoldWhileBlocked(on),
+    /** Minutes after midnight. */
+    getSummaryTimes: () => parse<number[]>(n.getSummaryTimesJson(), []),
+    setSummaryTimes: (times: number[]) => n.setSummaryTimesJson(JSON.stringify(times)),
 
     isLogEnabled: () => n.isLogEnabled(),
     setLogEnabled: (enabled: boolean) => n.setLogEnabled(enabled),

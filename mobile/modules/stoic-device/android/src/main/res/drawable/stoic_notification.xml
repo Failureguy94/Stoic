@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Status bar icon: Pebble's outline in one colour, as Android requires for notification icons. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="120" android:viewportHeight="120">
+  <path android:fillColor="#FFFFFFFF"
+      android:pathData="M14,68c0,-27 20,-48 49,-48 27,0 45,18 45,43 0,22 -16,34 -46,34C31,97 14,88 14,68z" />
+</vector>

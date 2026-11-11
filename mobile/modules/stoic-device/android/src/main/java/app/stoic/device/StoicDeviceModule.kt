@@ -1,7 +1,9 @@
 package app.stoic.device
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.provider.Settings
 import expo.modules.kotlin.exception.CodedException
 import expo.modules.kotlin.modules.Module
@@ -111,6 +113,88 @@ class StoicDeviceModule : Module() {
     Function("hasDndAccess") { Dnd.hasAccess(context) }
 
     Function("openDndAccessSettings") { open(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS) }
+
+    // ---- notification control ----
+    Function("hasNotificationAccess") { StoicNotificationListener.isEnabled(context) }
+
+    Function("openNotificationAccessSettings") {
+      val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        Intent(Settings.ACTION_NOTIFICATION_LISTENER_DETAIL_SETTINGS)
+          .putExtra(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME, StoicNotificationListener.component(context).flattenToString())
+      } else {
+        Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+      }
+      context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    }
+
+    /** Today's notifications per app, most first: [{packageName, label, count}]. */
+    AsyncFunction("getNotificationCountsJson") {
+      val arr = JSONArray()
+      HeldLog.countsFor(context, UsageReader.dayKey(UsageReader.dayStart(0))).entries
+        .sortedByDescending { it.value }
+        .forEach {
+          arr.put(
+            JSONObject().put("packageName", it.key)
+              .put("label", StoicNotificationListener.appLabel(context, it.key)).put("count", it.value),
+          )
+        }
+      arr.toString()
+    }
+
+    AsyncFunction("getHeldJson") { HeldLog.toJson(HeldLog.list(context).sortedByDescending { it.postedAt }).toString() }
+
+    /** Open a held notification as if it had been tapped (or its app, if that is no longer possible). */
+    Function("openHeld") { key: String ->
+      val item = HeldLog.list(context).firstOrNull { it.key == key }
+      val pending = StoicNotificationListener.pending.remove(key)
+      var opened = false
+      if (pending != null) {
+        opened = try {
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            @Suppress("DEPRECATION")
+            val options = ActivityOptions.makeBasic()
+              .setPendingIntentBackgroundActivityStartMode(ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED)
+            pending.send(context, 0, null, null, null, null, options.toBundle())
+          } else {
+            pending.send()
+          }
+          true
+        } catch (_: Exception) {
+          false
+        }
+      }
+      if (!opened && item != null) {
+        context.packageManager.getLaunchIntentForPackage(item.pkg)?.let {
+          context.startActivity(it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+          opened = true
+        }
+      }
+      HeldLog.remove(context, key)
+      opened
+    }
+
+    Function("clearHeld") {
+      HeldLog.clear(context)
+      StoicNotificationListener.pending.clear()
+    }
+
+    Function("getHoldAppsJson") { Store(context).holdAppsJson }
+
+    Function("setHoldAppsJson") { json: String ->
+      JSONArray(json)
+      Store(context).holdAppsJson = json
+    }
+
+    Function("getHoldWhileBlocked") { Store(context).holdWhileBlocked }
+
+    Function("setHoldWhileBlocked") { on: Boolean -> Store(context).holdWhileBlocked = on }
+
+    Function("getSummaryTimesJson") { Store(context).summaryTimesJson }
+
+    Function("setSummaryTimesJson") { json: String ->
+      JSONArray(json)
+      Store(context).summaryTimesJson = json
+    }
 
     // ---- STOIC's own usage log ----
     Function("isLogEnabled") { Store(context).logEnabled }

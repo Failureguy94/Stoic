@@ -48,6 +48,41 @@ class Store(context: Context) {
     get() = prefs.getBoolean("dndOnByStoic", false)
     set(value) = prefs.edit().putBoolean("dndOnByStoic", value).apply()
 
+  // ---- notification control ----
+
+  /** Apps whose notifications are held for the summary. */
+  var holdAppsJson: String
+    get() = prefs.getString("holdApps", "[]") ?: "[]"
+    set(value) = prefs.edit().putString("holdApps", value).apply()
+
+  fun holdApps(): Set<String> = Schedules.parsePackages(holdAppsJson)
+
+  /** Also hold notifications from apps that are blocked right now (focus, bedtime, schedules). */
+  var holdWhileBlocked: Boolean
+    get() = prefs.getBoolean("holdWhileBlocked", true)
+    set(value) = prefs.edit().putBoolean("holdWhileBlocked", value).apply()
+
+  /** Summary times, minutes after midnight. */
+  var summaryTimesJson: String
+    get() = prefs.getString("summaryTimes", "[780,1140]") ?: "[780,1140]"
+    set(value) = prefs.edit().putString("summaryTimes", value).apply()
+
+  fun summaryTimes(): List<Int> = try {
+    val arr = org.json.JSONArray(summaryTimesJson)
+    (0 until arr.length()).map { arr.getInt(it) }.filter { it in 0 until 24 * 60 }
+  } catch (_: Exception) {
+    emptyList()
+  }
+
+  var lastSummaryAt: Long
+    get() = prefs.getLong("lastSummaryAt", 0)
+    set(value) = prefs.edit().putLong("lastSummaryAt", value).apply()
+
+  /** Was a focus session or schedule active at the last check? Used to send a summary when it ends. */
+  var blockWasActive: Boolean
+    get() = prefs.getBoolean("blockWasActive", false)
+    set(value) = prefs.edit().putBoolean("blockWasActive", value).apply()
+
   fun snoozeUntil(pkg: String) = prefs.getLong("snooze_$pkg", 0)
   fun setSnoozeUntil(pkg: String, until: Long) = prefs.edit().putLong("snooze_$pkg", until).apply()
 

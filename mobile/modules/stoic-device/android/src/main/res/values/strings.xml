@@ -24,4 +24,9 @@
   <string name="stoic_open_anyway_ready">Open anyway is now available</string>
   <string name="stoic_five_more">5 more minutes</string>
   <string name="stoic_footer">You set this up in STOIC. You can change it there any time.</string>
+
+  <string name="stoic_notif_label">STOIC notification control</string>
+  <string name="stoic_summary_channel">Notification summary</string>
+  <string name="stoic_summary_title">%1$d notifications held for you</string>
+  <string name="stoic_summary_title_after_block">You\'re done. %1$d notifications waited for you</string>
 </resources>
