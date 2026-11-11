@@ -20,6 +20,7 @@ export default function More() {
         <T v="h2">On this phone</T>
         {isAndroid ? (
           <>
+            <NavCard href="/score" icon="🌱" tint="butter" title="My day score" body="One number for your day, from goals you set, explained in plain words." />
             <NavCard href="/screen-time" icon="⏱️" tint="sky" title="My screen time" body="Your real per-app usage, today and this week, plus a log that survives uninstalls." />
             <NavCard href="/limits" icon="✋" tint="peach" title="Limits and pauses" body="Daily limits, a pause before opening an app, and blocking during focus." />
             <NavCard href="/schedules" icon="🌙" tint="lavender" title="Schedules and bedtime" body="Hours when apps stay closed, like bedtime or study time, with Do Not Disturb." />

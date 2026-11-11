@@ -88,6 +88,30 @@ class StoicDeviceModule : Module() {
       o.toString()
     }
 
+    // ---- day score inputs ----
+    /** Block-screen outcomes today: {wentBack, overrode}. */
+    Function("getChoicesTodayJson") {
+      val (wentBack, overrode) = Store(context).choicesToday(UsageReader.dayKey(UsageReader.dayStart(0)))
+      JSONObject().put("wentBack", wentBack).put("overrode", overrode).toString()
+    }
+
+    /**
+     * Phone use during the last finished Bedtime: {minutes, start, end}, or "null" when Bedtime is off
+     * or has not run yet. Essential apps (phone, messages, alarm clock...) do not count.
+     */
+    AsyncFunction("getBedtimeUseJson") {
+      val store = Store(context)
+      val bed = store.schedules().firstOrNull { it.isBedtime && it.enabled } ?: return@AsyncFunction "null"
+      val now = System.currentTimeMillis()
+      val (isoDay, _) = StoicAccessibilityService.localTime(now)
+      val (start, end) = Schedules.lastCompletedWindow(bed, now, UsageReader.dayStart(0), isoDay) ?: return@AsyncFunction "null"
+      val essential = Essentials.packages(context)
+      val ms = UsageReader.foregroundMs(context, start, end)
+        .filter { (pkg, _) -> pkg !in essential && UsageReader.launchableLabel(context, pkg) != null }
+        .values.sum()
+      JSONObject().put("minutes", ms / 60_000.0).put("start", start).put("end", end).toString()
+    }
+
     Function("setFocusBlockUntil") { untilMs: Double -> Store(context).focusUntil = untilMs.toLong() }
 
     // ---- schedules and bedtime ----

@@ -68,6 +68,29 @@ object Schedules {
   fun dndWanted(schedules: List<Schedule>, isoDay: Int, minute: Int): Boolean =
     schedules.any { it.dnd && isActive(it, isoDay, minute) }
 
+  /**
+   * The most recent window of `s` that has fully ended by `now`, as (start, end) epoch ms, or null.
+   * @param todayMidnight local midnight of today. @param todayIso ISO day of today (1 = Monday).
+   * Ignores daylight-saving shifts (at most an hour off, twice a year).
+   */
+  fun lastCompletedWindow(s: Schedule, now: Long, todayMidnight: Long, todayIso: Int): Pair<Long, Long>? {
+    if (s.days.isEmpty()) return null
+    val dayMs = DAY_MIN * 60_000L
+    val lengthMin = when {
+      s.startMin == s.endMin -> DAY_MIN
+      s.endMin > s.startMin -> s.endMin - s.startMin
+      else -> DAY_MIN - s.startMin + s.endMin
+    }
+    for (back in 0..8) {
+      val iso = ((todayIso - 1 - back) % 7 + 7) % 7 + 1
+      if (iso !in s.days) continue
+      val start = todayMidnight - back * dayMs + s.startMin * 60_000L
+      val end = start + lengthMin * 60_000L
+      if (end <= now) return start to end
+    }
+    return null
+  }
+
   fun parse(json: String): List<Schedule> {
     val out = ArrayList<Schedule>()
     try {

@@ -40,7 +40,7 @@
     "prestart": "node scripts/build-guides.mjs",
     "preandroid": "node scripts/build-guides.mjs",
     "typecheck": "tsc --noEmit",
-    "test": "jest",
+    "test": "node --test \"src/**/*.test.ts\"",
     "lint": "expo lint"
   },
   "private": true

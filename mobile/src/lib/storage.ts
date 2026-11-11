@@ -60,4 +60,6 @@ export const KEYS = {
   focusLog: "stoic.focus.log.v1",
   focusActive: "stoic.focus.active.v1",
   focusPrefs: "stoic.focus.prefs.v1",
+  scoreGoals: "stoic.score.goals.v1",
+  scoreHistory: "stoic.score.history.v1",
 } as const;

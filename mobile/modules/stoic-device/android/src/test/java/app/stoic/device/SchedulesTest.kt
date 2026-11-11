@@ -106,4 +106,29 @@ class SchedulesTest {
   }
 
   @Test fun corruptJsonMeansNoSchedules() = assertEquals(0, Schedules.parse("not json").size)
+
+  private val dayMs = 24 * 60 * 60_000L
+  private val midnight = 1000 * dayMs // pretend this is a Wednesday
+  private val wed = 3
+  private fun t(h: Int, m: Int = 0) = midnight + (h * 60 + m) * 60_000L
+
+  @Test fun lastNightsBedtimeIsFoundInTheMorning() {
+    // Every night 23:00-07:00; at 09:00 Wednesday the last finished one is Tue 23:00 - Wed 07:00.
+    val w = Schedules.lastCompletedWindow(schedule(), t(9), midnight, wed)
+    assertEquals(t(23) - dayMs to t(7), w)
+  }
+
+  @Test fun bedtimeStillRunningIsNotCountedYet() {
+    // At 06:00 Wednesday, last night is still going: the one before (Mon-Tue) is the last finished.
+    val w = Schedules.lastCompletedWindow(schedule(), t(6), midnight, wed)
+    assertEquals(t(23) - 2 * dayMs to t(7) - dayMs, w)
+  }
+
+  @Test fun onlyDaysTheWindowStartsOnCount() {
+    // Only Monday nights: on Wednesday the last one is Mon 23:00 - Tue 07:00.
+    val w = Schedules.lastCompletedWindow(schedule(days = setOf(1)), t(12), midnight, wed)
+    assertEquals(t(23) - 2 * dayMs to t(7) - dayMs, w)
+  }
+
+  @Test fun noDaysMeansNoWindow() = assertNull(Schedules.lastCompletedWindow(schedule(days = emptySet()), t(12), midnight, wed))
 }

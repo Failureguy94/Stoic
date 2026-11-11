@@ -95,6 +95,8 @@ interface Native {
   getRulesJson(): string;
   setRulesJson(json: string): void;
   setFocusBlockUntil(untilMs: number): void;
+  getChoicesTodayJson(): string;
+  getBedtimeUseJson(): Promise<string>;
   getOpensTodayJson(): string;
   getSchedulesJson(): string;
   setSchedulesJson(json: string): void;
@@ -148,6 +150,10 @@ function wrap(n: Native) {
     openAccessibilitySettings: () => n.openAccessibilitySettings(),
     getRules: () => parse<Rule[]>(n.getRulesJson(), []),
     setRules: (rules: Rule[]) => n.setRulesJson(JSON.stringify(rules)),
+    /** Block-screen outcomes today: chose "Go back" vs went past the screen. */
+    getChoicesToday: () => parse<{ wentBack: number; overrode: number }>(n.getChoicesTodayJson(), { wentBack: 0, overrode: 0 }),
+    /** Phone use during the last finished Bedtime (essential apps excluded), or null if Bedtime is off. */
+    getBedtimeUse: async () => parse<{ minutes: number; start: number; end: number } | null>(await n.getBedtimeUseJson(), null),
     /** Opens counted today for each app with a rule. */
     getOpensToday: () => parse<Record<string, number>>(n.getOpensTodayJson(), {}),
     /** Block "blockInFocus" apps until this time (ms since epoch). 0 clears it. */

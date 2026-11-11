@@ -60,6 +60,7 @@ class BlockActivity : Activity() {
 
   private fun render(intent: Intent) {
     countdown?.cancel()
+    chosen = false
     val store = Store(this)
     val kind = try { Decision.valueOf(intent.getStringExtra(EXTRA_KIND) ?: "") } catch (_: Exception) { Decision.PAUSE }
     val pkg = intent.getStringExtra(EXTRA_PACKAGE) ?: ""
@@ -138,6 +139,7 @@ class BlockActivity : Activity() {
       Decision.PAUSE -> {
         val open = button(getString(R.string.stoic_open_anyway_wait), primary = false) {
           store.setGraceUntil(pkg, System.currentTimeMillis() + Blocker.GRACE_MS)
+          choice(store, wentBack = false)
           finish()
         }
         open.isEnabled = false
@@ -162,12 +164,14 @@ class BlockActivity : Activity() {
       Decision.LIMIT -> if (allowExtend) {
         column.addView(button(getString(R.string.stoic_five_more), primary = false) {
           store.setExtendUntil(pkg, System.currentTimeMillis() + Blocker.EXTEND_MS)
+          choice(store, wentBack = false)
           finish()
         }, margin(top = 12))
       }
       Decision.OPENS -> if (allowExtend) {
         column.addView(button(getString(R.string.stoic_open_once_more), primary = false) {
           store.addExtraOpen(pkg, UsageReader.dayKey(UsageReader.dayStart(0)))
+          choice(store, wentBack = false)
           finish()
         }, margin(top = 12))
       }
@@ -175,12 +179,14 @@ class BlockActivity : Activity() {
         column.addView(button(getString(R.string.stoic_keep_going), primary = false) {
           // Start the count again: the next check-in comes after another full stretch.
           store.setSessionStart(pkg, System.currentTimeMillis())
+          choice(store, wentBack = false)
           finish()
         }, margin(top = 12))
       }
       Decision.SCHEDULE -> if (intent.getBooleanExtra(EXTRA_SCHEDULE_SNOOZE, false)) {
         column.addView(button(getString(R.string.stoic_five_more), primary = false) {
           store.setSnoozeUntil(pkg, System.currentTimeMillis() + Blocker.EXTEND_MS)
+          choice(store, wentBack = false)
           finish()
         }, margin(top = 12))
       }
@@ -239,8 +245,17 @@ class BlockActivity : Activity() {
 
   private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
+  /** Count this screen's outcome once, for the day score. */
+  private var chosen = false
+  private fun choice(store: Store, wentBack: Boolean) {
+    if (chosen) return
+    chosen = true
+    store.recordChoice(UsageReader.dayKey(UsageReader.dayStart(0)), wentBack)
+  }
+
   /** Leave the blocked app by going to the home screen. */
   private fun goHome() {
+    choice(Store(this), wentBack = true)
     startActivity(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     finish()
   }

@@ -57,6 +57,7 @@ export default function RootLayout() {
         <Stack.Screen name="limits" options={{ title: "Limits and pauses" }} />
         <Stack.Screen name="schedules" options={{ title: "Schedules and bedtime" }} />
         <Stack.Screen name="notifications" options={{ title: "Notifications" }} />
+        <Stack.Screen name="score" options={{ title: "My day score" }} />
       </Stack>
     </>
   );

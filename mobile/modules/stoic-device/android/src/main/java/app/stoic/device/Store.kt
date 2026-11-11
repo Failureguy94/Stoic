@@ -104,6 +104,18 @@ class Store(context: Context) {
     prefs.edit().putInt(key, prefs.getInt(key, 0) + 1).apply()
   }
 
+  /** Block-screen outcomes today, for the day score: "Go back" vs going past the screen. */
+  fun recordChoice(day: String, wentBack: Boolean) {
+    if (prefs.getString("choicesDay", "") != day) {
+      prefs.edit().putString("choicesDay", day).putInt("wentBack", 0).putInt("overrode", 0).commit()
+    }
+    val key = if (wentBack) "wentBack" else "overrode"
+    prefs.edit().putInt(key, prefs.getInt(key, 0) + 1).apply()
+  }
+
+  fun choicesToday(day: String): Pair<Int, Int> =
+    if (prefs.getString("choicesDay", "") == day) prefs.getInt("wentBack", 0) to prefs.getInt("overrode", 0) else 0 to 0
+
   /** When the current visit started, for check-ins. "Keep going" moves it to now. */
   fun sessionStart(pkg: String) = prefs.getLong("session_$pkg", 0)
   fun setSessionStart(pkg: String, at: Long) = prefs.edit().putLong("session_$pkg", at).apply()
