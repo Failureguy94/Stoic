@@ -83,6 +83,17 @@ export interface StrictState {
   unlockWaitMs: number;
 }
 
+/** Website and internet blocking. Mirrors SiteSettings in Sites.kt. */
+export interface SiteSettings {
+  enabled: boolean;
+  /** Domains, e.g. "youtube.com"; subdomains are blocked too. */
+  sites: string[];
+  /** true: always. false: only during focus sessions and schedules. */
+  always: boolean;
+  /** During focus and schedules, no internet except essential and always-allowed apps. */
+  internetOff: boolean;
+}
+
 export interface DayRecord {
   /** YYYY-MM-DD */
   day: string;
@@ -104,6 +115,7 @@ interface Native {
   getRulesJson(): string;
   setRulesJson(json: string): void;
   setFocusBlockUntil(untilMs: number): void;
+  setFocusSessionUntil(untilMs: number): void;
   getChoicesTodayJson(): string;
   getBedtimeUseJson(): Promise<string>;
   getOpensTodayJson(): string;
@@ -114,6 +126,12 @@ interface Native {
   getEssentialAppsJson(): Promise<string>;
   hasDndAccess(): boolean;
   openDndAccessSettings(): void;
+  getSitesJson(): string;
+  setSitesJson(json: string): void;
+  normalizeSite(input: string): string | null;
+  isVpnAllowed(): boolean;
+  isVpnRunning(): boolean;
+  requestVpnPermission(): boolean;
   getStrictJson(): string;
   startStrict(untilMs: number, lockSettings: boolean): void;
   requestUnlock(): void;
@@ -170,6 +188,8 @@ function wrap(n: Native) {
     getBedtimeUse: async () => parse<{ minutes: number; start: number; end: number } | null>(await n.getBedtimeUseJson(), null),
     /** Opens counted today for each app with a rule. */
     getOpensToday: () => parse<Record<string, number>>(n.getOpensTodayJson(), {}),
+    /** End of the running focus session (any session), 0 when none. "During focus" settings follow it. */
+    setFocusSessionUntil: (untilMs: number) => n.setFocusSessionUntil(untilMs),
     /** Block "blockInFocus" apps until this time (ms since epoch). 0 clears it. */
     setFocusBlockUntil: (untilMs: number) => n.setFocusBlockUntil(untilMs),
 
@@ -183,6 +203,15 @@ function wrap(n: Native) {
     hasDndAccess: () => n.hasDndAccess(),
     openDndAccessSettings: () => n.openDndAccessSettings(),
 
+    getSites: () => parse<SiteSettings>(n.getSitesJson(), { enabled: false, sites: [], always: true, internetOff: false }),
+    setSites: (s: SiteSettings) => n.setSitesJson(JSON.stringify(s)),
+    /** "youtube.com" from whatever was typed (a link, "www.…"), or null if it isn't a website. */
+    normalizeSite: (input: string) => n.normalizeSite(input),
+    /** Has the user allowed STOIC's on-phone VPN? */
+    isVpnAllowed: () => n.isVpnAllowed(),
+    isVpnRunning: () => n.isVpnRunning(),
+    /** Shows Android's VPN permission dialog. */
+    requestVpnPermission: () => n.requestVpnPermission(),
     getStrict: () => parse<StrictState>(n.getStrictJson(), { until: 0, lockSettings: false, unlockRequestedAt: 0, unlockWaitMs: 0 }),
     /** Start or extend strict mode. It can never be shortened. */
     startStrict: (untilMs: number, lockSettings: boolean) => n.startStrict(untilMs, lockSettings),

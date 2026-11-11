@@ -4,6 +4,9 @@
   <!-- "Usage access": the user grants this in Settings; it is never granted silently. -->
   <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
 
+  <!-- Restart website blocking after the phone restarts. -->
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
   <!-- Bedtime can turn on Do Not Disturb. The user grants "Do Not Disturb access" in Settings. -->
   <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
@@ -58,6 +61,23 @@
         <action android:name="android.service.notification.NotificationListenerService" />
       </intent-filter>
     </service>
+
+    <!-- Website and internet blocking: a VPN that stays on the phone (StoicVpnService.kt). -->
+    <service
+        android:name=".StoicVpnService"
+        android:exported="false"
+        android:permission="android.permission.BIND_VPN_SERVICE">
+      <intent-filter>
+        <action android:name="android.net.VpnService" />
+      </intent-filter>
+    </service>
+
+    <receiver android:name=".StoicBootReceiver" android:exported="false">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+      </intent-filter>
+    </receiver>
 
     <activity
         android:name=".BlockActivity"

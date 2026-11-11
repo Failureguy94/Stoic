@@ -3,6 +3,7 @@ package app.stoic.device
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.net.VpnService
 import android.os.Build
 import android.provider.Settings
 import expo.modules.kotlin.exception.CodedException
@@ -119,11 +120,18 @@ class StoicDeviceModule : Module() {
       JSONObject().put("minutes", ms / 60_000.0).put("start", start).put("end", end).toString()
     }
 
+    /** Every focus session reports its end here, so "during focus" settings (sites, internet off) follow it. */
+    Function("setFocusSessionUntil") { untilMs: Double ->
+      Store(context).focusSessionUntil = untilMs.toLong()
+      StoicVpnService.sync(context)
+    }
+
     Function("setFocusBlockUntil") { untilMs: Double ->
       val store = Store(context)
       val now = System.currentTimeMillis()
       if (store.strictActive(now)) strictCheck(Strict.looserFocus(store.focusUntil, untilMs.toLong(), now))
       store.focusUntil = untilMs.toLong()
+      StoicVpnService.sync(context) // "Internet off" follows focus sessions
     }
 
     // ---- schedules and bedtime ----
@@ -146,6 +154,38 @@ class StoicDeviceModule : Module() {
       val store = Store(context)
       if (store.strictActive()) strictCheck(Strict.looserAllowed(store.alwaysAllowed(), Schedules.parsePackages(json)))
       store.alwaysAllowedJson = json
+    }
+
+    // ---- website and internet blocking ----
+    Function("getSitesJson") {
+      val s = Sites.parse(Store(context).sitesJson)
+      val arr = JSONArray()
+      s.sites.sorted().forEach { arr.put(it) }
+      JSONObject().put("enabled", s.enabled).put("sites", arr).put("always", s.always).put("internetOff", s.internetOff).toString()
+    }
+
+    Function("setSitesJson") { json: String ->
+      val next = Sites.parse(json)
+      val store = Store(context)
+      if (store.strictActive()) strictCheck(Strict.looserSites(Sites.parse(store.sitesJson), next))
+      store.sitesJson = json
+      StoicVpnService.sync(context)
+    }
+
+    /** "youtube.com" from whatever was typed, or null if it isn't a website address. */
+    Function("normalizeSite") { input: String -> Sites.normalize(input) }
+
+    Function("isVpnAllowed") { StoicVpnService.consented(context) }
+
+    Function("isVpnRunning") { StoicVpnService.running }
+
+    /** Ask Android for permission to run STOIC's VPN (a system dialog). */
+    Function("requestVpnPermission") {
+      val intent = VpnService.prepare(context) ?: return@Function false
+      val activity = appContext.currentActivity
+      if (activity != null) activity.startActivityForResult(intent, 4711)
+      else context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+      true
     }
 
     // ---- strict mode ----

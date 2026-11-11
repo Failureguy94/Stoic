@@ -30,9 +30,9 @@ class BlockState(private val context: Context, private val store: Store) {
     return Schedules.blocking(store.schedules(), pkg, isoDay, minute, essentials(), store.alwaysAllowed(), ::isLaunchable) != null
   }
 
-  /** Is any focus session or schedule running? */
+  /** Is any focus session (blocking apps or not) or schedule running? */
   fun anyActive(now: Long): Boolean {
-    if (store.focusUntil > now) return true
+    if (store.focusUntil > now || store.focusSessionUntil > now) return true
     val (isoDay, minute) = StoicAccessibilityService.localTime(now)
     return store.schedules().any { Schedules.isActive(it, isoDay, minute) }
   }

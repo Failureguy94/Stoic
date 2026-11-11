@@ -23,6 +23,11 @@ class Store(context: Context) {
     get() = prefs.getLong("focusUntil", 0)
     set(value) = prefs.edit().putLong("focusUntil", value).apply()
 
+  /** End of the running Pebble focus session, whether or not it blocks apps (0 = none). */
+  var focusSessionUntil: Long
+    get() = prefs.getLong("focusSessionUntil", 0)
+    set(value) = prefs.edit().putLong("focusSessionUntil", value).apply()
+
   var logEnabled: Boolean
     get() = prefs.getBoolean("logEnabled", false)
     set(value) = prefs.edit().putBoolean("logEnabled", value).apply()
@@ -47,6 +52,11 @@ class Store(context: Context) {
   var dndOnByStoic: Boolean
     get() = prefs.getBoolean("dndOnByStoic", false)
     set(value) = prefs.edit().putBoolean("dndOnByStoic", value).apply()
+
+  // ---- website blocking ----
+  var sitesJson: String
+    get() = prefs.getString("sites", "{}") ?: "{}"
+    set(value) = prefs.edit().putString("sites", value).apply()
 
   // ---- strict mode ----
 

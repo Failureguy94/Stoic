@@ -51,6 +51,15 @@ object Strict {
   fun looserAllowed(old: Set<String>, new: Set<String>): String? =
     if (!old.containsAll(new)) "always allow more apps" else null
 
+  /** Would replacing the website settings `old` with `new` let more through? */
+  fun looserSites(old: SiteSettings, new: SiteSettings): String? {
+    if (old.enabled && !new.enabled) return "turn off website blocking"
+    if (old.enabled && !new.sites.containsAll(old.sites)) return "remove blocked sites"
+    if (old.enabled && old.always && !new.always) return "block sites only some of the time"
+    if (old.internetOff && !new.internetOff) return "turn off “Internet off”"
+    return null
+  }
+
   /** Ending a running focus block early. */
   fun looserFocus(oldUntil: Long, newUntil: Long, now: Long): String? =
     if (oldUntil > now && newUntil < oldUntil) "end the focus session early" else null

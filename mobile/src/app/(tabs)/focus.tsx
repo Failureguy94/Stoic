@@ -46,6 +46,7 @@ export default function Focus() {
   const close = (session: ActiveSession, at: number, early: boolean) => {
     // Strict mode refuses to lift a running app block early; then the session simply goes on.
     if (device && !tryStrictSave(() => device!.setFocusBlockUntil(0), () => {})) return;
+    device?.setFocusSessionUntil(0);
     const done = finish(session, at);
     setLog(appendSession(log ?? [], done));
     setActive(null);
@@ -89,6 +90,7 @@ export default function Focus() {
     const startedAt = Date.now();
     const blockApps = prefs.blockApps && !!device?.isBlockerEnabled();
     if (blockApps) device?.setFocusBlockUntil(startedAt + durationMs);
+    device?.setFocusSessionUntil(startedAt + durationMs);
     setNow(startedAt);
     setActive({ startedAt, durationMs, blockApps, notificationId });
     say(`Focus session started: ${prefs.minutes} minutes.`);

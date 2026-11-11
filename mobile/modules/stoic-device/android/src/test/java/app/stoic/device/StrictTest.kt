@@ -102,4 +102,16 @@ class StrictTest {
     assertTrue(Strict.blocksSystemApp("settings", lockSettings = true, installers, settings))
     assertFalse(Strict.blocksSystemApp("yt", lockSettings = true, installers, settings))
   }
+
+  private val sites = SiteSettings(enabled = true, sites = setOf("youtube.com", "reddit.com"), always = true, internetOff = true)
+
+  @Test fun sitesCanOnlyGetStricter() {
+    assertNull(Strict.looserSites(sites, sites))
+    assertNull(Strict.looserSites(sites, sites.copy(sites = sites.sites + "x.com")))
+    assertNull(Strict.looserSites(Sites.OFF, sites))
+    assertNotNull(Strict.looserSites(sites, sites.copy(enabled = false)))
+    assertNotNull(Strict.looserSites(sites, sites.copy(sites = setOf("youtube.com"))))
+    assertNotNull(Strict.looserSites(sites, sites.copy(always = false)))
+    assertNotNull(Strict.looserSites(sites, sites.copy(internetOff = false)))
+  }
 }
