@@ -1,75 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
-import { Pebble, type Mood } from "@/components/Pebble";
+import { Pebble } from "@/components/Pebble";
 import { AppLink, B, Bullets, Card, Chip, ChipGroup, Screen, T } from "@/components/ui";
 import { device } from "@/lib/device";
-import type { FinishedSession } from "@/lib/focus";
-import { BEDTIME_ZERO_MIN, MAX, computeScore, type ScoreInputs } from "@/lib/score";
+import { BEDTIME_ZERO_MIN, MAX } from "@/lib/score";
 import { KEYS, useStored } from "@/lib/storage";
-import { todayScreenMs } from "@/lib/todayUsage";
-import { useForeground } from "@/lib/useForeground";
-import { dayKey, shiftDay, weekday } from "@/lib/week";
+import { DEFAULT_GOALS, moodFor, useDayScore } from "@/lib/useDayScore";
+import { shiftDay, weekday } from "@/lib/week";
 import { font, radius, space, useTheme } from "@/theme";
 
-interface Goals {
-  screenH: number;
-  focusMin: number;
-}
-const DEFAULT_GOALS: Goals = { screenH: 3, focusMin: 50 };
 const SCREEN_GOALS_H = [1, 2, 3, 4, 5];
 const FOCUS_GOALS_MIN = [25, 50, 100];
-const NO_LOG: FinishedSession[] = [];
 const NO_HISTORY: Record<string, number> = {};
 const KEEP_DAYS = 30;
 
-const H = 3_600_000;
-const MIN = 60_000;
-
-function moodFor(total: number): Mood {
-  if (total >= 80) return "cheer";
-  if (total >= 60) return "happy";
-  if (total >= 40) return "calm";
-  return "sleepy";
-}
 
 export default function ScoreScreen() {
   const t = useTheme();
-  const [goals, setGoals] = useStored<Goals>(KEYS.scoreGoals, DEFAULT_GOALS);
+  const { score, goals, setGoals, access, bedtimeMin, today } = useDayScore();
   const [history, setHistory] = useStored<Record<string, number>>(KEYS.scoreHistory, NO_HISTORY);
-  const [log] = useStored<FinishedSession[]>(KEYS.focusLog, NO_LOG);
-  const [screenMs, setScreenMs] = useState<number | null>(null);
-  const [access, setAccess] = useState(true);
-  const [choices, setChoices] = useState({ wentBack: 0, overrode: 0 });
-  const [bedtimeMin, setBedtimeMin] = useState<number | null>(null);
-
-  useForeground(() => {
-    if (!device) return;
-    setAccess(device.hasUsageAccess());
-    setChoices(device.getChoicesToday());
-    todayScreenMs().then(setScreenMs);
-    device.getBedtimeUse().then((b) => setBedtimeMin(b ? b.minutes : null));
-  });
-
-  const today = dayKey();
-  const focusMs = useMemo(
-    () => (log ?? []).filter((s) => dayKey(new Date(s.startedAt)) === today).reduce((sum, s) => sum + s.focusedMs, 0),
-    [log, today],
-  );
-
-  const score = useMemo(() => {
-    if (screenMs === null || goals === undefined) return null;
-    const inputs: ScoreInputs = {
-      screenMs,
-      screenGoalMs: goals.screenH * H,
-      focusMs,
-      focusGoalMs: goals.focusMin * MIN,
-      wentBack: choices.wentBack,
-      overrode: choices.overrode,
-      bedtimeMin,
-    };
-    return computeScore(inputs);
-  }, [screenMs, goals, focusMs, choices, bedtimeMin]);
 
   // Keep today's score so the week view has something to show. Saved whenever STOIC is opened.
   useEffect(() => {

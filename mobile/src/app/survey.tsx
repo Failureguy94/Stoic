@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import { SURVEY, TOTAL_RESPONDENTS, TRIED_TO_CUT_DOWN, type SurveyQuestion } from "@shared/survey";
-import { tools } from "@shared/tools";
 import { B, Card, Screen, T } from "@/components/ui";
 import { SITE_NAME } from "@/lib/site";
 import { radius, space, useTheme, type Tint } from "@/theme";
@@ -10,19 +9,19 @@ const TINTS: Tint[] = ["peach", "mint", "sky", "butter", "lavender", "rose", "mi
 export default function Survey() {
   const t = useTheme();
   const changes: [string, string][] = [
-    ["12 of 17 wanted a short trusted list", `We kept it to ${tools.length} tools, all checked on official pages, and dropped one we couldn't verify.`],
-    ["11 of 17 wanted step-by-step guides", "We wrote three setup guides with screenshots and an “if it didn't work” box."],
+    ["12 of 17 wanted a short trusted list", `Instead of a list of other apps, ${SITE_NAME} puts the tools in one place: limits, bedtime, focus, notifications and website blocking.`],
+    ["11 of 17 wanted step-by-step guides", "Every feature has a short how-to guide with an “if it didn't work” box."],
     [
       "Tools failed because of permissions (6), cost (6) and forgetting (6)",
-      "Every tool shows three labels up front: cost, permission level, and Automatic vs Needs you to remember.",
+      `${SITE_NAME} is free, asks for each permission only when you switch on the feature that needs it, and works automatically once set up.`,
     ],
     [
       "YouTube/reels (10) and social media (8) were the top distractions",
-      "They're the first two choices in the Find your fix picker, and one guide is all about YouTube.",
+      "Limits, opens per day, check-ins and website blocking all start with those apps, and the quick fixes on the Today tab point straight at them.",
     ],
     [
-      "11 study on a Windows laptop, and 9 already use Android Digital Wellbeing",
-      "We cover Android, Windows and browser tools, plus a smaller iPhone section, starting with free built-in tools.",
+      "Many said changes didn't last",
+      "Schedules and bedtime run by themselves, and strict mode keeps your rules firm through a weak moment.",
     ],
     [
       `${TRIED_TO_CUT_DOWN} of 17 had tried to cut down, but many said it didn't last`,

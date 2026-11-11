@@ -36,12 +36,12 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "guides": "node scripts/build-guides.mjs",
-    "prestart": "node scripts/build-guides.mjs",
-    "preandroid": "node scripts/build-guides.mjs",
+    "prestart": "node scripts/build-docs.mjs",
+    "preandroid": "node scripts/build-docs.mjs",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"src/**/*.test.ts\"",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "docs": "node scripts/build-docs.mjs"
   },
   "private": true
 }

@@ -1,0 +1,3457 @@
+{
+ "day-score": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "What it is"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "One number out of 100 for your day so far, made of four parts you control. It is a mirror, not a grade: there is no streak, and it stays on your phone."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "How it is worked out"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Screen time (40 points)"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": full points up to your daily goal, then fewer, down to zero at twice the goal."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Focus (25 points)"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": your Pebble focus minutes towards your daily focus goal."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Choices (20 points)"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": when a pause or limit screen appears, how often you choose "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Go back"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". A day with no prompts gets full points."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Bedtime (15 points)"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": phone use during last night's Bedtime, down to zero at 30 minutes. Calls, messages and alarms don't count. If Bedtime is off, this part is left out and the others are scaled to 100."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Each part shows one sentence explaining its points."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Set your goals"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Go to "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "More"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", then "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "My day score"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", and pick your screen time goal (1 to 5 hours) and focus goal (25 to 100 minutes)."
+    }
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "A day gets a score in the week chart when you open STOIC that day."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "focus": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Start a session"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Focus"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " tab."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pick "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "15"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "25"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " or "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "45"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " minutes."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Start"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", put the phone down, and watch Pebble grow."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Ending early is fine: the minutes you did still count towards your week and your day score."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Make it stronger"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Tell me when it ends"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " sends one notification from your phone when time is up."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block my chosen apps while I focus"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " blocks the apps you marked "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block during focus sessions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Limits and pauses"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Websites and internet"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " you can block sites "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "During focus & schedules"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", or switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Internet off during focus & schedules"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "During "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Strict mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", a session that blocks apps can't be ended early."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "Focus sessions are saved only on this phone. There is no streak to lose: every session just adds up."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "getting-started": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "What STOIC needs, and why"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC asks for each permission only when you turn on the feature that needs it. Everything stays on your phone: there is no account and no STOIC server."
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Usage access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": lets STOIC see how long each app was open. Needed for "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "My screen time"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "daily limits"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and your "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "day score"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Accessibility (\"STOIC limits and pauses\")"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": lets STOIC see "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "which app is in front"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", so it can show a pause, limit, bedtime or focus screen. It cannot read what is on your screen or what you type."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Notification access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": needed only for "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Notifications"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (counting and holding notifications)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Do Not Disturb access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": needed only if you want "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Bedtime"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " to switch Do Not Disturb on."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "VPN"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": needed only for "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Websites and internet"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". The VPN stays on your phone."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Notifications"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": so STOIC can tell you when a focus session ends or send your notification summary."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Set up in five minutes"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Open STOIC and go to the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Today"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " tab. The "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Set up"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " card lists what is on and what is not."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "My screen time"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open Usage access settings"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". Find STOIC and switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Permit usage access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". Come back."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Limits and pauses"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open Accessibility settings"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". Under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Downloaded apps"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (or "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Installed apps"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "), tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "STOIC limits and pauses"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", switch it on and confirm."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Add the one or two apps that distract you most, and pick a pause or a daily limit."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Optional: set up "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Bedtime"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Schedules and bedtime"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "Start small. One app with a gentle pause works better than ten apps with strict limits you will want to switch off by Wednesday."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Android says \"Restricted setting\""
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": open "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Settings"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ", "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Apps"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ", "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "STOIC"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ", tap the three dots at the top right and choose "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Allow restricted settings"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ". Then try again. Android does this for apps installed from a file."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "The switch keeps turning itself off"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": see "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "If STOIC stops working"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "limits": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Add an app"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Limits and pauses"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Add an app"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and pick it from the list (you can search)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Choose any mix of the options below. Every change is saved straight away."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "The options"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pause before opening"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": a 10 second pause asking \"Is this important right now?\". "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open anyway"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " appears after the countdown. Once you open anyway, STOIC leaves you alone for that visit (and three minutes after it)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Daily limit"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (15 minutes to 2 hours): once you reach it, you see \"That's your time for today\". It starts fresh at midnight. Needs "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Usage access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Opens per day"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (5 to 40): after that many opens, the app shows \"That's your opens for today\". An open counts only once you actually get into the app, and coming back within 30 seconds (for example from a share sheet) is the same visit."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Check in after"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (10, 20 or 30 minutes in a row): STOIC asks \"Still worth it?\". "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Keep going"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " restarts the count. This is about time in the app; STOIC does not watch what you scroll."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Let me go a little over"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": offers "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "5 more minutes"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " on a daily limit and "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open once more"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " on the opens limit. Switch it off to make both strict until midnight."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block during focus sessions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": blocks the app while a Pebble focus session runs, if you also switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block my chosen apps while I focus"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " on the Focus tab."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "When several rules apply"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "The strictest one shows: a focus session first, then a schedule (like Bedtime), then the daily limit, then opens per day, then the check-in, then the pause."
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Nothing happens when I open the app"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check that "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "STOIC limits and pauses"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " is on under "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Accessibility"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ". Android switches it off after STOIC is updated from a file, or if you force-stop STOIC."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "The daily limit never shows"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": switch on "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Usage access"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " for STOIC."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "notifications": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "See who interrupts you"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Notifications"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open Notification access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and allow STOIC."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "From then on, the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Today"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " card on that screen shows how many notifications each app sent."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Hold the noisy ones"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Hold"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " next to an app. Its notifications are taken out of your notification shade and kept in STOIC."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pick when to get them under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Send my summary at"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (for example 1 PM and 7 PM). You get one notification listing what was held."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap a held notification in STOIC to open it, just as if you had tapped the original."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "During focus, bedtime and schedules"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Hold notifications from blocked apps"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " holds notifications from apps that are blocked at that moment, and sends a summary when the block ends."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Never held"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Calls, alarms, navigation, music and other ongoing notifications, and your phone and messages apps."
+    }
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "Android lets STOIC hide a notification only after it arrives, so you may still hear the first sound. Bedtime's Do Not Disturb keeps nights fully quiet. Held notifications stay on your phone and are deleted when you open or clear them, or after three days."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "No summary arrives"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": allow notifications for STOIC in Android's app settings."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Android says \"Restricted setting\""
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": see "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Set up STOIC"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "schedules": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Bedtime"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Schedules and bedtime"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Bedtime"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Starts"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Ends"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " to pick the times. A bedtime that ends in the morning is fine: it runs past midnight."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pick the nights it starts on."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Choose "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "All apps"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " or "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Only apps I pick"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Optional: switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Turn on Do Not Disturb"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". Android asks you to allow STOIC under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Do Not Disturb access"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " the first time."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "During Bedtime, opening a blocked app shows \"It's bedtime\" and when it ends."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Your own schedules"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Tap "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Add a schedule"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " to make one, for example "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Study hours"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " on weekdays from 9 to 5. Give it a name, times, days and the apps it blocks. You can make as many as you like and pause any of them."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "What always works"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Your phone app, messages, alarm clock, home screen and Settings are never blocked by a schedule, so you can always be reached and woken up. You can add more under "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Always allowed"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " (these are skipped by schedules set to "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "All apps"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ")."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Do Not Disturb"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC switches on \"priority only\" Do Not Disturb when the schedule starts and off when it ends. Alarms and the people you allow in Android's Do Not Disturb settings still get through. If you changed Do Not Disturb yourself in the meantime, STOIC leaves it alone."
+    }
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "strong",
+       "c": [
+        {
+         "t": "text",
+         "v": "Let me add 5 more minutes"
+        }
+       ]
+      },
+      {
+       "t": "text",
+       "v": " offers a short snooze on the bedtime screen. Switch it off to make the schedule strict until it ends."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Apps are not blocked"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "STOIC limits and pauses"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " under "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Accessibility"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Do Not Disturb did not come on"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check STOIC under "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Do Not Disturb access"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ", and that Do Not Disturb was off when the schedule started."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "screen-time": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "See your screen time"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Go to "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "More"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", then "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "My screen time"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ". You see today's total, each app's time, and the last few days. It needs "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Usage access"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": "."
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC counts apps with an icon on your home screen. System screens and the home screen itself are left out."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Keep your own record"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Android keeps detailed history for only a few days, and on some phones it forgets an app's time when you uninstall it. Switch on "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Record my daily screen time in STOIC"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " to keep your own copy:"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Every few hours, STOIC copies each day's totals into its own storage. Opening STOIC also records a check-in."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Once a day is recorded, uninstalling another app can't erase it."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Days when STOIC couldn't check in are marked "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "unverified"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", not zero."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "The record stays on your phone. Uninstalling STOIC or clearing its data deletes it."
+    }
+   ]
+  }
+ ],
+ "strict": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "When to use it"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "For the days you know you will be tempted: exams, deadlines, a late night. Set up your limits and schedules first; strict mode makes them firm."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Start it"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Strict mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pick how long: 1 hour, 4 hours, until 7 AM, 1 day or 1 week."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Optional: "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Also lock Settings"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (the strongest option; it also locks Wi-Fi and other settings)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Start strict mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and confirm."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "While it is on"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "You can make things stricter (add apps, lower limits, add days), but not looser."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "5 more minutes"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open once more"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and schedule snoozes are hidden."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "A focus session that blocks apps can't be ended early."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Uninstalling apps is blocked, and so is Settings if you chose that."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Pauses still offer "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open anyway"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and check-ins still offer "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Keep going"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": those are nudges, not limits."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "You can extend strict mode while it is on, but not shorten it."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Need out?"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Tap "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Unlock early"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " and wait 15 minutes. Often the urge passes by then. After the wait you can unlock, or choose to stay strict."
+    }
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "Strict mode can't stop restarting the phone in safe mode, a computer with developer tools, or a factory reset."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "troubleshooting": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Pauses, limits or schedules stopped working"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Open Android "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Settings"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Accessibility"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", and check that "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "STOIC limits and pauses"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " is on. Android switches it off when STOIC is force-stopped, and after STOIC is updated from a file."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Let STOIC run in the background. On many phones, battery saving stops apps like STOIC:"
+       }
+      ]
+     },
+     {
+      "type": "list",
+      "ordered": false,
+      "items": [
+       [
+        {
+         "type": "paragraph",
+         "inline": [
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Xiaomi, Redmi, Poco"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": ": Settings, Apps, STOIC: turn on "
+          },
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Autostart"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": " and set "
+          },
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Battery saver"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": " to "
+          },
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "No restrictions"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": "."
+          }
+         ]
+        }
+       ],
+       [
+        {
+         "type": "paragraph",
+         "inline": [
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Samsung"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": ": Settings, Battery, Background usage limits: add STOIC to "
+          },
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Never sleeping apps"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": "."
+          }
+         ]
+        }
+       ],
+       [
+        {
+         "type": "paragraph",
+         "inline": [
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "Oppo, Realme, OnePlus"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": ": Settings, Apps, STOIC, Battery: allow "
+          },
+          {
+           "t": "strong",
+           "c": [
+            {
+             "t": "text",
+             "v": "background activity"
+            }
+           ]
+          },
+          {
+           "t": "text",
+           "v": "."
+          }
+         ]
+        }
+       ]
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Open STOIC once. That also restarts its background work."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Android says \"Restricted setting\""
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Open "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Settings"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Apps"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "STOIC"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", tap the three dots at the top right and choose "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Allow restricted settings"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ". Then switch the permission on again."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Websites are not blocked"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Check for the key icon in the status bar. If it is missing, open "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Websites and internet"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Start again"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Set "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Private DNS"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (in Android's network settings) to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Automatic"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "My screen time shows nothing"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Switch on "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Usage access"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " for STOIC. If your phone's clock was changed by a lot, Android itself may lose the day's usage; it fixes itself from the next day."
+    }
+   ]
+  }
+ ],
+ "websites": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Block websites"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Websites and internet"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Allow"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and accept Android's VPN request. A key icon appears in the status bar while it is on."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap the sites you want to block under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Popular"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", or type your own under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Add your own"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (a full link is fine)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Choose "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Always"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", or "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "During focus & schedules"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Blocked sites show \"This site can't be reached\" in every browser. Blocking a site also stops its app on your phone, because apps use the same addresses."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Internet off"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "Switch on "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Internet off during focus & schedules"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " to take every app offline while you focus, except calls, messages, alarms and your always-allowed apps."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "How it works"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC's VPN never leaves your phone. It only answers \"where is this website?\" questions, saying \"nowhere\" for the sites you block and passing every other question to your usual network. It can't see what you read or type, and nothing is sent to STOIC."
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "A blocked site still opens"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": browsers remember addresses for a minute or two. Wait, or close and reopen the tab."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Nothing is blocked"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": if you set a custom "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Private DNS"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " in Android's settings, website blocking can't work. Set it to "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Automatic"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "The key icon is gone"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": only one VPN can run at a time. Turning on another VPN app switches STOIC's off. Tap "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Start again"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}

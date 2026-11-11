@@ -48,10 +48,10 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="guides/index" options={{ title: "Setup guides" }} />
-        <Stack.Screen name="guides/[slug]" options={{ title: "Guide" }} />
+        <Stack.Screen name="docs/index" options={{ title: "How-to guides" }} />
+        <Stack.Screen name="docs/[slug]" options={{ title: "Guide" }} />
         <Stack.Screen name="survey" options={{ title: "Survey results" }} />
-        <Stack.Screen name="about" options={{ title: "About and method" }} />
+        <Stack.Screen name="about" options={{ title: "About STOIC" }} />
         <Stack.Screen name="design-note" options={{ title: "Design note" }} />
         <Stack.Screen name="screen-time" options={{ title: "My screen time" }} />
         <Stack.Screen name="limits" options={{ title: "Limits and pauses" }} />

@@ -1,189 +1,133 @@
+import { router } from "expo-router";
 import { useState } from "react";
-import { AccessibilityInfo, View } from "react-native";
-import { DEVICES, PICKER, PROBLEMS, type Device, type Problem } from "@shared/picker";
-import { TOTAL_RESPONDENTS, TRIED_TO_CUT_DOWN } from "@shared/survey";
-import { getTool, tools } from "@shared/tools";
+import { Pressable, View } from "react-native";
 import { Pebble } from "@/components/Pebble";
-import { TagRow } from "@/components/Tags";
-import { AppLink, B, Card, Chip, ChipGroup, ExternalLink, NavCard, Row, Screen, T } from "@/components/ui";
-import { SITE_NAME } from "@/lib/site";
-import { font, radius, space, useTheme, type Tint } from "@/theme";
+import { AppLink, B, Button, Card, NavCard, Screen, T } from "@/components/ui";
+import { device, isAndroid } from "@/lib/device";
+import { hm } from "@/lib/score";
+import { moodFor, useDayScore } from "@/lib/useDayScore";
+import { useForeground } from "@/lib/useForeground";
+import { font, radius, space, useTheme } from "@/theme";
 
-const PROBLEM_ICON: Record<Problem, string> = {
-  "youtube-reels": "📺",
-  "social-media": "💬",
-  notifications: "🔔",
-  "late-night": "🌙",
-  games: "🎮",
-};
-const DEVICE_ICON: Record<Device, string> = { android: "📱", iphone: "📱", laptop: "💻" };
-const OPTION_TINTS: Tint[] = ["peach", "mint", "sky"];
+function greeting(now = new Date()) {
+  const h = now.getHours();
+  if (h < 5) return "Up late?";
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  return "Good evening";
+}
 
-export default function FindYourFix() {
-  const t = useTheme();
-  const [problem, setProblem] = useState<Problem | null>(null);
-  const [device, setDevice] = useState<Device | null>(null);
-
-  const problemLabel = PROBLEMS.find((p) => p.id === problem)?.label;
-  const deviceLabel = DEVICES.find((d) => d.id === device)?.label;
-  const result = problem && device ? PICKER[problem][device] : null;
-
-  // Tell screen-reader users the results changed (same idea as aria-live on the website).
-  const choose = (p: Problem | null, d: Device | null) => {
-    setProblem(p);
-    setDevice(d);
-    if (p && d) {
-      const n = PICKER[p][d].picks.length;
-      const pl = PROBLEMS.find((x) => x.id === p)?.label;
-      const dl = DEVICES.find((x) => x.id === d)?.label;
-      AccessibilityInfo.announceForAccessibility(`${n} ${n === 1 ? "tool" : "tools"} for ${pl} on ${dl}, shown below.`);
-    }
-  };
-
+/** The two permissions most of STOIC needs. Others are asked for by the feature that uses them. */
+function SetUpCard() {
+  const [state, setState] = useState<{ usage: boolean; blocker: boolean } | null>(null);
+  useForeground(() => {
+    if (device) setState({ usage: device.hasUsageAccess(), blocker: device.isBlockerEnabled() });
+  });
+  if (!state || (state.usage && state.blocker)) return null;
+  const items = [
+    { done: state.usage, label: "Screen time", hint: "Usage access", href: "/screen-time" as const },
+    { done: state.blocker, label: "Limits and schedules", hint: "Accessibility", href: "/limits" as const },
+  ];
   return (
-    <Screen tab>
-      <View style={{ gap: space.md }}>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-          <View style={{ flex: 1, gap: space.sm }}>
-            <View style={{ alignSelf: "flex-start", backgroundColor: t.butter, borderRadius: radius.pill, paddingHorizontal: 14, paddingVertical: 4 }}>
-              <T v="small" color={t.warnInk} style={{ fontFamily: font.bold }}>
-                Made by a first-year, for first-years
-              </T>
-            </View>
-            <T v="h1">Hey! What&apos;s eating your study time?</T>
-          </View>
-          <Pebble mood="cheer" size={96} float />
-        </View>
-        <T v="lead">
-          {SITE_NAME} is a short, friendly list of tools that actually help, with straight answers to three questions:{" "}
-          <B>does it cost money</B>, <B>what does it want access to</B>, and <B>will it still work when I forget about it</B>.
-        </T>
-      </View>
-
-      <Card>
-        <T v="h2">Find your fix</T>
-        <T muted>Two taps. Your matches appear straight away, just below.</T>
-
-        <Step n="1" title="What eats your study time most?" />
-        <ChipGroup label="What eats your study time most?">
-          {PROBLEMS.map((p) => (
-            <Chip key={p.id} label={p.label} icon={PROBLEM_ICON[p.id]} selected={problem === p.id} onPress={() => choose(p.id, device)} />
-          ))}
-        </ChipGroup>
-
-        <Step n="2" title="Which device?" />
-        <ChipGroup label="Which device?">
-          {DEVICES.map((d) => (
-            <Chip
-              key={d.id}
-              label={d.label}
-              hint={d.hint || undefined}
-              icon={DEVICE_ICON[d.id]}
-              selected={device === d.id}
-              onPress={() => choose(problem, d.id)}
-            />
-          ))}
-        </ChipGroup>
-
-        <View style={{ backgroundColor: t.lavender, borderRadius: radius.card, padding: space.lg, gap: space.md, marginTop: space.md }}>
-          {!result ? (
-            <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-              <Pebble mood="calm" size={60} />
-              <T v="label" style={{ flex: 1 }}>
-                {problem || device
-                  ? `Nice! Now pick ${problem ? "your device" : "what distracts you most"}.`
-                  : "Pick one in each row and I'll show you 2 or 3 tools that fit."}
-              </T>
-            </View>
-          ) : (
-            <>
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-                <Pebble mood="happy" size={52} />
-                <T v="h3" style={{ flex: 1 }}>
-                  Your fix for {problemLabel} on {deviceLabel}
-                </T>
-              </View>
-              {result.picks.length === 1 ? (
-                <T>Only one tool we checked really fits this, so we&apos;re not padding the list.</T>
-              ) : null}
-              {result.picks.map((pick, i) => {
-                const tool = getTool(pick.toolId);
-                return (
-                  <View key={pick.toolId} style={{ backgroundColor: t.surface, borderRadius: radius.card, borderWidth: 2, borderColor: t.line, overflow: "hidden" }}>
-                    <View style={{ backgroundColor: t[OPTION_TINTS[i % 3]], paddingHorizontal: space.lg, paddingVertical: 6 }}>
-                      <T v="small" style={{ fontFamily: font.display }}>
-                        Option {i + 1}
-                      </T>
-                    </View>
-                    <View style={{ padding: space.lg, gap: space.sm }}>
-                      <T v="h3">{tool.name}</T>
-                      <T>{pick.reason}</T>
-                      <TagRow cost={tool.cost} level={tool.permissionLevel} effort={tool.effort} />
-                      {tool.paidFeatures.length > 0 ? (
-                        <T v="small">
-                          <B>Paid: </B>
-                          {tool.paidFeatures.join(", ")}.
-                        </T>
-                      ) : null}
-                      <Row>
-                        <ExternalLink href={tool.officialUrl}>{`${tool.name} official page`}</ExternalLink>
-                      </Row>
-                    </View>
-                  </View>
-                );
-              })}
-              {result.guide ? (
-                <View style={{ backgroundColor: t.surface, borderRadius: radius.card, padding: space.md }}>
-                  <T v="label">📘 Step-by-step:</T>
-                  <AppLink href={{ pathname: "/guides/[slug]", params: { slug: result.guide.slug } }}>{result.guide.label}</AppLink>
-                </View>
-              ) : null}
-              <T v="small">
-                <B>Tip from your batch:</B> tools mostly failed because people forgot or switched them off. An{" "}
-                <B>Automatic</B> one keeps going on lazy days too.
-              </T>
-            </>
-          )}
-        </View>
-      </Card>
-
-      <Card tint="mint">
-        <T v="h1" color={t.goodInk} accessibilityRole="none" importantForAccessibility="no">
-          {TRIED_TO_CUT_DOWN}/{TOTAL_RESPONDENTS}
-        </T>
-        <T v="h2">Your batch is in this too</T>
-        <T>
-          {TRIED_TO_CUT_DOWN} of the {TOTAL_RESPONDENTS} first-years we asked have already tried to cut down their phone time.
-          You&apos;re in good company.
-        </T>
-        <AppLink href="/circle">{`Join the ${SITE_NAME} Circle and pick one small weekly goal`}</AppLink>
-      </Card>
-
-      <View style={{ gap: space.md }}>
-        <T v="h2">Have a look around</T>
-        <NavCard href="/tools" icon="⚖️" tint="peach" title="Compare tools" body={`All ${tools.length} tools side by side. Filter by phone, laptop or free-only.`} />
-        <NavCard href="/guides" icon="📘" tint="sky" title="Setup guides" body="Step-by-step help with screenshots, written by a student." />
-        <NavCard href="/survey" icon="📊" tint="butter" title="Survey results" body={`What ${TOTAL_RESPONDENTS} first-years told us, and what it changed here.`} />
-      </View>
-    </Screen>
+    <Card tint="butter">
+      <T v="h2">Set up</T>
+      <T>Two switches in Android&apos;s settings unlock most of STOIC. Each one takes about a minute.</T>
+      {items.map((i) => (
+        <NavCard
+          key={i.label}
+          href={i.href}
+          icon={i.done ? "✅" : "⬜"}
+          tint="surface"
+          title={i.label}
+          body={i.done ? `${i.hint}: on` : `${i.hint}: tap to switch on`}
+        />
+      ))}
+      <AppLink href={{ pathname: "/docs/[slug]", params: { slug: "getting-started" } }}>What STOIC needs, and why</AppLink>
+    </Card>
   );
 }
 
-function Step({ n, title }: { n: string; title: string }) {
+export default function Today() {
   const t = useTheme();
+  const { score, screenMs, focusMs } = useDayScore();
+
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: space.md, marginTop: space.md }}>
-      <View
-        importantForAccessibility="no-hide-descendants"
-        style={{ width: 30, height: 30, borderRadius: 15, backgroundColor: t.brand, alignItems: "center", justifyContent: "center" }}
-      >
-        <T v="label" color={t.brandInk}>
-          {n}
-        </T>
+    <Screen tab>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+        <View style={{ flex: 1, gap: space.xs }}>
+          <T v="h1">{greeting()}</T>
+          <T muted>Here&apos;s your day with STOIC.</T>
+        </View>
+        <Pebble mood={score ? moodFor(score.total) : "happy"} size={84} float />
       </View>
-      <T v="h3" style={{ flex: 1 }} accessibilityLabel={`Step ${n}: ${title}`}>
-        {title}
-      </T>
-    </View>
+
+      {isAndroid && device ? (
+        <>
+          <SetUpCard />
+
+          <Pressable
+            accessibilityRole="link"
+            accessibilityLabel={score ? `Today's score: ${score.total} out of 100. ${score.word}. See what makes it up.` : "Today's score"}
+            onPress={() => router.push("/score")}
+            style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}
+          >
+            <Card tint="lavender">
+              <T v="label">Today&apos;s score</T>
+              <View style={{ flexDirection: "row", alignItems: "baseline", gap: space.sm }}>
+                <T style={{ fontFamily: font.display, fontSize: 48, lineHeight: 56, color: t.ink }}>{score ? score.total : "–"}</T>
+                <T v="h3">{score ? score.word : "Working it out…"}</T>
+              </View>
+              <T v="small" muted>
+                Tap to see what makes it up ›
+              </T>
+            </Card>
+          </Pressable>
+
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <Card tint="sky" style={{ flex: 1 }}>
+              <T v="label">Screen time</T>
+              <T v="h2">{screenMs === null ? "–" : hm(screenMs)}</T>
+            </Card>
+            <Card tint="mint" style={{ flex: 1 }}>
+              <T v="label">Focus</T>
+              <T v="h2">{hm(focusMs)}</T>
+            </Card>
+          </View>
+        </>
+      ) : (
+        <Card tint="butter">
+          <T v="h3">STOIC&apos;s phone features need Android for now</T>
+          <T>
+            On iPhone, Apple only lets approved apps see screen time or pause other apps. Until STOIC has that approval, you can
+            still use <B>Focus with Pebble</B> and the <B>Circle</B> here.
+          </T>
+        </Card>
+      )}
+
+      <Button label="Start a focus session" onPress={() => router.push("/focus")} />
+
+      <View style={{ gap: space.md }}>
+        <T v="h2">Quick fixes</T>
+        <NavCard href="/limits" icon="✋" tint="peach" title="One app keeps pulling me in" body="Add a pause, a daily limit or fewer opens." />
+        <NavCard href="/schedules" icon="🌙" tint="lavender" title="I stay up on my phone" body="Set a bedtime when apps stay closed." />
+        <NavCard href="/notifications" icon="🔔" tint="mint" title="Notifications keep interrupting" body="Hold the noisy ones for one summary." />
+        <NavCard href="/sites" icon="🌐" tint="sky" title="I get lost on websites" body="Block sites in every browser on this phone." />
+      </View>
+
+      <Pressable
+        accessibilityRole="link"
+        onPress={() => router.push("/docs")}
+        style={({ pressed }) => ({
+          borderRadius: radius.blob,
+          padding: space.lg,
+          borderWidth: 2,
+          borderColor: t.line,
+          opacity: pressed ? 0.85 : 1,
+        })}
+      >
+        <T v="label">📘 New to STOIC?</T>
+        <T>Short how-to guides for every feature ›</T>
+      </Pressable>
+    </Screen>
   );
 }

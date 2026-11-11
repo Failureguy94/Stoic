@@ -1,5 +1,5 @@
-// Turns the website's guide files (../content/guides/*.mdx) into JSON the app can render.
-// The MDX files stay the single place to write guides: edit them, then run `npm run guides`
+// Turns STOIC's how-to docs (../content/docs/*.mdx) into JSON the app can render.
+// The MDX files stay the single place to write docs: edit them, then run `npm run docs`
 // (it also runs automatically before `npm start` and `npm run android`).
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -9,8 +9,8 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const SRC = join(here, "../../content/guides");
-const OUT = join(here, "../src/generated/guides.json");
+const SRC = join(here, "../../content/docs");
+const OUT = join(here, "../src/generated/docs.json");
 
 const parser = unified().use(remarkParse).use(remarkMdx);
 
@@ -83,4 +83,4 @@ for (const file of readdirSync(SRC).filter((f) => f.endsWith(".mdx")).sort()) {
 }
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, JSON.stringify(out, null, 1) + "\n");
-console.log(`guides: wrote ${Object.keys(out).length} guides to src/generated/guides.json`);
+console.log(`docs: wrote ${Object.keys(out).length} docs to src/generated/docs.json`);

@@ -1,8 +1,6 @@
 import { View } from "react-native";
 import { TOTAL_RESPONDENTS } from "@shared/survey";
-import { tools } from "@shared/tools";
-import { formatDate } from "@/components/Tags";
-import { AppLink, B, Bullets, Card, ExternalLink, Screen, T } from "@/components/ui";
+import { AppLink, B, Bullets, ExternalLink, Screen, T } from "@/components/ui";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { space } from "@/theme";
 
@@ -21,41 +19,60 @@ export default function About() {
   return (
     <Screen>
       <T v="lead">
-        {SITE_NAME} is a first-year course project (“Digital Wellness Resource Hub”) at IIIT Nagpur. Its goal is to help students{" "}
-        <B>choose and use</B> practical digital wellness tools, not just list links. This app is the companion to the website.
+        {SITE_NAME} is a digital wellbeing app made for students: screen time, limits, bedtime, focus, notification control and
+        website blocking in one place, built to be honest and kind. It started as a first-year course project at IIIT Nagpur.
       </T>
       <ExternalLink href={SITE_URL}>{`Open the ${SITE_NAME} website`}</ExternalLink>
 
-      <Section title="Method">
+      <Section title="How it was shaped">
         <Bullets
           items={[
             <>
-              <B>Survey. </B>We asked {TOTAL_RESPONDENTS} first-year students about their devices, phone time, distractions and
-              past tools (Google Form).
+              <B>Survey. </B>We asked {TOTAL_RESPONDENTS} first-year students about their phones, distractions and what made
+              past attempts fail. Their answers decided what {SITE_NAME} does first.
             </>,
             <>
-              <B>Verification. </B>For each tool we read the official website and the official store listing and recorded cost,
-              paid features, permissions and privacy labels. Anything we could not find is marked “Not confirmed”. We never
-              guess. One candidate, StayFocusd, was dropped because its official pages could not be loaded.
+              <B>Tools failed because of permissions, cost and forgetting. </B>So {SITE_NAME} asks for each permission only when
+              you switch on the feature that needs it, is free, and works automatically once set up.
             </>,
             <>
-              <B>Labels. </B>If an important feature needs payment, the tool is labelled “Freemium” (never “Free”) and the paid
-              features are listed.
+              <B>Kind by design. </B>No streaks to lose, no red warnings, no shaming. Every limit has a way through unless you
+              choose strict mode.
+            </>,
+          ]}
+        />
+        <AppLink href="/survey">See the survey results</AppLink>
+      </Section>
+
+      <Section title="Permissions, and what each one is for">
+        <Bullets
+          items={[
+            <>
+              <B>Usage access: </B>how long each app was open, for screen time, daily limits and your day score.
             </>,
             <>
-              <B>Guides. </B>Setup guides are written and tested by a student on a real device.
+              <B>Accessibility: </B>which app is in front, to show pause, limit, bedtime and focus screens. It cannot read what is
+              on your screen or what you type.
+            </>,
+            <>
+              <B>Notification access: </B>only for Notifications, to count and hold the ones you choose.
+            </>,
+            <>
+              <B>Do Not Disturb access: </B>only if Bedtime should switch Do Not Disturb on.
+            </>,
+            <>
+              <B>VPN: </B>only for Websites and internet. It stays on your phone and only answers “where is this website?”.
             </>,
           ]}
         />
       </Section>
 
-      <Section title="What this app does on your phone">
+      <Section title="Privacy">
         <Bullets
           items={[
-            "Your pledge, focus sessions, limits and usage log stay on this phone. The app has no account and no server.",
-            "Screen time needs Android's “Usage access”. You grant it in Settings and can switch it off at any time.",
-            "Limits and pauses need Android's Accessibility permission. The app uses it only to see which app is in front. It does not read what you type or what is on the screen.",
-            "On iPhone, screen time and limits are not available, because Apple requires special approval for them.",
+            "There is no account and no STOIC server. Everything stays on this phone.",
+            "Held notifications are deleted when you open or clear them, or after three days.",
+            "Uninstalling STOIC or clearing its data deletes everything it stored.",
           ]}
         />
         <AppLink href="/design-note">Read the design note</AppLink>
@@ -63,25 +80,6 @@ export default function About() {
 
       <Section title="Accessibility">
         <Bullets items={A11Y} />
-        <T v="small" muted>
-          The third-party tools we list have not been tested by us with screen readers.
-        </T>
-      </Section>
-
-      <Section title="Sources and dates checked">
-        <T>Prices and features change. Always confirm on the official page before you pay or grant permissions.</T>
-        {tools.map((tool) => (
-          <Card key={tool.id} style={{ padding: space.lg, gap: 4 }}>
-            <T v="label">
-              {tool.name}, checked {formatDate(tool.dateChecked)}
-            </T>
-            {tool.sources.map((s) => (
-              <ExternalLink key={s.url} href={s.url}>
-                {s.label}
-              </ExternalLink>
-            ))}
-          </Card>
-        ))}
       </Section>
 
       <Section title="Attribution and AI assistance">
@@ -90,8 +88,8 @@ export default function About() {
           mascot and icons are original drawings made for {SITE_NAME}. Small symbols are standard emoji.
         </T>
         <T>
-          <B>AI-assistance acknowledgement: </B>This app and site were built with assistance from Claude; the survey, setup
-          guides, screenshots, user testing and final verification are my own work.
+          <B>AI-assistance acknowledgement: </B>This app and site were built with assistance from Claude; the survey, user
+          testing and final verification are my own work.
         </T>
       </Section>
     </Screen>

@@ -1,23 +1,24 @@
 import type { ColorValue } from "react-native";
-import Svg, { Circle, Path, Rect } from "react-native-svg";
+import Svg, { Circle, Path } from "react-native-svg";
 
-export type TabIconName = "fix" | "compare" | "focus" | "circle" | "more";
+export type TabIconName = "today" | "controls" | "focus" | "circle" | "more";
 
 /** Simple original line icons for the tab bar (decorative: tabs also have text labels). */
 export function TabIcon({ name, color, size = 26 }: { name: TabIconName; color: ColorValue; size?: number }) {
   const p = { stroke: color, strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24">
-      {name === "fix" && (
+      {name === "today" && (
         <>
-          <Circle cx="10.5" cy="10.5" r="6.5" {...p} />
-          <Path d="M15.5 15.5L21 21" {...p} />
+          <Circle cx="12" cy="12" r="4.5" {...p} />
+          <Path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" {...p} />
         </>
       )}
-      {name === "compare" && (
+      {name === "controls" && (
         <>
-          <Rect x="3" y="4" width="7" height="16" rx="2" {...p} />
-          <Rect x="14" y="4" width="7" height="16" rx="2" {...p} />
+          <Path d="M4 7h10M18 7h2M4 17h4M12 17h8" {...p} />
+          <Circle cx="16" cy="7" r="2.2" {...p} />
+          <Circle cx="10" cy="17" r="2.2" {...p} />
         </>
       )}
       {name === "focus" && (

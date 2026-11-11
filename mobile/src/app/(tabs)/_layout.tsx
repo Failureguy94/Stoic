@@ -4,8 +4,8 @@ import { TabIcon, type TabIconName } from "@/components/TabIcon";
 import { font, useTheme } from "@/theme";
 
 const TABS: { name: string; title: string; icon: TabIconName }[] = [
-  { name: "index", title: "Find fix", icon: "fix" },
-  { name: "tools", title: "Compare", icon: "compare" },
+  { name: "index", title: "Today", icon: "today" },
+  { name: "controls", title: "Controls", icon: "controls" },
   { name: "focus", title: "Focus", icon: "focus" },
   { name: "circle", title: "Circle", icon: "circle" },
   { name: "more", title: "More", icon: "more" },

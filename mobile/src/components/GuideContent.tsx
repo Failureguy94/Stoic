@@ -4,7 +4,7 @@ import { T } from "@/components/ui";
 import { SITE_URL } from "@/lib/site";
 import { font, radius, space, useTheme, type Theme } from "@/theme";
 
-/* Renders the JSON made by scripts/build-guides.mjs from content/guides/*.mdx. */
+/* Renders the JSON made by scripts/build-docs.mjs from content/docs/*.mdx. */
 
 export type Inline =
   | { t: "text"; v: string }

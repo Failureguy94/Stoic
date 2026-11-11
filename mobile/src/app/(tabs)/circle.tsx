@@ -50,12 +50,12 @@ function CohortPulse() {
     { n: TRIED_TO_CUT_DOWN, text: "have already tried to cut down their phone time.", tint: "peach" },
     {
       n: TOTAL_RESPONDENTS - count(used, "None"),
-      text: "have already tried at least one tool, like Digital Wellbeing, Focus mode or a blocker.",
+      text: "have already tried at least one tool to cut down. You're in good company.",
       tint: "sky",
     },
     {
-      n: count(used, "Android Digital Wellbeing"),
-      text: "use Android Digital Wellbeing, so a free tool already on your phone is a normal place to start.",
+      n: count(failed, "Forgot to use it"),
+      text: "said a tool stopped working because they forgot to use it, which is why schedules and limits in STOIC run by themselves.",
       tint: "butter",
     },
   ];
@@ -80,9 +80,9 @@ function CohortPulse() {
           {count(failed, "Forgot to use it")} people simply forgot. Schedules and daily limits keep going on busy days.
         </T>
         <T>
-          <B>⌂ Start free and built in. </B>
-          {count(failed, "Cost")} mentioned cost and {count(failed, "Too many permissions")} mentioned permissions. Your
-          phone&apos;s own settings avoid both.
+          <B>⌂ Free, and only what it needs. </B>
+          {count(failed, "Cost")} mentioned cost and {count(failed, "Too many permissions")} mentioned permissions. STOIC is
+          free and asks for each permission only when you switch on the feature that uses it.
         </T>
         <T>
           <B>✦ Keep it simple. </B>

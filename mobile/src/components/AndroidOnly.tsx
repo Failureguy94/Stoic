@@ -15,10 +15,10 @@ export function AndroidOnly() {
           </T>
         </View>
         <T>
-          iPhone does not let apps like this one read your screen time or pause other apps without special approval from Apple.
-          On iPhone, use the built-in Screen Time. The Find your fix picker shows where to start.
+          On iPhone, Apple only lets approved apps read screen time or pause other apps. Until STOIC has that approval, this
+          part works on Android phones only. Focus with Pebble and the Circle work everywhere.
         </T>
-        <AppLink href="/">Open Find your fix</AppLink>
+        <AppLink href="/focus">Open Focus with Pebble</AppLink>
       </Card>
     </Screen>
   );
