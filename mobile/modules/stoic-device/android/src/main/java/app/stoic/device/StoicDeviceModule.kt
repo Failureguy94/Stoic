@@ -34,6 +34,11 @@ class StoicDeviceModule : Module() {
     return arr
   }
 
+  /** Refuse a change that would loosen settings while strict mode is on. */
+  private fun strictCheck(reason: String?) {
+    if (reason != null) throw CodedException("ERR_STRICT", "Strict mode is on, so you can't $reason until it ends.", null)
+  }
+
   override fun definition() = ModuleDefinition {
     Name("StoicDevice")
 
@@ -76,7 +81,9 @@ class StoicDeviceModule : Module() {
     Function("setRulesJson") { json: String ->
       // Validate before saving so a bad value cannot break the service.
       JSONArray(json)
-      Store(context).rulesJson = json
+      val store = Store(context)
+      if (store.strictActive()) strictCheck(Strict.looserRules(store.rules(), Store.parseRules(json)))
+      store.rulesJson = json
     }
 
     /** Opens counted today for each app with a rule: {packageName: count}. */
@@ -112,7 +119,12 @@ class StoicDeviceModule : Module() {
       JSONObject().put("minutes", ms / 60_000.0).put("start", start).put("end", end).toString()
     }
 
-    Function("setFocusBlockUntil") { untilMs: Double -> Store(context).focusUntil = untilMs.toLong() }
+    Function("setFocusBlockUntil") { untilMs: Double ->
+      val store = Store(context)
+      val now = System.currentTimeMillis()
+      if (store.strictActive(now)) strictCheck(Strict.looserFocus(store.focusUntil, untilMs.toLong(), now))
+      store.focusUntil = untilMs.toLong()
+    }
 
     // ---- schedules and bedtime ----
     Function("getSchedulesJson") { Store(context).schedulesJson }
@@ -120,6 +132,7 @@ class StoicDeviceModule : Module() {
     Function("setSchedulesJson") { json: String ->
       JSONArray(json) // validate before saving so a bad value cannot break the service
       val store = Store(context)
+      if (store.strictActive()) strictCheck(Strict.looserSchedules(store.schedules(), Schedules.parse(json)))
       store.schedulesJson = json
       // Apply Do Not Disturb straight away instead of waiting for the next minute.
       val (isoDay, minute) = StoicAccessibilityService.localTime(System.currentTimeMillis())
@@ -130,7 +143,48 @@ class StoicDeviceModule : Module() {
 
     Function("setAlwaysAllowedJson") { json: String ->
       JSONArray(json)
-      Store(context).alwaysAllowedJson = json
+      val store = Store(context)
+      if (store.strictActive()) strictCheck(Strict.looserAllowed(store.alwaysAllowed(), Schedules.parsePackages(json)))
+      store.alwaysAllowedJson = json
+    }
+
+    // ---- strict mode ----
+    Function("getStrictJson") {
+      val store = Store(context)
+      val now = System.currentTimeMillis()
+      JSONObject()
+        .put("until", if (store.strictActive(now)) store.strictUntil else 0)
+        .put("lockSettings", store.strictLockSettings)
+        .put("unlockRequestedAt", store.unlockRequestedAt)
+        .put("unlockWaitMs", Strict.UNLOCK_WAIT_MS)
+        .toString()
+    }
+
+    /** Start strict mode, or extend it. It can never be shortened this way. */
+    Function("startStrict") { untilMs: Double, lockSettings: Boolean ->
+      val store = Store(context)
+      val now = System.currentTimeMillis()
+      val wasActive = store.strictActive(now)
+      store.strictUntil = Strict.newUntil(store.strictUntil, untilMs.toLong(), now)
+      // Settings can be added to a running lock, not taken out of it.
+      store.strictLockSettings = if (wasActive) store.strictLockSettings || lockSettings else lockSettings
+      store.unlockRequestedAt = 0
+    }
+
+    Function("requestUnlock") {
+      val store = Store(context)
+      if (store.unlockRequestedAt == 0L) store.unlockRequestedAt = System.currentTimeMillis()
+    }
+
+    Function("cancelUnlock") { Store(context).unlockRequestedAt = 0 }
+
+    /** Finish "Unlock early" once the wait is over. Returns false if it is too soon. */
+    Function("unlockNow") {
+      val store = Store(context)
+      if (!Strict.canUnlockEarly(store.unlockRequestedAt, System.currentTimeMillis())) return@Function false
+      store.strictUntil = 0
+      store.unlockRequestedAt = 0
+      true
     }
 
     /** Apps schedules never block (phone, messages, alarm clock, home screen, Settings), with labels. */

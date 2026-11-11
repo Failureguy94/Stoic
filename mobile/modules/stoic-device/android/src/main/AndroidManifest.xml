@@ -27,6 +27,11 @@
     <intent>
       <action android:name="android.intent.action.DIAL" />
     </intent>
+    <!-- Strict mode covers the uninstall screen. -->
+    <intent>
+      <action android:name="android.intent.action.DELETE" />
+      <data android:scheme="package" />
+    </intent>
   </queries>
 
   <application>

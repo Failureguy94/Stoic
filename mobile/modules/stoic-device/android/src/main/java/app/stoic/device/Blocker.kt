@@ -22,7 +22,7 @@ data class Rule(
   val checkInMin: Int = 0,
 )
 
-enum class Decision { ALLOW, FOCUS, SCHEDULE, LIMIT, OPENS, CHECKIN, PAUSE }
+enum class Decision { ALLOW, STRICT, FOCUS, SCHEDULE, LIMIT, OPENS, CHECKIN, PAUSE }
 
 object Blocker {
   /** How long "Open anyway" lasts before the pause screen may show again. */

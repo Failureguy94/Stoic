@@ -29,6 +29,8 @@ class StoicAccessibilityService : AccessibilityService() {
   private val lastUsed = HashMap<String, Long>()
 
   private var essentials: Set<String> = emptySet()
+  private var installers: Set<String> = emptySet()
+  private var settingsApps: Set<String> = emptySet()
   private var essentialsAt = 0L
   private val launchable = HashMap<String, Boolean>()
 
@@ -83,7 +85,13 @@ class StoicAccessibilityService : AccessibilityService() {
 
   /** Does anything apply to this app? Any enabled schedule may (Bedtime can cover "all apps"). */
   private fun watched(pkg: String): Boolean =
-    store.rules().containsKey(pkg) || store.schedules().any { it.enabled }
+    store.rules().containsKey(pkg) || store.schedules().any { it.enabled } || (store.strictActive() && strictCovers(pkg))
+
+  /** Strict mode covers the uninstall screen, and Settings if the user chose that. */
+  private fun strictCovers(pkg: String): Boolean {
+    essentials() // refreshes the installer and Settings package lists
+    return Strict.blocksSystemApp(pkg, store.strictLockSettings, installers, settingsApps)
+  }
 
   private fun refreshGrace(pkg: String) {
     val now = System.currentTimeMillis()
@@ -102,6 +110,8 @@ class StoicAccessibilityService : AccessibilityService() {
     // Refresh now and then: the user may change their default phone or SMS app.
     if (now - essentialsAt > ESSENTIALS_TTL_MS) {
       essentials = Essentials.packages(this)
+      installers = SystemApps.installers(this)
+      settingsApps = SystemApps.settings(this)
       essentialsAt = now
       launchable.clear()
     }
@@ -115,6 +125,11 @@ class StoicAccessibilityService : AccessibilityService() {
   private fun evaluate(pkg: String, arrival: Boolean) {
     val rule = store.rules()[pkg]
     val now = System.currentTimeMillis()
+    val strict = store.strictActive(now)
+    if (strict && strictCovers(pkg)) {
+      show(Decision.STRICT, pkg, UsageReader.launchableLabel(this, pkg) ?: SystemAppsLabel.of(this, pkg), null, null, now, strict)
+      return
+    }
     val (isoDay, minute) = localTime(now)
     val day = UsageReader.dayKey(UsageReader.dayStart(0))
     val schedule = Schedules.blocking(store.schedules(), pkg, isoDay, minute, essentials(), store.alwaysAllowed(), ::isLaunchable)
@@ -141,7 +156,10 @@ class StoicAccessibilityService : AccessibilityService() {
       return
     }
 
-    val label = rule?.label ?: UsageReader.launchableLabel(this, pkg) ?: pkg
+    show(decision, pkg, rule?.label ?: UsageReader.launchableLabel(this, pkg) ?: pkg, rule, schedule, now, strict)
+  }
+
+  private fun show(decision: Decision, pkg: String, label: String, rule: Rule?, schedule: Schedule?, now: Long, strict: Boolean) {
     startActivity(
       Intent(this, BlockActivity::class.java)
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NO_ANIMATION)
@@ -149,14 +167,16 @@ class StoicAccessibilityService : AccessibilityService() {
         .putExtra(BlockActivity.EXTRA_PACKAGE, pkg)
         .putExtra(BlockActivity.EXTRA_LABEL, label)
         .putExtra(BlockActivity.EXTRA_LIMIT_MIN, rule?.limitMin ?: 0)
-        .putExtra(BlockActivity.EXTRA_ALLOW_EXTEND, rule?.allowExtend ?: false)
+        // Strict mode hides every "go a little over" button.
+        .putExtra(BlockActivity.EXTRA_ALLOW_EXTEND, !strict && (rule?.allowExtend ?: false))
         .putExtra(BlockActivity.EXTRA_FOCUS_UNTIL, store.focusUntil)
         .putExtra(BlockActivity.EXTRA_SCHEDULE_NAME, schedule?.name)
         .putExtra(BlockActivity.EXTRA_SCHEDULE_BEDTIME, schedule?.isBedtime ?: false)
         .putExtra(BlockActivity.EXTRA_SCHEDULE_END_MIN, schedule?.endMin ?: 0)
-        .putExtra(BlockActivity.EXTRA_SCHEDULE_SNOOZE, schedule?.allowSnooze ?: false)
+        .putExtra(BlockActivity.EXTRA_SCHEDULE_SNOOZE, !strict && (schedule?.allowSnooze ?: false))
         .putExtra(BlockActivity.EXTRA_MAX_OPENS, rule?.maxOpens ?: 0)
-        .putExtra(BlockActivity.EXTRA_CHECKIN_MIN, ((now - store.sessionStart(pkg)) / 60_000L).toInt()),
+        .putExtra(BlockActivity.EXTRA_CHECKIN_MIN, ((now - store.sessionStart(pkg)) / 60_000L).toInt())
+        .putExtra(BlockActivity.EXTRA_STRICT_UNTIL, store.strictUntil),
     )
     // The block screen is now in front. Forget the app so returning to it is checked again.
     currentPkg = null

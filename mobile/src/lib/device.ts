@@ -74,6 +74,15 @@ export interface HeldNotification {
   reason: "app" | "blocked";
 }
 
+export interface StrictState {
+  /** Strict mode is on until this time (ms since epoch); 0 when off. */
+  until: number;
+  lockSettings: boolean;
+  /** When "Unlock early" was asked for; 0 if not. */
+  unlockRequestedAt: number;
+  unlockWaitMs: number;
+}
+
 export interface DayRecord {
   /** YYYY-MM-DD */
   day: string;
@@ -105,6 +114,11 @@ interface Native {
   getEssentialAppsJson(): Promise<string>;
   hasDndAccess(): boolean;
   openDndAccessSettings(): void;
+  getStrictJson(): string;
+  startStrict(untilMs: number, lockSettings: boolean): void;
+  requestUnlock(): void;
+  cancelUnlock(): void;
+  unlockNow(): boolean;
   hasNotificationAccess(): boolean;
   openNotificationAccessSettings(): void;
   getNotificationCountsJson(): Promise<string>;
@@ -169,6 +183,13 @@ function wrap(n: Native) {
     hasDndAccess: () => n.hasDndAccess(),
     openDndAccessSettings: () => n.openDndAccessSettings(),
 
+    getStrict: () => parse<StrictState>(n.getStrictJson(), { until: 0, lockSettings: false, unlockRequestedAt: 0, unlockWaitMs: 0 }),
+    /** Start or extend strict mode. It can never be shortened. */
+    startStrict: (untilMs: number, lockSettings: boolean) => n.startStrict(untilMs, lockSettings),
+    requestUnlock: () => n.requestUnlock(),
+    cancelUnlock: () => n.cancelUnlock(),
+    /** False if the unlock wait is not over yet. */
+    unlockNow: () => n.unlockNow(),
     hasNotificationAccess: () => n.hasNotificationAccess(),
     openNotificationAccessSettings: () => n.openNotificationAccessSettings(),
     /** Today's notifications per app, most first. */

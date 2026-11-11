@@ -25,6 +25,7 @@ export default function More() {
             <NavCard href="/limits" icon="✋" tint="peach" title="Limits and pauses" body="Daily limits, a pause before opening an app, and blocking during focus." />
             <NavCard href="/schedules" icon="🌙" tint="lavender" title="Schedules and bedtime" body="Hours when apps stay closed, like bedtime or study time, with Do Not Disturb." />
             <NavCard href="/notifications" icon="🔔" tint="mint" title="Notifications" body="See which apps interrupt you most, and get the noisy ones in one summary." />
+            <NavCard href="/strict" icon="🔒" tint="rose" title="Strict mode" body="Make your limits firm for a while, so a weak moment can't undo them." />
           </>
         ) : (
           <Card tint="butter">

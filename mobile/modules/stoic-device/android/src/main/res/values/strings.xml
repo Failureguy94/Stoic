@@ -27,6 +27,9 @@
   </plurals>
   <string name="stoic_keep_going">Keep going</string>
 
+  <string name="stoic_strict_title">Strict mode is on</string>
+  <string name="stoic_strict_body">%1$s is locked until %2$s. You set this up to protect your goals.</string>
+
   <string name="stoic_go_back">Go back</string>
   <string name="stoic_open_anyway">Open anyway</string>
   <string name="stoic_open_anyway_in">Open anyway (%1$d)</string>

@@ -19,6 +19,7 @@ import {
 } from "@/lib/focus";
 import { cancelSessionEnd, ensureNotificationPermission, scheduleSessionEnd } from "@/lib/notify";
 import { KEYS, useStored } from "@/lib/storage";
+import { tryStrictSave } from "@/lib/strict";
 import { formatDuration } from "@/lib/week";
 import { font, space } from "@/theme";
 
@@ -43,10 +44,11 @@ export default function Focus() {
   };
 
   const close = (session: ActiveSession, at: number, early: boolean) => {
+    // Strict mode refuses to lift a running app block early; then the session simply goes on.
+    if (device && !tryStrictSave(() => device!.setFocusBlockUntil(0), () => {})) return;
     const done = finish(session, at);
     setLog(appendSession(log ?? [], done));
     setActive(null);
-    device?.setFocusBlockUntil(0);
     if (early) cancelSessionEnd(session.notificationId);
     say(
       early

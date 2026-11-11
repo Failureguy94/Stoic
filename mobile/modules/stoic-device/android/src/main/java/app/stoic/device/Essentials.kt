@@ -39,6 +39,32 @@ object Essentials {
   }
 }
 
+/** System apps strict mode covers: the app installer/uninstaller, and Settings. */
+object SystemApps {
+  private fun handlers(context: Context, intent: Intent): Set<String> = try {
+    context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+      .map { it.activityInfo.packageName }.toSet()
+  } catch (_: Exception) {
+    emptySet()
+  }
+
+  fun installers(context: Context): Set<String> =
+    handlers(context, Intent(Intent.ACTION_DELETE, android.net.Uri.parse("package:${context.packageName}"))) +
+      handlers(context, Intent(Intent.ACTION_UNINSTALL_PACKAGE, android.net.Uri.parse("package:${context.packageName}")))
+
+  fun settings(context: Context): Set<String> = handlers(context, Intent(Settings.ACTION_SETTINGS))
+}
+
+/** A readable name for system apps that have no home-screen icon (e.g. the uninstall screen). */
+object SystemAppsLabel {
+  fun of(context: Context, pkg: String): String = try {
+    val pm = context.packageManager
+    pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
+  } catch (_: Exception) {
+    pkg
+  }
+}
+
 /** Do Not Disturb, for Bedtime. Only ever switched off again if STOIC switched it on. */
 object Dnd {
   fun hasAccess(context: Context): Boolean =

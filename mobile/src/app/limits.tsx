@@ -3,8 +3,10 @@ import { AccessibilityInfo, View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
 import { AppPicker } from "@/components/AppPicker";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
+import { StrictBanner } from "@/components/StrictBanner";
 import { AppLink, Bullets, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type LaunchableApp, type Rule } from "@/lib/device";
+import { tryStrictSave } from "@/lib/strict";
 import { useForeground } from "@/lib/useForeground";
 import { space } from "@/theme";
 
@@ -33,8 +35,8 @@ export default function Limits() {
   if (!device) return <AndroidOnly />;
 
   const save = (next: Rule[], spoken?: string) => {
+    if (!tryStrictSave(() => device!.setRules(next), () => setRules(device!.getRules()))) return;
     setRules(next);
-    device!.setRules(next);
     if (spoken) AccessibilityInfo.announceForAccessibility(spoken);
   };
   const update = (pkg: string, patch: Partial<Rule>) => save(rules.map((r) => (r.packageName === pkg ? { ...r, ...patch } : r)));
@@ -69,6 +71,7 @@ export default function Limits() {
       </T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Limits and pauses are on" />
+      <StrictBanner />
 
       {needsUsage ? (
         <Card tint="butter">

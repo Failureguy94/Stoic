@@ -48,6 +48,25 @@ class Store(context: Context) {
     get() = prefs.getBoolean("dndOnByStoic", false)
     set(value) = prefs.edit().putBoolean("dndOnByStoic", value).apply()
 
+  // ---- strict mode ----
+
+  /** Strict mode is on until this time (epoch ms). */
+  var strictUntil: Long
+    get() = prefs.getLong("strictUntil", 0)
+    set(value) = prefs.edit().putLong("strictUntil", value).apply()
+
+  /** While strict, also cover Settings (blocks switching STOIC off or clearing its data). */
+  var strictLockSettings: Boolean
+    get() = prefs.getBoolean("strictLockSettings", false)
+    set(value) = prefs.edit().putBoolean("strictLockSettings", value).apply()
+
+  /** When "Unlock early" was asked for, 0 if not. */
+  var unlockRequestedAt: Long
+    get() = prefs.getLong("unlockRequestedAt", 0)
+    set(value) = prefs.edit().putLong("unlockRequestedAt", value).apply()
+
+  fun strictActive(now: Long = System.currentTimeMillis()) = Strict.isActive(strictUntil, now)
+
   // ---- notification control ----
 
   /** Apps whose notifications are held for the summary. */

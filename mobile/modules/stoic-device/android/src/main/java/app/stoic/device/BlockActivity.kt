@@ -80,6 +80,13 @@ class BlockActivity : Activity() {
         titleText = getString(R.string.stoic_limit_title)
         bodyText = getString(R.string.stoic_limit_body, limitMin, label)
       }
+      Decision.STRICT -> {
+        titleText = getString(R.string.stoic_strict_title)
+        bodyText = getString(
+          R.string.stoic_strict_body, label,
+          DateFormat.getTimeFormat(this).format(Date(intent.getLongExtra(EXTRA_STRICT_UNTIL, 0))),
+        )
+      }
       Decision.OPENS -> {
         titleText = getString(R.string.stoic_opens_title)
         bodyText = getString(R.string.stoic_opens_body, label, intent.getIntExtra(EXTRA_MAX_OPENS, 0))
@@ -277,6 +284,7 @@ class BlockActivity : Activity() {
     const val EXTRA_SCHEDULE_END_MIN = "scheduleEndMin"
     const val EXTRA_SCHEDULE_SNOOZE = "scheduleSnooze"
     const val EXTRA_MAX_OPENS = "maxOpens"
+    const val EXTRA_STRICT_UNTIL = "strictUntil"
     const val EXTRA_CHECKIN_MIN = "checkInMin"
     private const val PAUSE_MS = 10_000L
   }

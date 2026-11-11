@@ -4,9 +4,11 @@ import { AndroidOnly } from "@/components/AndroidOnly";
 import { AppPicker } from "@/components/AppPicker";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
 import { ScheduleEditor } from "@/components/ScheduleEditor";
+import { StrictBanner } from "@/components/StrictBanner";
 import { Bullets, Button, Card, Chip, Screen, T } from "@/components/ui";
 import { device, type LaunchableApp, type Schedule } from "@/lib/device";
 import { BEDTIME_ID, newSchedule, withBedtime } from "@/lib/schedules";
+import { tryStrictSave } from "@/lib/strict";
 import { useForeground } from "@/lib/useForeground";
 import { space, type Tint } from "@/theme";
 
@@ -45,8 +47,8 @@ export default function Schedules() {
   if (!device) return <AndroidOnly />;
 
   const save = (next: Schedule[], spoken?: string) => {
+    if (!tryStrictSave(() => device!.setSchedules(next), () => setList(withBedtime(device!.getSchedules())))) return;
     setList(next);
-    device!.setSchedules(next);
     if (spoken) AccessibilityInfo.announceForAccessibility(spoken);
   };
   const update = (id: string, patch: Partial<Schedule>, spoken?: string) =>
@@ -56,8 +58,8 @@ export default function Schedules() {
     );
 
   const saveAllowed = (next: string[], spoken?: string) => {
+    if (!tryStrictSave(() => device!.setAlwaysAllowed(next), () => setAllowed(device!.getAlwaysAllowed()))) return;
     setAllowed(next);
-    device!.setAlwaysAllowed(next);
     if (spoken) AccessibilityInfo.announceForAccessibility(spoken);
   };
 
@@ -72,6 +74,7 @@ export default function Schedules() {
       </T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Schedules are on" />
+      <StrictBanner />
 
       {bedtime ? (
         <View style={{ gap: space.md }}>
