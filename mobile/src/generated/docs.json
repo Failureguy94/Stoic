@@ -2914,6 +2914,373 @@
    ]
   }
  ],
+ "shorts-reels": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Switch it on"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Go to "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Controls"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", then "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Shorts and Reels"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Switch on "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block YouTube Shorts"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Block Instagram Reels"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", or both."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open Accessibility settings"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ". Under "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Downloaded apps"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " (or "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Installed apps"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": "), tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "STOIC Shorts and Reels blocker"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", switch it on and confirm."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "From then on, when Shorts or Reels fill the screen, STOIC goes back and shows \"STOIC closed Shorts\" (or Reels). Videos, search, subscriptions, your Instagram feed, stories and messages keep working."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Why it is a separate switch"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC's main part only sees "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "which app is in front"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ". Recognising Shorts needs a little more: knowing that the screen is showing the Shorts player. So this is a separate part of STOIC that you switch on only if you want it, and:"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Android only lets it work inside YouTube and Instagram. It gets nothing from any other app."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "It looks at the "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "names of the parts of the screen"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ", like \"the Shorts player\", never at text, messages or what you type."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Nothing is stored or sent anywhere. It only counts how many times it closed Shorts or Reels today."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "During "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "Strict mode"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": ", Shorts and Reels blocking can be switched on but not off."
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Shorts still play"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check that "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "STOIC Shorts and Reels blocker"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " is on under "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Accessibility"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ". Android switches it off when STOIC is updated from a file."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "It stopped working after YouTube or Instagram updated"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": the apps sometimes rename their screens. Let us know so STOIC can learn the new names."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Want to block YouTube or Instagram completely?"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " Use a daily limit, a schedule or website blocking instead."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
  "strict": [
   {
    "type": "heading",

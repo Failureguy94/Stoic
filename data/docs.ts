@@ -62,6 +62,14 @@ export const DOCS: DocMeta[] = [
     screen: { href: "/sites", label: "Open Websites and internet" },
   },
   {
+    slug: "shorts-reels",
+    title: "Shorts and Reels",
+    summary: "Leave YouTube Shorts and Instagram Reels automatically, and keep the rest of each app.",
+    icon: "🎞️",
+    minutes: 2,
+    screen: { href: "/reels", label: "Open Shorts and Reels" },
+  },
+  {
     slug: "strict",
     title: "Strict mode",
     summary: "Make your own rules firm for a while, so a weak moment can't undo them.",

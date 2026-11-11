@@ -42,4 +42,10 @@
   <string name="stoic_summary_channel">Notification summary</string>
   <string name="stoic_summary_title">%1$d notifications held for you</string>
   <string name="stoic_summary_title_after_block">You\'re done. %1$d notifications waited for you</string>
+
+  <string name="stoic_reels_label">STOIC Shorts and Reels blocker</string>
+  <string name="stoic_reels_summary">Leaves YouTube Shorts and Instagram Reels when they open. Only works in those two apps.</string>
+  <string name="stoic_reels_description">This optional part of STOIC only receives events from YouTube and Instagram. To recognise Shorts and Reels it looks at the names of the parts of the screen (like the Shorts player), never at text, messages or what you type. When it sees Shorts or Reels, it goes back. Nothing is stored or sent anywhere.</string>
+  <string name="stoic_reels_toast_shorts">STOIC closed Shorts</string>
+  <string name="stoic_reels_toast_reels">STOIC closed Reels</string>
 </resources>

@@ -188,6 +188,24 @@ class StoicDeviceModule : Module() {
       true
     }
 
+    // ---- Shorts & Reels ----
+    Function("getReelsJson") {
+      val store = Store(context)
+      JSONObject()
+        .put("youtube", store.reelsYouTube)
+        .put("instagram", store.reelsInstagram)
+        .put("serviceOn", StoicReelsService.isEnabled(context))
+        .put("blockedToday", store.reelsBlockedToday(UsageReader.dayKey(UsageReader.dayStart(0))))
+        .toString()
+    }
+
+    Function("setReels") { youtube: Boolean, instagram: Boolean ->
+      val store = Store(context)
+      if (store.strictActive()) strictCheck(Strict.looserReels(store.reelsYouTube, store.reelsInstagram, youtube, instagram))
+      store.reelsYouTube = youtube
+      store.reelsInstagram = instagram
+    }
+
     // ---- strict mode ----
     Function("getStrictJson") {
       val store = Store(context)

@@ -114,4 +114,11 @@ class StrictTest {
     assertNotNull(Strict.looserSites(sites, sites.copy(always = false)))
     assertNotNull(Strict.looserSites(sites, sites.copy(internetOff = false)))
   }
+
+  @Test fun reelsBlockingCanOnlyBeAdded() {
+    assertNull(Strict.looserReels(oldYouTube = false, oldInstagram = false, newYouTube = true, newInstagram = true))
+    assertNull(Strict.looserReels(oldYouTube = true, oldInstagram = false, newYouTube = true, newInstagram = true))
+    assertNotNull(Strict.looserReels(oldYouTube = true, oldInstagram = true, newYouTube = false, newInstagram = true))
+    assertNotNull(Strict.looserReels(oldYouTube = false, oldInstagram = true, newYouTube = false, newInstagram = false))
+  }
 }

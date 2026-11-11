@@ -51,6 +51,20 @@
           android:resource="@xml/stoic_accessibility_service" />
     </service>
 
+    <!-- Optional Shorts & Reels blocker: separate from the main service, limited to YouTube and Instagram. -->
+    <service
+        android:name=".StoicReelsService"
+        android:exported="true"
+        android:label="@string/stoic_reels_label"
+        android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+      <intent-filter>
+        <action android:name="android.accessibilityservice.AccessibilityService" />
+      </intent-filter>
+      <meta-data
+          android:name="android.accessibilityservice"
+          android:resource="@xml/stoic_reels_service" />
+    </service>
+
     <!-- Notification control. The user grants "Notification access" in Settings. -->
     <service
         android:name=".StoicNotificationListener"

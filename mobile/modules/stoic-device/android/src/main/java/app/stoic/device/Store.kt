@@ -58,6 +58,23 @@ class Store(context: Context) {
     get() = prefs.getString("sites", "{}") ?: "{}"
     set(value) = prefs.edit().putString("sites", value).apply()
 
+  // ---- Shorts & Reels ----
+  var reelsYouTube: Boolean
+    get() = prefs.getBoolean("reelsYouTube", false)
+    set(value) = prefs.edit().putBoolean("reelsYouTube", value).apply()
+
+  var reelsInstagram: Boolean
+    get() = prefs.getBoolean("reelsInstagram", false)
+    set(value) = prefs.edit().putBoolean("reelsInstagram", value).apply()
+
+  /** How many times today STOIC left Shorts or Reels. */
+  fun reelsBlockedToday(day: String): Int = if (prefs.getString("reelsDay", "") == day) prefs.getInt("reelsBlocked", 0) else 0
+
+  fun addReelsBlocked(day: String) {
+    val n = reelsBlockedToday(day) + 1
+    prefs.edit().putString("reelsDay", day).putInt("reelsBlocked", n).apply()
+  }
+
   // ---- strict mode ----
 
   /** Strict mode is on until this time (epoch ms). */

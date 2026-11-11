@@ -13,6 +13,7 @@ const LOADERS: Record<string, Loader> = {
   focus: () => import("@/content/docs/focus.mdx"),
   notifications: () => import("@/content/docs/notifications.mdx"),
   websites: () => import("@/content/docs/websites.mdx"),
+  "shorts-reels": () => import("@/content/docs/shorts-reels.mdx"),
   strict: () => import("@/content/docs/strict.mdx"),
   "day-score": () => import("@/content/docs/day-score.mdx"),
   "screen-time": () => import("@/content/docs/screen-time.mdx"),

@@ -15,6 +15,7 @@ interface Status {
   schedules: string;
   sites: string;
   notifications: string;
+  reels: string;
   strict: string;
 }
 
@@ -29,6 +30,7 @@ function readStatus(): Status | null {
   const sites = device.getSites();
   const hold = device.getHoldApps();
   const strict = device.getStrict();
+  const reels = device.getReels();
   return {
     enabled: device.isBlockerEnabled(),
     limits: rules.length ? plural(rules.length, "app with its own rules", "apps with their own rules") : "No apps yet",
@@ -48,6 +50,10 @@ function readStatus(): Status | null {
         ? `Holding ${plural(hold.length, "app", "apps")} for your summary`
         : "Counting, nothing held"
       : "Off",
+    reels:
+      reels.youtube || reels.instagram
+        ? `Blocking ${[reels.youtube && "Shorts", reels.instagram && "Reels"].filter(Boolean).join(" and ")}${reels.serviceOn ? "" : " (needs one more switch)"}`
+        : "Off",
     strict: strict.until ? `On ${untilText(strict.until)}` : "Off",
   };
 }
@@ -72,6 +78,7 @@ export default function Controls() {
             <NavCard href="/schedules" icon="🌙" tint="lavender" title="Schedules and bedtime" body={s?.schedules ?? " "} />
             <NavCard href="/sites" icon="🌐" tint="sky" title="Websites and internet" body={s?.sites ?? " "} />
             <NavCard href="/notifications" icon="🔔" tint="mint" title="Notifications" body={s?.notifications ?? " "} />
+            <NavCard href="/reels" icon="🎞️" tint="peach" title="Shorts and Reels" body={s?.reels ?? " "} />
             <NavCard href="/strict" icon="🔒" tint="rose" title="Strict mode" body={s?.strict ?? " "} />
           </View>
           <AppLink href="/docs">How each one works</AppLink>

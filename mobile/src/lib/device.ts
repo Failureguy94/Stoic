@@ -94,6 +94,14 @@ export interface SiteSettings {
   internetOff: boolean;
 }
 
+export interface ReelsState {
+  youtube: boolean;
+  instagram: boolean;
+  /** Is the separate "STOIC Shorts and Reels blocker" switched on in Accessibility settings? */
+  serviceOn: boolean;
+  blockedToday: number;
+}
+
 export interface DayRecord {
   /** YYYY-MM-DD */
   day: string;
@@ -132,6 +140,8 @@ interface Native {
   isVpnAllowed(): boolean;
   isVpnRunning(): boolean;
   requestVpnPermission(): boolean;
+  getReelsJson(): string;
+  setReels(youtube: boolean, instagram: boolean): void;
   getStrictJson(): string;
   startStrict(untilMs: number, lockSettings: boolean): void;
   requestUnlock(): void;
@@ -212,6 +222,8 @@ function wrap(n: Native) {
     isVpnRunning: () => n.isVpnRunning(),
     /** Shows Android's VPN permission dialog. */
     requestVpnPermission: () => n.requestVpnPermission(),
+    getReels: () => parse<ReelsState>(n.getReelsJson(), { youtube: false, instagram: false, serviceOn: false, blockedToday: 0 }),
+    setReels: (youtube: boolean, instagram: boolean) => n.setReels(youtube, instagram),
     getStrict: () => parse<StrictState>(n.getStrictJson(), { until: 0, lockSettings: false, unlockRequestedAt: 0, unlockWaitMs: 0 }),
     /** Start or extend strict mode. It can never be shortened. */
     startStrict: (untilMs: number, lockSettings: boolean) => n.startStrict(untilMs, lockSettings),

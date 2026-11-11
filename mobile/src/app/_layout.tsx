@@ -60,6 +60,7 @@ export default function RootLayout() {
         <Stack.Screen name="score" options={{ title: "My day score" }} />
         <Stack.Screen name="strict" options={{ title: "Strict mode" }} />
         <Stack.Screen name="sites" options={{ title: "Websites and internet" }} />
+        <Stack.Screen name="reels" options={{ title: "Shorts and Reels" }} />
       </Stack>
     </>
   );

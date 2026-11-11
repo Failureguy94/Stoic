@@ -60,6 +60,13 @@ object Strict {
     return null
   }
 
+  /** Switching off the Shorts or Reels blocker. */
+  fun looserReels(oldYouTube: Boolean, oldInstagram: Boolean, newYouTube: Boolean, newInstagram: Boolean): String? = when {
+    oldYouTube && !newYouTube -> "turn off blocking YouTube Shorts"
+    oldInstagram && !newInstagram -> "turn off blocking Instagram Reels"
+    else -> null
+  }
+
   /** Ending a running focus block early. */
   fun looserFocus(oldUntil: Long, newUntil: Long, now: Long): String? =
     if (oldUntil > now && newUntil < oldUntil) "end the focus session early" else null
