@@ -28,9 +28,7 @@ class StoicAccessibilityService : AccessibilityService() {
       val pkg = currentPkg
       if (pkg != null && store.rules().containsKey(pkg)) {
         // Still using the app: keep "Open anyway" alive so the pause does not reappear mid-use.
-        if (store.graceUntil(pkg) > System.currentTimeMillis()) {
-          store.setGraceUntil(pkg, System.currentTimeMillis() + Blocker.GRACE_MS)
-        }
+        refreshGrace(pkg)
         evaluate(pkg)
         handler.postDelayed(this, TICK_MS)
       }
@@ -52,9 +50,19 @@ class StoicAccessibilityService : AccessibilityService() {
     currentPkg = pkg
     handler.removeCallbacks(tick)
     if (store.rules().containsKey(pkg)) {
+      // Back in an app still covered by "Open anyway": refresh it now. Waiting for the first
+      // re-check let a nearly expired grace run out and pause the app mid-use.
+      refreshGrace(pkg)
       evaluate(pkg)
       handler.postDelayed(tick, TICK_MS)
     }
+  }
+
+  private fun refreshGrace(pkg: String) {
+    val now = System.currentTimeMillis()
+    val current = store.graceUntil(pkg)
+    val refreshed = Blocker.refreshedGrace(current, now)
+    if (refreshed != current) store.setGraceUntil(pkg, refreshed)
   }
 
   private fun isInputMethod(pkg: String): Boolean {

@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TabIcon, type TabIconName } from "@/components/TabIcon";
 import { font, useTheme } from "@/theme";
 
@@ -12,13 +13,15 @@ const TABS: { name: string; title: string; icon: TabIconName }[] = [
 
 export default function TabsLayout() {
   const t = useTheme();
+  // A fixed height replaces the default one, so add the gesture/nav bar inset back ourselves.
+  const { bottom } = useSafeAreaInsets();
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: t.brand,
         tabBarInactiveTintColor: t.muted,
-        tabBarStyle: { backgroundColor: t.surface, borderTopColor: t.line, borderTopWidth: 2, height: 68, paddingTop: 6 },
+        tabBarStyle: { backgroundColor: t.surface, borderTopColor: t.line, borderTopWidth: 2, height: 68 + bottom, paddingTop: 6, paddingBottom: bottom },
         tabBarLabelStyle: { fontFamily: font.xbold, fontSize: 12 },
         sceneStyle: { backgroundColor: t.bg },
       }}

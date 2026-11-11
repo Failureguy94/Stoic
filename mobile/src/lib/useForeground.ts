@@ -1,5 +1,5 @@
 import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { AppState } from "react-native";
 
 /**
@@ -8,7 +8,9 @@ import { AppState } from "react-native";
  */
 export function useForeground(fn: () => void) {
   const ref = useRef(fn);
-  ref.current = fn;
+  useLayoutEffect(() => {
+    ref.current = fn;
+  });
 
   useFocusEffect(
     useCallback(() => {

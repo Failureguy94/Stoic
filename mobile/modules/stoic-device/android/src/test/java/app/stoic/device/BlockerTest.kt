@@ -49,4 +49,14 @@ class BlockerTest {
     assertEquals(Decision.FOCUS, decide(rule(focus = true, pause = true), focusUntil = now + min, grace = now + min))
     assertEquals(Decision.LIMIT, decide(rule(limit = 1, pause = true), used = 5 * min, grace = now + min))
   }
+
+  @Test fun graceIsRefreshedWhileStillActive() {
+    // Grace with 5 s left (less than one 20 s re-check) is renewed to a full GRACE_MS.
+    assertEquals(now + Blocker.GRACE_MS, Blocker.refreshedGrace(now + 5_000, now))
+  }
+
+  @Test fun expiredGraceIsNotRevived() {
+    assertEquals(now, Blocker.refreshedGrace(now, now))
+    assertEquals(0L, Blocker.refreshedGrace(0, now))
+  }
 }

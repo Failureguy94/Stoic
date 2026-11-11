@@ -1,7 +1,7 @@
 import { dayKey, parseKey } from "@/lib/week";
 
 /**
- * Is a recorded day trustworthy? (Pure functions, unit-tested.)
+ * Is a recorded day trustworthy? (Pure functions.)
  *
  * A "heartbeat" is a moment when STOIC's background job ran with Usage access on.
  * - today:      still in progress.
@@ -33,9 +33,14 @@ export const STATUS_TEXT: Record<DayStatus, { label: string; symbol: string; exp
   },
 };
 
-/** Longest stretch with no heartbeat in the last `days` days, in hours (for the status line). */
+/**
+ * Longest stretch with no heartbeat in the last `days` days, in hours (for the status line).
+ * Counts from the first heartbeat ever if that is more recent: before recording was switched
+ * on there was nothing to miss, so that time is not a gap.
+ */
 export function longestGapHours(heartbeats: number[], now = Date.now(), days = 7) {
-  const from = now - days * DAY_MS;
+  if (heartbeats.length === 0) return 0;
+  const from = Math.max(now - days * DAY_MS, Math.min(...heartbeats));
   const beats = heartbeats.filter((h) => h >= from).sort((a, b) => a - b);
   let last = from;
   let gap = 0;

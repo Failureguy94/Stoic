@@ -14,6 +14,10 @@ import { font, useTheme } from "@/theme";
 
 SplashScreen.preventAutoHideAsync();
 
+// Keep the tabs underneath any page opened straight from a link or notification,
+// so it still has a back arrow.
+export const unstable_settings = { anchor: "(tabs)" };
+
 export default function RootLayout() {
   const t = useTheme();
   const [loaded, error] = useFonts({

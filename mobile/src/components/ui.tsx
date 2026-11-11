@@ -1,4 +1,4 @@
-import { Link, type Href } from "expo-router";
+import { Link, router, type Href } from "expo-router";
 import { type ReactNode } from "react";
 import {
   Linking,
@@ -262,33 +262,33 @@ export function NavCard({
 }) {
   const t = useTheme();
   return (
-    <Link href={href} asChild>
-      <Pressable
-        accessibilityRole="link"
-        accessibilityLabel={`${title}. ${body}`}
-        style={({ pressed }) => ({
-          backgroundColor: t[tint],
-          borderRadius: radius.blob,
-          padding: space.lg + 2,
-          flexDirection: "row",
-          gap: space.md,
-          alignItems: "center",
-          opacity: pressed ? 0.85 : 1,
-          minHeight: TOUCH,
-        })}
-      >
-        <Text style={{ fontSize: 28 }} importantForAccessibility="no">
-          {icon}
-        </Text>
-        <View style={{ flex: 1 }}>
-          <Text style={{ fontFamily: font.display, fontSize: 18, color: t.ink, textDecorationLine: "underline" }}>{title}</Text>
-          <Text style={{ fontFamily: font.body, fontSize: 15, lineHeight: 22, color: t.ink }}>{body}</Text>
-        </View>
-        <Text style={{ fontFamily: font.display, fontSize: 22, color: t.ink }} importantForAccessibility="no">
-          ›
-        </Text>
-      </Pressable>
-    </Link>
+    // Not <Link asChild>: Link's slot drops Pressable's function style (that lost the row layout).
+    <Pressable
+      onPress={() => router.push(href)}
+      accessibilityRole="link"
+      accessibilityLabel={`${title}. ${body}`}
+      style={({ pressed }) => ({
+        backgroundColor: t[tint],
+        borderRadius: radius.blob,
+        padding: space.lg + 2,
+        flexDirection: "row",
+        gap: space.md,
+        alignItems: "center",
+        opacity: pressed ? 0.85 : 1,
+        minHeight: TOUCH,
+      })}
+    >
+      <Text style={{ fontSize: 28 }} importantForAccessibility="no">
+        {icon}
+      </Text>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontFamily: font.display, fontSize: 18, color: t.ink, textDecorationLine: "underline" }}>{title}</Text>
+        <Text style={{ fontFamily: font.body, fontSize: 15, lineHeight: 22, color: t.ink }}>{body}</Text>
+      </View>
+      <Text style={{ fontFamily: font.display, fontSize: 22, color: t.ink }} importantForAccessibility="no">
+        ›
+      </Text>
+    </Pressable>
   );
 }
 

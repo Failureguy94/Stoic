@@ -138,7 +138,7 @@ export default function ScreenTime() {
           <T v="small" muted>
             {beats.length === 0
               ? "No check-ins yet."
-              : `Checked in ${beats.length} ${beats.length === 1 ? "time" : "times"}. Longest gap in the last 7 days: about ${longestGapHours(beats)} hours.`}{" "}
+              : `Checked in ${beats.length} ${beats.length === 1 ? "time" : "times"}. Longest gap in the last 7 days: ${gapText(longestGapHours(beats))}.`}{" "}
             Battery savers on some phones (Redmi, Realme, Oppo) can stop background check-ins. Opening STOIC also records a
             check-in.
           </T>
@@ -230,4 +230,9 @@ function DayRow({ day, status }: { day: Day; status?: DayStatus }) {
       ) : null}
     </Card>
   );
+}
+
+function gapText(hours: number) {
+  if (hours < 1) return "under an hour";
+  return `about ${hours} ${hours === 1 ? "hour" : "hours"}`;
 }

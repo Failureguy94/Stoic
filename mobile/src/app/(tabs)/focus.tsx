@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { AccessibilityInfo, AppState, View } from "react-native";
 import { Pebble } from "@/components/Pebble";
 import { AppLink, B, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
@@ -37,17 +37,6 @@ export default function Focus() {
   const [now, setNow] = useState(() => Date.now());
   const [message, setMessage] = useState("");
 
-  // Tick once a second while a session runs, and catch up when the app comes back to the front.
-  useEffect(() => {
-    if (!active) return;
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    const sub = AppState.addEventListener("change", (s) => s === "active" && setNow(Date.now()));
-    return () => {
-      clearInterval(id);
-      sub.remove();
-    };
-  }, [active]);
-
   const say = (text: string) => {
     setMessage(text);
     AccessibilityInfo.announceForAccessibility(text);
@@ -66,11 +55,22 @@ export default function Focus() {
     );
   };
 
-  // Finish automatically when the time is up (also covers sessions that ended while the app was closed).
+  // Tick once a second while a session runs, and catch up when the app comes back to the front.
+  // Each tick also finishes the session once time is up (this covers sessions that ended while
+  // the app was closed: the first tick after loading closes them).
+  const onTick = useEffectEvent((t: number) => {
+    setNow(t);
+    if (active && log !== undefined && isDone(active, t)) close(active, t, false);
+  });
   useEffect(() => {
-    if (active && log !== undefined && isDone(active, now)) close(active, now, false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, now, log]);
+    if (!active) return;
+    const id = setInterval(() => onTick(Date.now()), 1000);
+    const sub = AppState.addEventListener("change", (s) => s === "active" && onTick(Date.now()));
+    return () => {
+      clearInterval(id);
+      sub.remove();
+    };
+  }, [active]);
 
   if (active === undefined || log === undefined || prefs === undefined) {
     return (

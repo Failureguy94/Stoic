@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { AccessibilityInfo, Animated, Easing } from "react-native";
 import Svg, { Circle, Ellipse, G, Path, Text as SvgText } from "react-native-svg";
 import { useTheme } from "@/theme";
@@ -11,7 +11,7 @@ export type Mood = "calm" | "happy" | "sleepy" | "cheer";
  */
 export function Pebble({ mood = "calm", size = 120, float = false }: { mood?: Mood; size?: number; float?: boolean }) {
   const t = useTheme();
-  const y = useRef(new Animated.Value(0)).current;
+  const [y] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     if (!float) return;

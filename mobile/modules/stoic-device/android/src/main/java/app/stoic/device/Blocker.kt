@@ -28,6 +28,14 @@ object Blocker {
   const val EXTEND_MS = 5 * 60_000L
 
   /**
+   * While the user is in an app they chose to "Open anyway", keep that choice alive.
+   * Called when the app comes to the front and on every re-check. GRACE_MS is far longer
+   * than the re-check interval, so an open app never sees the pause mid-use.
+   * An expired grace is left expired: leaving and coming back later asks again.
+   */
+  fun refreshedGrace(graceUntil: Long, now: Long): Long = if (graceUntil > now) now + GRACE_MS else graceUntil
+
+  /**
    * @param usedTodayMs foreground time for this app today, or null when Usage access is off
    *                    (then a daily limit cannot be checked and is skipped).
    * @param focusUntil  end of the running focus session, 0 if none.

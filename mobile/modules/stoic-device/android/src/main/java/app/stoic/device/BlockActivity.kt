@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.window.OnBackInvokedDispatcher
+import androidx.core.content.res.ResourcesCompat
 import java.util.Date
 
 /**
@@ -28,6 +29,15 @@ import java.util.Date
  * it opens instantly and works with TalkBack and large fonts.
  */
 class BlockActivity : Activity() {
+  // STOIC's own fonts (same as the app: Fredoka for headings and buttons, Nunito for text).
+  // Fall back to the system font if they cannot be loaded.
+  private val displayFont: Typeface by lazy {
+    ResourcesCompat.getFont(this, R.font.stoic_fredoka_bold) ?: Typeface.DEFAULT_BOLD
+  }
+  private val bodyFont: Typeface by lazy {
+    ResourcesCompat.getFont(this, R.font.stoic_nunito_regular) ?: Typeface.DEFAULT
+  }
+
   private var countdown: CountDownTimer? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,7 +101,7 @@ class BlockActivity : Activity() {
     column.addView(TextView(this).apply {
       text = titleText
       setTextSize(TypedValue.COMPLEX_UNIT_SP, 28f)
-      typeface = Typeface.DEFAULT_BOLD
+      typeface = displayFont
       setTextColor(getColor(R.color.stoic_ink))
       gravity = Gravity.CENTER
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) isAccessibilityHeading = true
@@ -100,6 +110,7 @@ class BlockActivity : Activity() {
     column.addView(TextView(this).apply {
       text = bodyText
       setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+      typeface = bodyFont
       setLineSpacing(0f, 1.3f)
       setTextColor(getColor(R.color.stoic_ink))
       gravity = Gravity.CENTER
@@ -145,6 +156,7 @@ class BlockActivity : Activity() {
     column.addView(TextView(this).apply {
       text = getString(R.string.stoic_footer)
       setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+      typeface = bodyFont
       setTextColor(getColor(R.color.stoic_muted))
       gravity = Gravity.CENTER
     }, margin(top = 28))
@@ -161,7 +173,7 @@ class BlockActivity : Activity() {
     text = label
     isAllCaps = false
     setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-    typeface = Typeface.DEFAULT_BOLD
+    typeface = displayFont
     minHeight = dp(52)
     minimumHeight = dp(52)
     setPadding(dp(24), dp(10), dp(24), dp(10))
