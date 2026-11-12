@@ -1,2 +1,5 @@
 # The mobile app is built separately; the website does not need it.
 mobile/
+/extension
+/desktop
+/release
