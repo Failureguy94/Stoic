@@ -7,7 +7,8 @@ Use this with the test APK (`stoic-test.apk`). Tick each line, and note the phon
 ## Install
 
 - [ ] Copy `stoic-test.apk` to the phone and open it. Allow "Install unknown apps" for your file manager if asked.
-- [ ] STOIC opens on the **Today** tab, and the **Set up** card is shown.
+- [ ] STOIC opens with the **tour**. Tap through all 14 stops: each one opens the right screen and highlights the button it talks about.
+- [ ] After the tour, STOIC is on the **Today** tab and the **Set up** card is shown. More → **Take the tour again** replays it.
 
 ## Permissions (Today → Set up)
 
