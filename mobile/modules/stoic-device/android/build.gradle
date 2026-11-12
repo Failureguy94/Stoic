@@ -11,6 +11,8 @@ android {
   defaultConfig {
     versionCode 1
     versionName "0.1.0"
+    // Keep rules for release (shrunk) builds of any app using this module.
+    consumerProguardFiles "consumer-rules.pro"
   }
   lintOptions {
     abortOnError false
