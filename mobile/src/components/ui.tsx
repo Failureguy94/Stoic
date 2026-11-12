@@ -1,5 +1,5 @@
 import { Link, router, type Href } from "expo-router";
-import { type ReactNode } from "react";
+import { createContext, useRef, type ComponentRef, type ReactNode, type RefObject } from "react";
 import {
   Linking,
   Pressable,
@@ -18,17 +18,28 @@ import { TOUCH, font, radius, space, useTheme, type Tint } from "@/theme";
 
 /* ----------------------------- layout ----------------------------- */
 
+/** The page's scroll view and its content, so the tour can scroll a highlighted control into view. */
+export type ScrollRefs = { scroll: RefObject<ComponentRef<typeof ScrollView> | null>; content: RefObject<ComponentRef<typeof View> | null> };
+export const ScreenScroll = createContext<ScrollRefs | null>(null);
+
 /** Scrolling page with the app background. `tab` adds top safe-area padding (tab screens have no header). */
 export function Screen({ children, tab = false }: { children: ReactNode; tab?: boolean }) {
   const t = useTheme();
+  const scroll = useRef<ComponentRef<typeof ScrollView>>(null);
+  const content = useRef<ComponentRef<typeof View>>(null);
   const body = (
-    <ScrollView
-      style={{ backgroundColor: t.bg }}
-      contentContainerStyle={{ padding: space.lg, paddingBottom: space.xxl * 1.5, gap: space.xl }}
-      keyboardShouldPersistTaps="handled"
-    >
-      {children}
-    </ScrollView>
+    <ScreenScroll value={{ scroll, content }}>
+      <ScrollView
+        ref={scroll}
+        style={{ backgroundColor: t.bg }}
+        contentContainerStyle={{ padding: space.lg, paddingBottom: space.xxl * 1.5 }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View ref={content} collapsable={false} style={{ gap: space.xl }}>
+          {children}
+        </View>
+      </ScrollView>
+    </ScreenScroll>
   );
   if (!tab) return body;
   return (
@@ -251,15 +262,17 @@ export function AppLink({ href, children }: { href: Href; children: string }) {
   );
 }
 
-/** A full-width row that navigates somewhere (used on the More tab and home). */
+/** A full-width row that navigates somewhere, or does something (`onPress`). */
 export function NavCard({
   href,
+  onPress,
   title,
   body,
   icon,
   tint,
 }: {
-  href: Href;
+  href?: Href;
+  onPress?: () => void;
   title: string;
   body: string;
   icon: string;
@@ -269,8 +282,8 @@ export function NavCard({
   return (
     // Not <Link asChild>: Link's slot drops Pressable's function style (that lost the row layout).
     <Pressable
-      onPress={() => router.push(href)}
-      accessibilityRole="link"
+      onPress={() => (onPress ? onPress() : href && router.push(href))}
+      accessibilityRole={onPress ? "button" : "link"}
       accessibilityLabel={`${title}. ${body}`}
       style={({ pressed }) => ({
         backgroundColor: t[tint],

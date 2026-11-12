@@ -62,4 +62,5 @@ export const KEYS = {
   focusPrefs: "stoic.focus.prefs.v1",
   scoreGoals: "stoic.score.goals.v1",
   scoreHistory: "stoic.score.history.v1",
+  tourDone: "stoic.tour.done.v1",
 } as const;
