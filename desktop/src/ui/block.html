@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STOIC</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      main { max-width: 30rem; margin: 0 auto; padding: 2rem 1.25rem; text-align: center; }
+      main > * + * { margin-top: 1rem; }
+      .pebble { width: 130px; margin: 0 auto; }
+      .actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+      .actions button { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="pebble float" src="pebble.svg" alt="" />
+      <h1 id="title">Pause for a moment</h1>
+      <p id="body"></p>
+      <div class="actions">
+        <button id="back" type="button">Go back</button>
+        <button id="other" type="button" class="outline" hidden></button>
+      </div>
+      <p class="small muted">You set this up in STOIC. You can change it there any time.</p>
+      <p class="small"><button type="button" class="quiet" id="settings">Open STOIC settings</button></p>
+    </main>
+    <script type="module" src="block.js"></script>
+  </body>
+</html>
