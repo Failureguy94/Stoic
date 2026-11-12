@@ -35,7 +35,9 @@ const shot = async (page, name) => shots && page.screenshot({ path: join(shots, 
 
 // The options page opens on install; use it to talk to the background.
 const opts = await ctx.newPage();
-await opts.goto(`${base}/options.html`);
+// STOIC opens its settings page by itself on install; that can interrupt this navigation, which is fine.
+await opts.goto(`${base}/options.html`).catch(() => {});
+await opts.waitForLoadState("load");
 const send = (msg) => opts.evaluate((m) => chrome.runtime.sendMessage(m), msg);
 await shot(opts, "options-empty");
 
@@ -144,6 +146,8 @@ const pages = [
   ["options-narrow", `${base}/options.html`, { width: 375, height: 800 }],
   ["blocked-pause", `${base}/blocked.html?kind=PAUSE&url=https%3A%2F%2Fexample.com&domain=example.com`, { width: 1280, height: 900 }],
   ["blocked-limit", `${base}/blocked.html?kind=LIMIT&url=https%3A%2F%2Fexample.com&domain=example.com&limitMin=30&allowExtend=true`, { width: 375, height: 800 }],
+  ["blocked-focus", `${base}/blocked.html?kind=FOCUS&url=https%3A%2F%2Fexample.com&domain=example.com&until=${Date.now() + 600000}`, { width: 1280, height: 900 }],
+  ["blocked-schedule", `${base}/blocked.html?kind=SCHEDULE&url=https%3A%2F%2Fexample.com&domain=example.com&schedule=Study%20hours&endMin=1020`, { width: 375, height: 800 }],
 ];
 for (const scheme of ["light", "dark"]) {
   for (const [name, url, viewport] of pages) {
