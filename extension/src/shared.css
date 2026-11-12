@@ -19,6 +19,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Keep "hidden" hidden, even for elements given a display below (e.g. buttons). */
+[hidden] { display: none !important; }
 html { background: var(--bg); color: var(--ink); }
 body { margin: 0; font: 16px/1.55 "Nunito", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
 h1, h2, h3, .display { font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; line-height: 1.2; margin: 0; }
