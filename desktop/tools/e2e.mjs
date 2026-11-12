@@ -1,7 +1,7 @@
 // End-to-end check of the desktop app on this computer (Linux), with ordinary programs standing in for
 // distracting apps: `tail` (pause, focus) and `sleep` (schedule). Usage: node tools/e2e.mjs [screenshot-folder]
 import { execFileSync, spawn } from "node:child_process";
-import { mkdtempSync, mkdirSync, readFileSync } from "node:fs";
+import { chmodSync, copyFileSync, mkdtempSync, mkdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -110,19 +110,44 @@ ok("strict mode allows a tighter limit", tighten.ok === true);
 const unlock = await send({ type: "unlockNow" });
 ok("unlocking early needs the wait", !!unlock.error, unlock.error);
 
-// 6. Unrelated programs are left alone.
+// 6. Daily limit on time open (1 minute; takes about 70 seconds). Uses a copy of `sleep` with its own name.
+{
+  const dir = mkdtempSync(join(tmpdir(), "stoic-limit-"));
+  const exe = join(dir, "stoiclimittest");
+  copyFileSync("/bin/sleep", exe);
+  chmodSync(exe, 0o755);
+  const now = await send({ type: "getAll" });
+  const add = await send({
+    type: "save",
+    settings: { ...now.settings, apps: [...now.settings.apps, { key: "stoiclimittest", name: "Limit test", pause: false, limitMin: 1, blockInFocus: false, allowExtend: true }] },
+  });
+  ok("adding an app with a limit is allowed in strict mode", add.ok === true, JSON.stringify(add));
+  const t0 = Date.now();
+  const proc = spawn(exe, ["1000"], { stdio: "ignore" });
+  await sleep(20_000);
+  ok("the app stays open under its limit", alive(proc.pid));
+  const closedAtLimit = await waitFor(() => !alive(proc.pid), 70_000);
+  const secs = Math.round((Date.now() - t0) / 1000);
+  ok("closed when the daily limit is reached", closedAtLimit && secs >= 55, `${secs} s`);
+  const limitWin = await blockWindow("LIMIT");
+  ok("Pebble's time's-up window appears", !!limitWin);
+  ok("strict mode hides 5 more minutes", !!limitWin && limitWin.url().includes("allowExtend=false"));
+}
+
+// 7. Unrelated programs are left alone.
 const other = spawn("cat", [], { stdio: ["pipe", "ignore", "ignore"] });
 await sleep(5000);
 ok("unrelated programs keep running", alive(other.pid));
 other.kill();
 
-// 7. Accessibility (axe) on the settings and Pebble windows, light and dark.
+// 8. Accessibility (axe) on the settings and Pebble windows, light and dark.
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 await settingsWin.reload();
 await sleep(800);
 if (shots) await settingsWin.screenshot({ path: join(shots, "settings-strict.png"), fullPage: true });
 for (const scheme of ["light", "dark"]) {
-  for (const [name, win] of [["settings", settingsWin], ["block", schedWin ?? focusWin]]) {
+  const currentBlock = app.windows().find((w) => w.url().includes("block.html"));
+  for (const [name, win] of [["settings", settingsWin], ["block", currentBlock]]) {
     if (!win) continue;
     await win.emulateMedia({ colorScheme: scheme });
     await sleep(300);
