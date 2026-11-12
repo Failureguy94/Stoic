@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type ComponentRef } from "react";
 import { AccessibilityInfo, TextInput, View } from "react-native";
-import { TOTAL_RESPONDENTS, TRIED_TO_CUT_DOWN, getQuestion } from "@shared/survey";
 import { Pebble, type Mood } from "@/components/Pebble";
-import { AppLink, B, Button, Card, Chip, ChipGroup, Screen, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { B, Button, Card, Chip, ChipGroup, Screen, T } from "@/components/ui";
 import { device } from "@/lib/device";
 import { focusedMsInWeek, sessionsInWeek, type FinishedSession } from "@/lib/focus";
 import {
@@ -21,75 +21,19 @@ import {
 import { SITE_NAME } from "@/lib/site";
 import { KEYS, useStored } from "@/lib/storage";
 import { formatDuration, shortDate, weekOf } from "@/lib/week";
-import { font, radius, space, useTheme, type Theme, type Tint } from "@/theme";
+import { font, radius, space, useTheme, type Theme } from "@/theme";
 
 const NO_LOG: FinishedSession[] = [];
-const count = (list: { label: string; count: number }[], label: string) => list.find((a) => a.label === label)?.count ?? 0;
 
 export default function Circle() {
   return (
     <Screen tab>
       <View style={{ gap: space.sm }}>
         <T v="h1">{SITE_NAME} Circle</T>
-        <T v="lead">
-          Most of your batch is working on this too. The Circle shows what first-years are doing together, and helps you keep one
-          small goal a week. No leaderboards, no comparing people, no guilt trips.
-        </T>
+        <T v="lead">One small goal a week. No leaderboards, no guilt trips.</T>
       </View>
-      <CohortPulse />
       <WeeklyPledge />
     </Screen>
-  );
-}
-
-/** Anonymous, aggregate-only encouragement. Never individuals, rankings or comparisons. */
-function CohortPulse() {
-  const used = getQuestion("tools-used").answers;
-  const failed = getQuestion("why-failed").answers;
-  const stats: { n: number; text: string; tint: Tint }[] = [
-    { n: TRIED_TO_CUT_DOWN, text: "have already tried to cut down their phone time.", tint: "peach" },
-    {
-      n: TOTAL_RESPONDENTS - count(used, "None"),
-      text: "have already tried at least one tool to cut down. You're in good company.",
-      tint: "sky",
-    },
-    {
-      n: count(failed, "Forgot to use it"),
-      text: "said a tool stopped working because they forgot to use it, which is why schedules and limits in STOIC run by themselves.",
-      tint: "butter",
-    },
-  ];
-  return (
-    <View style={{ gap: space.md }}>
-      <T v="h2">Cohort pulse</T>
-      <T muted>Anonymous totals from our survey of {TOTAL_RESPONDENTS} first-years. No names, no rankings.</T>
-      {stats.map((s) => (
-        <Card key={s.text} tint={s.tint}>
-          <View accessible accessibilityLabel={`${s.n} of ${TOTAL_RESPONDENTS} ${s.text}`}>
-            <T v="h1">
-              {s.n} <T v="h3">of {TOTAL_RESPONDENTS}</T>
-            </T>
-            <T>{s.text}</T>
-          </View>
-        </Card>
-      ))}
-      <Card>
-        <T v="h3">What makes a change stick, according to your batch</T>
-        <T>
-          <B>↻ Pick something automatic. </B>
-          {count(failed, "Forgot to use it")} people simply forgot. Schedules and daily limits keep going on busy days.
-        </T>
-        <T>
-          <B>⌂ Free, and only what it needs. </B>
-          {count(failed, "Cost")} mentioned cost and {count(failed, "Too many permissions")} mentioned permissions. STOIC is
-          free and asks for each permission only when you switch on the feature that uses it.
-        </T>
-        <T>
-          <B>✦ Keep it simple. </B>
-          {count(failed, "Too complicated")} found tools too complicated. One small goal beats five settings.
-        </T>
-      </Card>
-    </View>
   );
 }
 
@@ -120,15 +64,15 @@ function WeeklyPledge() {
 
   return (
     <Card>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+      <TourTarget id="circle.pledge" style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
         <View style={{ flex: 1, gap: 4 }}>
           <T v="h2">My weekly pledge</T>
           <T v="small" muted>
-            🔒 Saved only on this phone and never sent to us.
+            🔒 Saved only on this phone.
           </T>
         </View>
         <Pebble mood={mood} size={80} float />
-      </View>
+      </TourTarget>
 
       {pledge === undefined ? (
         <T muted>Loading your pledge…</T>
@@ -168,7 +112,6 @@ function WeeklyPledge() {
       <View accessibilityLiveRegion="polite" style={{ minHeight: 24 }}>
         {message ? <T v="h3">{message}</T> : null}
       </View>
-      <AppLink href="/design-note">How check-ins are verified, and what still can&apos;t be</AppLink>
     </Card>
   );
 }

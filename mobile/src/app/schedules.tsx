@@ -5,7 +5,8 @@ import { AppPicker } from "@/components/AppPicker";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
 import { ScheduleEditor } from "@/components/ScheduleEditor";
 import { StrictBanner } from "@/components/StrictBanner";
-import { Bullets, Button, Card, Chip, Screen, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { Button, Card, Chip, Screen, T } from "@/components/ui";
 import { device, type LaunchableApp, type Schedule } from "@/lib/device";
 import { BEDTIME_ID, newSchedule, withBedtime } from "@/lib/schedules";
 import { tryStrictSave } from "@/lib/strict";
@@ -69,15 +70,13 @@ export default function Schedules() {
 
   return (
     <Screen>
-      <T v="lead">
-        Pick hours when apps stay closed: a calm bedtime, or study hours on weekdays. They switch on and off by themselves.
-      </T>
+      <T v="lead">Hours when apps stay closed. They switch on and off by themselves.</T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Schedules are on" />
       <StrictBanner />
 
       {bedtime ? (
-        <View style={{ gap: space.md }}>
+        <TourTarget id="schedules.bedtime" style={{ gap: space.md }}>
           <T v="h2">Bedtime</T>
           <ScheduleEditor
             schedule={bedtime}
@@ -87,12 +86,12 @@ export default function Schedules() {
             onChange={(patch, spoken) => update(bedtime.id, patch, spoken)}
             onOpenDndSettings={() => device!.openDndAccessSettings()}
           />
-        </View>
+        </TourTarget>
       ) : null}
 
       <View style={{ gap: space.md }}>
         <T v="h2">My schedules</T>
-        {custom.length === 0 ? <T muted>None yet. Study hours on weekdays is a good first one.</T> : null}
+        {custom.length === 0 ? <T muted>None yet. Try study hours on weekdays.</T> : null}
         {custom.map((s, i) => (
           <ScheduleEditor
             key={s.id}
@@ -155,16 +154,9 @@ export default function Schedules() {
         )}
       </Card>
 
-      <Card>
-        <T v="h3">Good to know</T>
-        <Bullets
-          items={[
-            "A focus session is stricter than a schedule; a schedule is stricter than a daily limit.",
-            "Calls, texts and alarms always work, so you can be reached and woken up.",
-            "Changing the time on your phone changes when schedules run.",
-          ]}
-        />
-      </Card>
+      <T v="small" muted>
+        Calls, messages and alarms always work.
+      </T>
     </Screen>
   );
 }

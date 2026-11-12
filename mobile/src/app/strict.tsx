@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AccessibilityInfo, Alert, View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
+import { TourTarget } from "@/components/Tour";
 import { B, Bullets, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type StrictState } from "@/lib/device";
 import { clock } from "@/lib/focus";
@@ -86,9 +87,7 @@ export default function Strict() {
 
   return (
     <Screen>
-      <T v="lead">
-        For the days you know you&apos;ll be tempted. Until the time you pick, your limits can get stricter but never looser.
-      </T>
+      <T v="lead">Until the time you pick, your rules can get stricter but never looser.</T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Limits, schedules and strict mode can work" />
 
@@ -160,6 +159,7 @@ export default function Strict() {
           </View>
         </Card>
       ) : (
+        <TourTarget id="strict.start">
         <Card tint="lavender">
           <T v="h2">Start strict mode</T>
           <T v="label">How long</T>
@@ -176,19 +176,12 @@ export default function Strict() {
           />
           <Button label="Start strict mode" onPress={start} />
         </Card>
+        </TourTarget>
       )}
 
-      <Card>
-        <T v="h3">Good to know</T>
-        <Bullets
-          items={[
-            "Strict mode makes your own rules firm. It doesn't add new ones: set up limits and schedules first.",
-            "You can extend strict mode while it's on, but not shorten it.",
-            "Pauses still offer “Open anyway”, and check-ins still offer “Keep going”: those are nudges, not limits.",
-            "What it can't stop: restarting in safe mode, a computer with developer tools, or resetting the phone.",
-          ]}
-        />
-      </Card>
+      <T v="small" muted>
+        Set up your limits and schedules first: strict mode locks them, it doesn&apos;t add new ones.
+      </T>
     </Screen>
   );
 }

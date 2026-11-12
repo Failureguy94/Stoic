@@ -2,12 +2,13 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { Pressable, View } from "react-native";
 import { Pebble } from "@/components/Pebble";
-import { AppLink, B, Button, Card, NavCard, Screen, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { B, Button, Card, Screen, T } from "@/components/ui";
 import { device, isAndroid } from "@/lib/device";
 import { hm } from "@/lib/score";
 import { moodFor, useDayScore } from "@/lib/useDayScore";
 import { useForeground } from "@/lib/useForeground";
-import { font, radius, space, useTheme } from "@/theme";
+import { font, space, useTheme } from "@/theme";
 
 function greeting(now = new Date()) {
   const h = now.getHours();
@@ -17,33 +18,45 @@ function greeting(now = new Date()) {
   return "Good evening";
 }
 
-/** The two permissions most of STOIC needs. Others are asked for by the feature that uses them. */
+/** The two permissions most of STOIC needs, each one tap away. Others are asked for by the feature that uses them. */
 function SetUpCard() {
+  const t = useTheme();
   const [state, setState] = useState<{ usage: boolean; blocker: boolean } | null>(null);
   useForeground(() => {
     if (device) setState({ usage: device.hasUsageAccess(), blocker: device.isBlockerEnabled() });
   });
-  if (!state || (state.usage && state.blocker)) return null;
+  if (!device || !state || (state.usage && state.blocker)) return null;
   const items = [
-    { done: state.usage, label: "Screen time", hint: "Usage access", href: "/screen-time" as const },
-    { done: state.blocker, label: "Limits and schedules", hint: "Accessibility", href: "/limits" as const },
+    { done: state.usage, label: "Usage access", why: "To see your screen time", open: () => device!.openUsageAccessSettings() },
+    { done: state.blocker, label: "Accessibility", why: "To pause apps (find “STOIC limits and pauses”)", open: () => device!.openAccessibilitySettings() },
   ];
   return (
-    <Card tint="butter">
-      <T v="h2">Set up</T>
-      <T>Two switches in Android&apos;s settings unlock most of STOIC. Each one takes about a minute.</T>
-      {items.map((i) => (
-        <NavCard
-          key={i.label}
-          href={i.href}
-          icon={i.done ? "✅" : "⬜"}
-          tint="surface"
-          title={i.label}
-          body={i.done ? `${i.hint}: on` : `${i.hint}: tap to switch on`}
-        />
-      ))}
-      <AppLink href={{ pathname: "/docs/[slug]", params: { slug: "getting-started" } }}>What STOIC needs, and why</AppLink>
-    </Card>
+    <TourTarget id="today.setup">
+      <Card tint="butter">
+        <T v="h2">Set up</T>
+        {items.map((i) => (
+          <View key={i.label} style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+            <View style={{ flex: 1 }}>
+              <T v="label">
+                {i.done ? "✅ " : ""}
+                {i.label}
+              </T>
+              <T v="small">{i.why}</T>
+            </View>
+            {i.done ? (
+              <T v="label" color={t.goodInk}>
+                On
+              </T>
+            ) : (
+              <Button label="Turn on" accessibilityHint={`Opens ${i.label} settings`} onPress={i.open} />
+            )}
+          </View>
+        ))}
+        <T v="small" muted>
+          Says “Restricted setting”? Settings › Apps › STOIC › ⋮ › Allow restricted settings.
+        </T>
+      </Card>
+    </TourTarget>
   );
 }
 
@@ -84,10 +97,12 @@ export default function Today() {
           </Pressable>
 
           <View style={{ flexDirection: "row", gap: space.md }}>
-            <Card tint="sky" style={{ flex: 1 }}>
-              <T v="label">Screen time</T>
-              <T v="h2">{screenMs === null ? "–" : hm(screenMs)}</T>
-            </Card>
+            <Pressable accessibilityRole="link" onPress={() => router.push("/screen-time")} style={{ flex: 1 }}>
+              <Card tint="sky">
+                <T v="label">Screen time</T>
+                <T v="h2">{screenMs === null ? "–" : hm(screenMs)}</T>
+              </Card>
+            </Pressable>
             <Card tint="mint" style={{ flex: 1 }}>
               <T v="label">Focus</T>
               <T v="h2">{hm(focusMs)}</T>
@@ -96,38 +111,14 @@ export default function Today() {
         </>
       ) : (
         <Card tint="butter">
-          <T v="h3">STOIC&apos;s phone features need Android for now</T>
+          <T v="h3">Most of STOIC needs Android for now</T>
           <T>
-            On iPhone, Apple only lets approved apps see screen time or pause other apps. Until STOIC has that approval, you can
-            still use <B>Focus with Pebble</B> and the <B>Circle</B> here.
+            On iPhone you can still use <B>Focus with Pebble</B> and the <B>Circle</B>.
           </T>
         </Card>
       )}
 
       <Button label="Start a focus session" onPress={() => router.push("/focus")} />
-
-      <View style={{ gap: space.md }}>
-        <T v="h2">Quick fixes</T>
-        <NavCard href="/limits" icon="✋" tint="peach" title="One app keeps pulling me in" body="Add a pause, a daily limit or fewer opens." />
-        <NavCard href="/schedules" icon="🌙" tint="lavender" title="I stay up on my phone" body="Set a bedtime when apps stay closed." />
-        <NavCard href="/notifications" icon="🔔" tint="mint" title="Notifications keep interrupting" body="Hold the noisy ones for one summary." />
-        <NavCard href="/sites" icon="🌐" tint="sky" title="I get lost on websites" body="Block sites in every browser on this phone." />
-      </View>
-
-      <Pressable
-        accessibilityRole="link"
-        onPress={() => router.push("/docs")}
-        style={({ pressed }) => ({
-          borderRadius: radius.blob,
-          padding: space.lg,
-          borderWidth: 2,
-          borderColor: t.line,
-          opacity: pressed ? 0.85 : 1,
-        })}
-      >
-        <T v="label">📘 New to STOIC?</T>
-        <T>Short how-to guides for every feature ›</T>
-      </Pressable>
     </Screen>
   );
 }

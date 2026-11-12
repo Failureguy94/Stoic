@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { AccessibilityInfo, Alert, TextInput, View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
 import { StrictBanner } from "@/components/StrictBanner";
-import { B, Bullets, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { B, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type SiteSettings } from "@/lib/device";
 import { tryStrictSave } from "@/lib/strict";
 import { useForeground } from "@/lib/useForeground";
@@ -72,10 +73,7 @@ export default function Sites() {
 
   return (
     <Screen>
-      <T v="lead">
-        Block websites in every browser and app on this phone, always or only while you focus. You can also switch the
-        internet off during focus.
-      </T>
+      <T v="lead">Block websites in every browser on this phone, always or only while you focus.</T>
 
       <StrictBanner />
 
@@ -83,12 +81,9 @@ export default function Sites() {
         <Card tint="butter">
           <T v="h2">Allow STOIC&apos;s VPN</T>
           <T>
-            Android blocks websites through a <B>VPN</B>. STOIC&apos;s VPN never leaves your phone: it only answers “where is
-            this website?” questions, saying “nowhere” for the sites you block. It can&apos;t see what you read or type, and
-            nothing is sent to STOIC.
+            Android blocks sites through a <B>VPN</B>. STOIC&apos;s stays on your phone and never sees what you read.
           </T>
           <Button label="Allow" onPress={() => device!.requestVpnPermission()} />
-          <T v="small">Android shows a key icon in the status bar while it&apos;s on.</T>
         </Card>
       ) : null}
 
@@ -125,7 +120,7 @@ export default function Sites() {
         <T v="label" style={{ marginTop: space.sm }}>
           Popular
         </T>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm }}>
+        <TourTarget id="sites.presets" style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm }}>
           {PRESETS.map((p) => (
             <Chip
               key={p.label}
@@ -136,9 +131,9 @@ export default function Sites() {
               onPress={() => togglePreset(p)}
             />
           ))}
-        </View>
+        </TourTarget>
         <T v="small" muted>
-          Blocking a site also stops its app on this phone, because apps use the same addresses.
+          This also stops the site&apos;s app.
         </T>
 
         <T v="label" style={{ marginTop: space.sm }}>
@@ -196,17 +191,9 @@ export default function Sites() {
         />
       </Card>
 
-      <Card>
-        <T v="h3">Good to know</T>
-        <Bullets
-          items={[
-            "Browsers remember addresses for a minute or two, so a site that was already open may keep working briefly.",
-            "If you set a custom “Private DNS” in Android's settings, website blocking can't work. “Automatic” is fine.",
-            "Only one VPN can run at a time. Turning on another VPN app switches STOIC's off.",
-            "Nothing you visit is recorded or sent anywhere.",
-          ]}
-        />
-      </Card>
+      <T v="small" muted>
+        Not working? Set Private DNS to “Automatic”, and turn off other VPN apps. Open sites can take a minute to stop.
+      </T>
     </Screen>
   );
 }

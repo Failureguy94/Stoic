@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { AccessibilityInfo, View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
-import { AppLink, B, Bullets, Button, Card, Screen, SwitchRow, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { AppLink, B, Button, Card, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type AppUsage, type DayRecord } from "@/lib/device";
 import { useForeground } from "@/lib/useForeground";
 import { STATUS_TEXT, dayStatus, longestGapHours, type DayStatus } from "@/lib/usageLog";
@@ -58,27 +59,14 @@ export default function ScreenTime() {
 
   return (
     <Screen>
-      <T v="lead">Your real per-app screen time, read from Android on this phone. Nothing is sent anywhere.</T>
-
+      <TourTarget id="screentime.top">
       {access === false ? (
         <Card tint="butter">
           <T v="h2">Turn on Usage access</T>
           <T>
-            To show your screen time, Android needs you to allow <B>Usage access</B> for STOIC. It lets the app see how long
-            each app was open. It does not show what you did inside them.
+            Find STOIC and switch on <B>Permit usage access</B>. It shows how long each app was open, not what you did in it.
           </T>
-          <Bullets
-            items={[
-              "Tap the button below.",
-              "Find STOIC in the list and switch on “Permit usage access”.",
-              "Come back here. The numbers appear straight away.",
-            ]}
-          />
           <Button label="Open Usage access settings" onPress={() => device!.openUsageAccessSettings()} />
-          <T v="small">
-            If Android says “Restricted setting”, open Settings, Apps, STOIC, tap the three dots at the top right, and choose
-            “Allow restricted settings”. Then try again.
-          </T>
         </Card>
       ) : null}
 
@@ -100,20 +88,15 @@ export default function ScreenTime() {
           ) : (
             <T>No app use recorded yet today.</T>
           )}
-          <T v="small">Counts apps with an icon on your home screen. System screens and the launcher are left out.</T>
         </Card>
       ) : null}
+      </TourTarget>
 
       {access === null || (access && !days) ? <T muted>Reading your screen time…</T> : null}
 
       {earlier.length > 0 ? (
         <View style={{ gap: space.md }}>
           <T v="h2">{logOn ? "STOIC's record" : "Earlier this week"}</T>
-          {!logOn ? (
-            <T v="small" muted>
-              Read live from Android, which keeps detailed history for only a few days and drops apps you uninstall.
-            </T>
-          ) : null}
           {earlier.map((d) => (
             <DayRow key={d.day} day={d} status={logOn ? dayStatus(d.day, beats) : undefined} />
           ))}
@@ -129,29 +112,20 @@ export default function ScreenTime() {
           disabled={!access && !logOn}
           onChange={toggleLog}
         />
-        <T>
-          When this is on, STOIC copies each day&apos;s totals into its own storage every few hours. Once a day is recorded,
-          uninstalling another app can&apos;t erase it. Days where STOIC couldn&apos;t check in are marked <B>unverified</B>,
-          not zero.
+        <T v="small">
+          Keeps each day&apos;s totals, even if you uninstall an app. Days STOIC couldn&apos;t check are marked{" "}
+          <B>unverified</B>.
         </T>
         {logOn ? (
           <T v="small" muted>
             {beats.length === 0
               ? "No check-ins yet."
               : `Checked in ${beats.length} ${beats.length === 1 ? "time" : "times"}. Longest gap in the last 7 days: ${gapText(longestGapHours(beats))}.`}{" "}
-            Battery savers on some phones (Redmi, Realme, Oppo) can stop background check-ins. Opening STOIC also records a
-            check-in.
           </T>
         ) : null}
-        <AppLink href="/design-note">What this can and can&apos;t prove</AppLink>
       </Card>
 
-      {access ? (
-        <Card tint="peach">
-          <T v="h3">Want a nudge when it adds up?</T>
-          <AppLink href="/limits">Set a daily limit or a pause</AppLink>
-        </Card>
-      ) : null}
+      {access ? <AppLink href="/limits">Set a limit on an app</AppLink> : null}
     </Screen>
   );
 }

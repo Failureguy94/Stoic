@@ -32,7 +32,7 @@ An Electron tray app: pause before opening, daily limits (time open), schedules,
 | Route | What it is |
 |---|---|
 | `/` | What STOIC is and does, privacy, how to get it |
-| `/docs`, `/docs/[slug]` | How-to guides for every feature (the same guides are inside the app) |
+| `/docs`, `/docs/[slug]` | How-to guides for every feature (the app teaches itself with a first-run tour instead) |
 | `/circle` | STOIC Circle: cohort pulse + weekly pledge (saved in this browser only) |
 | `/survey` | Survey results as accessible bar charts, and how they shaped STOIC |
 | `/about` | What STOIC is, every permission and what it's for, privacy, accessibility, credits |
@@ -77,10 +77,9 @@ npm run check:a11y                  # axe-core on every page → docs/a11y-repor
 
 | What | File |
 |---|---|
-| How-to guides (website and app) | `content/docs/*.mdx`, with title, summary and icon in `data/docs.ts` |
+| How-to guides (website) | `content/docs/*.mdx`, with title, summary and icon in `data/docs.ts` |
+| First-run tour (app) | `mobile/src/lib/tour.ts` (steps), `mobile/src/components/Tour.tsx` (overlay) |
 | Survey numbers | `data/survey.ts` |
-
-After editing a guide, the app picks it up on the next `npm start` or `npm run android` in `mobile/` (or run `npm run docs` there).
 
 Guides can use `<Note>`, `<IfItDidntWork>` and `<Screenshot src="/doc-images/<slug>/<file>.png" alt="..." caption="..." />` (images go in `public/doc-images/`; alt text is required).
 

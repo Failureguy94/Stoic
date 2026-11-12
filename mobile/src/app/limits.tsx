@@ -4,7 +4,8 @@ import { AndroidOnly } from "@/components/AndroidOnly";
 import { AppPicker } from "@/components/AppPicker";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
 import { StrictBanner } from "@/components/StrictBanner";
-import { AppLink, Bullets, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type LaunchableApp, type Rule } from "@/lib/device";
 import { tryStrictSave } from "@/lib/strict";
 import { useForeground } from "@/lib/useForeground";
@@ -65,10 +66,7 @@ export default function Limits() {
 
   return (
     <Screen>
-      <T v="lead">
-        Pick the apps that pull you in, then choose a gentle pause, a daily limit, fewer opens, or a check-in when you&apos;ve
-        been on for a while. You are always the one in charge of these.
-      </T>
+      <T v="lead">Pick the apps that pull you in, then choose a pause, a daily limit or fewer opens.</T>
 
       <BlockerSetupCard enabled={enabled} onLabel="Limits and pauses are on" />
       <StrictBanner />
@@ -167,25 +165,19 @@ export default function Limits() {
           </Card>
         ))}
 
-        {!adding ? (
-          <Button label="Add an app" onPress={() => setAdding(true)} />
-        ) : (
-          <AppPicker exclude={taken} onPick={add} onCancel={() => setAdding(false)} />
-        )}
+        <TourTarget id="limits.add" style={{ alignSelf: adding ? "stretch" : "flex-start" }}>
+          {!adding ? (
+            <Button label="Add an app" onPress={() => setAdding(true)} />
+          ) : (
+            <AppPicker exclude={taken} onPick={add} onCancel={() => setAdding(false)} />
+          )}
+        </TourTarget>
       </View>
 
-      <Card>
-        <T v="h3">Good to know</T>
-        <Bullets
-          items={[
-            "Limits reset at midnight.",
-            "“Open anyway” appears after a short wait. Choosing it is fine: the pause is there to make it a choice, not to punish you.",
-            "On some phones (Redmi, Realme, Oppo), battery saving can switch the service off. If pauses stop appearing, check Accessibility settings and allow STOIC to run in the background.",
-            "Want certain hours blocked every day, like bedtime or study time? Use a schedule.",
-          ]}
-        />
-        <AppLink href="/schedules">Schedules and bedtime</AppLink>
-      </Card>
+      <T v="small" muted>
+        Limits reset at midnight. Pauses stopped appearing? Battery savers can switch STOIC off: check Accessibility, and let
+        STOIC run in the background.
+      </T>
     </Screen>
   );
 }

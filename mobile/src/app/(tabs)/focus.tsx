@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useState } from "react";
 import { AccessibilityInfo, AppState, View } from "react-native";
 import { Pebble } from "@/components/Pebble";
+import { TourTarget } from "@/components/Tour";
 import { AppLink, B, Button, Card, Chip, ChipGroup, Screen, SwitchRow, T } from "@/components/ui";
 import { device } from "@/lib/device";
 import {
@@ -166,9 +167,9 @@ export default function Focus() {
                 />
               ) : null}
             </View>
-            <View style={{ marginTop: space.sm }}>
+            <TourTarget id="focus.start" style={{ marginTop: space.sm }}>
               <Button label={`Start ${prefs.minutes} minute session`} onPress={start} />
-            </View>
+            </TourTarget>
           </>
         )}
       </Card>
@@ -186,17 +187,9 @@ export default function Focus() {
         <T v="lead">
           <B>{weekSessions.length}</B> {weekSessions.length === 1 ? "session" : "sessions"}, {formatDuration(focusedMsInWeek(log))} of focus.
         </T>
-        <T v="small">Stored only on this phone. No streak to lose: every session just adds up.</T>
-        <AppLink href="/circle">See my weekly pledge in the Circle</AppLink>
+        <AppLink href="/circle">My weekly pledge</AppLink>
       </Card>
 
-      {device && !blockerReady ? (
-        <Card tint="sky">
-          <T v="h3">Want apps blocked while you focus?</T>
-          <T>Pick the apps and turn on blocking first.</T>
-          <AppLink href="/limits">Open Limits and pauses</AppLink>
-        </Card>
-      ) : null}
     </Screen>
   );
 }

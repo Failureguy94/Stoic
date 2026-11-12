@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
 import { Pebble } from "@/components/Pebble";
-import { AppLink, B, Bullets, Card, Chip, ChipGroup, Screen, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { AppLink, Card, Chip, ChipGroup, Screen, T } from "@/components/ui";
 import { device } from "@/lib/device";
-import { BEDTIME_ZERO_MIN, MAX } from "@/lib/score";
 import { KEYS, useStored } from "@/lib/storage";
 import { DEFAULT_GOALS, moodFor, useDayScore } from "@/lib/useDayScore";
 import { shiftDay, weekday } from "@/lib/week";
@@ -128,6 +128,7 @@ export default function ScoreScreen() {
         </T>
       </Card>
 
+      <TourTarget id="score.goals">
       <Card>
         <T v="h2">My goals</T>
         <T v="label">Screen time a day, at most</T>
@@ -157,30 +158,11 @@ export default function ScoreScreen() {
           ))}
         </ChipGroup>
       </Card>
+      </TourTarget>
 
-      <Card>
-        <T v="h3">How the score works</T>
-        <Bullets
-          items={[
-            <T key="s">
-              <B>Screen time ({MAX.screen})</B>: full points up to your goal, then less until twice the goal.
-            </T>,
-            <T key="f">
-              <B>Focus ({MAX.focus})</B>: Pebble focus minutes towards your goal.
-            </T>,
-            <T key="c">
-              <B>Choices ({MAX.choices})</B>: when a pause or limit screen appears, how often you choose “Go back”.
-            </T>,
-            <T key="b">
-              <B>Bedtime ({MAX.bedtime})</B>: phone use during last night&apos;s bedtime, down to zero at {BEDTIME_ZERO_MIN}{" "}
-              minutes. Calls, messages and alarms don&apos;t count.
-            </T>,
-          ]}
-        />
-        <T v="small" muted>
-          It&apos;s a mirror, not a grade. There&apos;s no streak to lose, and it stays on this phone.
-        </T>
-      </Card>
+      <T v="small" muted>
+        A mirror, not a grade. No streak to lose.
+      </T>
     </Screen>
   );
 }

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { View } from "react-native";
 import { BlockerSetupCard } from "@/components/BlockerSetup";
 import { StrictBanner } from "@/components/StrictBanner";
-import { AppLink, NavCard, Screen, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { NavCard, Screen, T } from "@/components/ui";
 import { device, isAndroid } from "@/lib/device";
 import { BEDTIME_ID, describeWindow } from "@/lib/schedules";
 import { untilText } from "@/lib/strict";
@@ -65,7 +65,7 @@ export default function Controls() {
   return (
     <Screen tab>
       <T v="h1">Controls</T>
-      <T v="lead">Everything that keeps your phone in its place. Each one is yours to switch on, change or switch off.</T>
+      <T v="lead">Every rule in one place. Tap one to change it.</T>
 
       {!isAndroid || !device ? (
         <T>Controls work on Android phones for now.</T>
@@ -73,15 +73,14 @@ export default function Controls() {
         <>
           <BlockerSetupCard enabled={s?.enabled ?? null} onLabel="Limits, schedules and blocking are on" />
           <StrictBanner />
-          <View style={{ gap: space.md }}>
+          <TourTarget id="controls.list" style={{ gap: space.md }}>
             <NavCard href="/limits" icon="✋" tint="peach" title="Limits and pauses" body={s?.limits ?? " "} />
             <NavCard href="/schedules" icon="🌙" tint="lavender" title="Schedules and bedtime" body={s?.schedules ?? " "} />
             <NavCard href="/sites" icon="🌐" tint="sky" title="Websites and internet" body={s?.sites ?? " "} />
             <NavCard href="/notifications" icon="🔔" tint="mint" title="Notifications" body={s?.notifications ?? " "} />
             <NavCard href="/reels" icon="🎞️" tint="peach" title="Shorts and Reels" body={s?.reels ?? " "} />
             <NavCard href="/strict" icon="🔒" tint="rose" title="Strict mode" body={s?.strict ?? " "} />
-          </View>
-          <AppLink href="/docs">How each one works</AppLink>
+          </TourTarget>
         </>
       )}
     </Screen>

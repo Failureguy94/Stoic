@@ -10,6 +10,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { TourProvider } from "@/components/Tour";
 import { font, useTheme } from "@/theme";
 
 SplashScreen.preventAutoHideAsync();
@@ -36,7 +37,7 @@ export default function RootLayout() {
   if (!loaded && !error) return null;
 
   return (
-    <>
+    <TourProvider>
       <StatusBar style={t.dark ? "light" : "dark"} />
       <Stack
         screenOptions={{
@@ -48,11 +49,7 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="docs/index" options={{ title: "How-to guides" }} />
-        <Stack.Screen name="docs/[slug]" options={{ title: "Guide" }} />
-        <Stack.Screen name="survey" options={{ title: "Survey results" }} />
-        <Stack.Screen name="about" options={{ title: "About STOIC" }} />
-        <Stack.Screen name="design-note" options={{ title: "Design note" }} />
+        <Stack.Screen name="about" options={{ title: "About and privacy" }} />
         <Stack.Screen name="screen-time" options={{ title: "My screen time" }} />
         <Stack.Screen name="limits" options={{ title: "Limits and pauses" }} />
         <Stack.Screen name="schedules" options={{ title: "Schedules and bedtime" }} />
@@ -62,6 +59,6 @@ export default function RootLayout() {
         <Stack.Screen name="sites" options={{ title: "Websites and internet" }} />
         <Stack.Screen name="reels" options={{ title: "Shorts and Reels" }} />
       </Stack>
-    </>
+    </TourProvider>
   );
 }

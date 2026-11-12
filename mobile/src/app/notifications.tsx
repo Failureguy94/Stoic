@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { AccessibilityInfo, Alert, Pressable, View } from "react-native";
 import { AndroidOnly } from "@/components/AndroidOnly";
 import { AppPicker } from "@/components/AppPicker";
-import { B, Bullets, Button, Card, Chip, Screen, SwitchRow, T } from "@/components/ui";
+import { TourTarget } from "@/components/Tour";
+import { B, Button, Card, Chip, Screen, SwitchRow, T } from "@/components/ui";
 import { device, type HeldNotification, type NotificationCount } from "@/lib/device";
 import { ensureNotificationPermission } from "@/lib/notify";
 import { formatMin } from "@/lib/schedules";
@@ -71,21 +72,17 @@ export default function Notifications() {
 
   return (
     <Screen>
-      <T v="lead">
-        See which apps interrupt you most. Hold the noisy ones and get them in one summary at times you choose.
-      </T>
+      <T v="lead">Hold the noisy apps and get their notifications in one summary.</T>
 
       {access === false ? (
         <Card tint="butter">
           <T v="h2">Turn on Notification access</T>
           <T>
-            To count and hold notifications, Android needs you to allow STOIC under <B>Notification access</B>. Held
-            notifications stay on this phone and are deleted after three days.
+            Allow STOIC under <B>Notification access</B> to count and hold notifications.
           </T>
           <Button label="Open Notification access" onPress={() => device!.openNotificationAccessSettings()} />
-          <T v="small">
-            If Android says “Restricted setting”, open Settings, Apps, STOIC, tap the three dots at the top right, and choose
-            “Allow restricted settings”. Then try again.
+          <T v="small" muted>
+            Says “Restricted setting”? Settings › Apps › STOIC › ⋮ › Allow restricted settings.
           </T>
         </Card>
       ) : null}
@@ -177,6 +174,7 @@ export default function Notifications() {
         </View>
       </Card>
 
+      <TourTarget id="notifications.hold">
       <Card>
         <T v="h2">Apps I hold</T>
         {hold.length === 0 ? <T muted>None yet. Their notifications show as normal.</T> : null}
@@ -206,8 +204,12 @@ export default function Notifications() {
             onCancel={() => setAdding(false)}
           />
         ) : (
-          <Button kind="outline" label="Hold another app" onPress={() => setAdding(true)} />
+          <Button kind="outline" label="Hold an app" onPress={() => setAdding(true)} />
         )}
+      </Card>
+      </TourTarget>
+
+      <Card>
 
         <T v="label" style={{ marginTop: space.md }}>
           Send my summary at
@@ -230,16 +232,9 @@ export default function Notifications() {
         />
       </Card>
 
-      <Card>
-        <T v="h3">Good to know</T>
-        <Bullets
-          items={[
-            "Calls, alarms, navigation, music and your phone and messages apps are never held.",
-            "Android lets STOIC hide a notification only after it arrives, so you may still hear the first sound. Bedtime's Do Not Disturb keeps nights fully quiet.",
-            "Held notifications stay on this phone and are deleted when you open or clear them, or after three days.",
-          ]}
-        />
-      </Card>
+      <T v="small" muted>
+        Calls, alarms, music and messages are never held. Held notifications are deleted after three days.
+      </T>
     </Screen>
   );
 }
