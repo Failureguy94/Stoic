@@ -701,6 +701,378 @@
    ]
   }
  ],
+ "desktop": [
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "What it does"
+    }
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "STOIC for Windows and Mac looks after the apps on your computer, like games, Discord or video apps. It lives in the tray (next to the clock on Windows, in the menu bar on a Mac) as a little Pebble."
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": false,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Pause before opening"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": when you open an app you chose, STOIC closes it and asks \"Is this important right now?\". "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open anyway"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " appears after 10 seconds and opens it again."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Daily limits"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": once an app has been open for your daily time, STOIC closes it and shows \"That's your time for today\". Time counts while the app is open."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Focus with Pebble"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": start 15, 25 or 45 minutes from the tray or the STOIC window. Apps marked "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Close during focus sessions"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " are closed until it ends."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Schedules"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": hours when chosen apps stay closed, like study hours on weekdays."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Strict mode"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": ": until the time you pick, rules can get stricter but not looser, and STOIC can't be quit from its menu."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "paragraph",
+   "inline": [
+    {
+     "t": "text",
+     "v": "For websites, use "
+    },
+    {
+     "t": "strong",
+     "c": [
+      {
+       "t": "text",
+       "v": "STOIC for your browser"
+      }
+     ]
+    },
+    {
+     "t": "text",
+     "v": " too."
+    }
+   ]
+  },
+  {
+   "type": "heading",
+   "depth": 2,
+   "inline": [
+    {
+     "t": "text",
+     "v": "Set it up"
+    }
+   ]
+  },
+  {
+   "type": "list",
+   "ordered": true,
+   "items": [
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Open STOIC. Its window opens, and Pebble appears in the tray."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Open the app that distracts you, then in STOIC tap "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Add an app"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " and choose it from the list of running apps (or type its name)."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Choose a pause, a daily limit, or both, and whether it closes during focus."
+       }
+      ]
+     }
+    ],
+    [
+     {
+      "type": "paragraph",
+      "inline": [
+       {
+        "t": "text",
+        "v": "Closing the STOIC window keeps it running in the tray. "
+       },
+       {
+        "t": "strong",
+        "c": [
+         {
+          "t": "text",
+          "v": "Open STOIC when I log in"
+         }
+        ]
+       },
+       {
+        "t": "text",
+        "v": " is on by default."
+       }
+      ]
+     }
+    ]
+   ]
+  },
+  {
+   "type": "note",
+   "children": [
+    {
+     "type": "paragraph",
+     "inline": [
+      {
+       "t": "text",
+       "v": "STOIC never closes system apps such as File Explorer, Finder or Task Manager, so you can always use your computer. Your rules and today's time per app stay on your computer and are never sent anywhere."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "didntWork",
+   "children": [
+    {
+     "type": "list",
+     "ordered": false,
+     "items": [
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "An app isn't closed"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": check the name in STOIC matches the app's program name (for example "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "steam"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": " or "
+         },
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "discord"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": "). Adding it from the running-apps list gets this right."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Open anyway didn't reopen the app"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": open it yourself; STOIC leaves it alone for that visit."
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "paragraph",
+        "inline": [
+         {
+          "t": "strong",
+          "c": [
+           {
+            "t": "text",
+            "v": "Strict mode"
+           }
+          ]
+         },
+         {
+          "t": "text",
+          "v": ": Task Manager (or Activity Monitor) can still end STOIC, and restarting the computer starts it again. It's there for weak moments, not as a lock."
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  }
+ ],
  "focus": [
   {
    "type": "heading",

@@ -143,7 +143,9 @@ export default function Home() {
           </p>
           <p className="mt-2">
             On a laptop? <Link href="/docs/browser">{SITE_NAME} for your browser</Link> brings pauses, limits,
-            focus and a calmer YouTube to Chrome and Edge.
+            focus and a calmer YouTube to Chrome and Edge, and{" "}
+            <Link href="/docs/desktop">{SITE_NAME} for Windows and Mac</Link> does the same for apps like games and
+            Discord.
           </p>
         </div>
         <div className="rounded-[var(--radius-blob)] bg-butter p-6">

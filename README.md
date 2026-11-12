@@ -23,6 +23,10 @@ See [`mobile/AGENTS.md`](mobile/AGENTS.md) for app commands. In short: `cd mobil
 
 A Chrome/Edge extension for laptops: pauses, daily limits and schedules for sites, focus sessions, a calmer YouTube (no feed, no Shorts) and strict mode. See [`extension/README.md`](extension/README.md); `cd extension && npm test` runs its tests.
 
+## STOIC for Windows and Mac (in `desktop/`)
+
+An Electron tray app: pause before opening, daily limits (time open), schedules, focus sessions and strict mode for desktop apps. It finds and closes apps with each system's own tools (tasklist/taskkill on Windows, ps on macOS/Linux), so there are no native add-ons. See [`desktop/README.md`](desktop/README.md).
+
 ## Website pages
 
 | Route | What it is |

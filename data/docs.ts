@@ -101,6 +101,13 @@ export const DOCS: DocMeta[] = [
     minutes: 3,
   },
   {
+    slug: "desktop",
+    title: "STOIC for Windows and Mac",
+    summary: "Pauses, limits, schedules and focus for the apps on your computer.",
+    icon: "🖥️",
+    minutes: 3,
+  },
+  {
     slug: "troubleshooting",
     title: "If STOIC stops working",
     summary: "Battery savers, restricted settings, Private DNS and other fixes.",
