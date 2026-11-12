@@ -17,6 +17,7 @@
     "expo-splash-screen": "~58.0.13",
     "expo-status-bar": "~58.0.4",
     "expo-system-ui": "~58.0.7",
+    "expo-updates": "~58.0.22",
     "expo-web-browser": "~58.0.7",
     "react": "19.3.0",
     "react-native": "0.88.1",
@@ -35,7 +36,8 @@
     "ios": "expo run:ios",
     "typecheck": "tsc --noEmit",
     "test": "node --test \"src/**/*.test.ts\"",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "update": "eas update --channel production --environment production --platform android --non-interactive --message"
   },
   "private": true
 }

@@ -17,6 +17,18 @@ The name lives in one place: `SITE_NAME` in [`lib/site.ts`](lib/site.ts) (websit
 | Day score | 0–100 from four explained parts, no streaks |
 | Screen time | Real per-app usage, plus an add-only record that survives uninstalls |
 
+### Updating the app without a new APK
+
+Installed apps check for updates when they open (EAS Update, channel `production`, Expo project `dw1234/stoic`). For changes to screens and app logic (anything in `mobile/src/`), publish an update:
+
+```
+cd mobile && npm run update -- "What changed"
+```
+
+Phones get it the next time STOIC is opened (it applies on the following launch). More shows "updated <date>" once it has arrived.
+
+A **new APK** is still needed when native code changes: the Kotlin module (`modules/stoic-device`), permissions, new native libraries or `app.json` plugins. The runtime version is a fingerprint of the native code, so an update is never sent to an APK it doesn't fit.
+
 See [`mobile/AGENTS.md`](mobile/AGENTS.md) for app commands. In short: `cd mobile && npm install && npm run android` (needs Android Studio's SDK and an emulator or phone). `npm test` runs the TypeScript tests; `cd android && ./gradlew :stoic-device:testDebugUnitTest` runs the Kotlin tests.
 
 ## STOIC for your browser (in `extension/`)

@@ -33,7 +33,10 @@ export default function About() {
       </Section>
 
       <Section title="Privacy">
-        <T>No account and no {SITE_NAME} server. Everything stays on this phone, and uninstalling deletes it.</T>
+        <T>
+          No account, and your data stays on this phone: uninstalling deletes it. The app only goes online to download its
+          own updates.
+        </T>
       </Section>
 
       <Section title="Credits">

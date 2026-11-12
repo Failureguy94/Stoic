@@ -118,7 +118,7 @@ export default function Home() {
           Private by design
         </h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li>No account and no {SITE_NAME} server. Your data stays on your phone.</li>
+          <li>No account. Your data stays on your phone. The app only goes online to download its own updates.</li>
           <li>Each permission is asked for only when you switch on the feature that needs it.</li>
           <li>
             Limits only see <strong>which app is in front</strong>, never what&apos;s on your screen or what you type.

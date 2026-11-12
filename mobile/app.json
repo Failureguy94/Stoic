@@ -37,6 +37,28 @@
     "scheme": "stoic",
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+    "updates": {
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0,
+      "requestHeaders": {
+        "expo-channel-name": "production"
+      },
+      "url": "https://u.expo.dev/997906f6-d8f4-4e8f-831f-a352d3bda6fe"
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "997906f6-d8f4-4e8f-831f-a352d3bda6fe"
+      }
+    },
+    "owner": "dw1234"
   }
 }

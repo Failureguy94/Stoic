@@ -76,7 +76,7 @@ export default function AboutPage() {
 
       <h2 id="privacy">Privacy</h2>
       <ul>
-        <li>There is no account and no {SITE_NAME} server. Everything stays on your phone.</li>
+        <li>There is no account and nothing is uploaded. Everything stays on your phone; the app only goes online to download its own updates.</li>
         <li>Held notifications are deleted when you open or clear them, or after three days.</li>
         <li>Uninstalling {SITE_NAME} or clearing its data deletes everything it stored.</li>
         <li>
