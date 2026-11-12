@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 98" role="img" aria-hidden="true">
+  <style>
+    .shadow { fill: #e7dfd3 } .body { fill: #ece6ff; stroke: #2b2340 } .shine { stroke: #ffffff } .cheek { fill: #ffdfe6 } .line { stroke: #2b2340 }
+    @media (prefers-color-scheme: dark) {
+      .shadow { fill: #3d3452 } .body { fill: #ece6ff; stroke: #120d1f } .cheek { fill: #ffc4d2 } .line { stroke: #120d1f }
+    }
+  </style>
+  <ellipse class="shadow" cx="60" cy="92" rx="38" ry="5"/>
+  <path class="body" d="M14 58c0-27 20-48 49-48 27 0 45 18 45 43 0 22-16 34-46 34C31 87 14 78 14 58z" stroke-width="3"/>
+  <path class="shine" d="M36 28c6-6 14-9 22-9" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <ellipse class="cheek" cx="38" cy="60" rx="7" ry="4"/>
+  <ellipse class="cheek" cx="84" cy="60" rx="7" ry="4"/>
+  <g class="line" stroke-width="3" stroke-linecap="round" fill="none"><path d="M42 51q5-6 10 0"/><path d="M70 51q5-6 10 0"/><path d="M50 64q10 7 20 0"/></g>
+</svg>
